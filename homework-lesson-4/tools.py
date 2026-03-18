@@ -11,11 +11,18 @@ settings = Settings()
 # --- Plain Python tool functions ---
 
 def web_search(query: str) -> list[dict]:
-    results = DDGS().text(query, max_results=settings.max_search_results)
-    return [
-        {"title": r["title"], "url": r["href"], "snippet": r["body"]}
-        for r in results
-    ]
+    try:
+        results = DDGS().text(query, max_results=settings.max_search_results)
+        return [
+            {
+                "title": r["title"],
+                "url": r["href"],
+                "snippet": r["body"][: settings.max_snippet_length],
+            }
+            for r in results
+        ]
+    except Exception as e:
+        return [{"error": f"Search failed: {str(e)}"}]
 
 
 def read_url(url: str) -> str:

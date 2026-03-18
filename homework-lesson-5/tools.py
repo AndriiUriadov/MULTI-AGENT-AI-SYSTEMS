@@ -5,6 +5,7 @@ from ddgs import DDGS
 from langchain_core.tools import tool
 
 from config import Settings
+from retriever import get_retriever
 
 settings = Settings()
 
@@ -12,8 +13,8 @@ settings = Settings()
 @tool
 def web_search(query: str) -> list[dict]:
     """Search the web using DuckDuckGo. Returns a list of results,
-    each with 'title', 'url', and 'snippet' fields. Use this to discover
-    relevant sources before reading full pages with read_url."""
+    each with 'title', 'url', and 'snippet' fields. Use this to find
+    information not covered in the local knowledge base."""
     try:
         results = DDGS().text(query, max_results=settings.max_search_results)
         return [
@@ -57,3 +58,25 @@ def write_report(filename: str, content: str) -> str:
     with open(path, "w", encoding="utf-8") as f:
         f.write(content)
     return f"Report saved to {path}"
+
+
+@tool
+def knowledge_search(query: str) -> str:
+    """Search the local knowledge base using hybrid retrieval and reranking.
+    Use this first for questions about topics covered in ingested documents
+    (LangChain, LLMs, RAG). Returns the most relevant text excerpts."""
+    try:
+        retriever = get_retriever()
+        docs = retriever.invoke(query)
+        if not docs:
+            return "No relevant documents found in the knowledge base."
+        parts = []
+        for i, doc in enumerate(docs, 1):
+            source = doc.metadata.get("source", "unknown")
+            page = doc.metadata.get("page", "?")
+            parts.append(
+                f"[{i}] Source: {os.path.basename(source)}, page {page}\n{doc.page_content}"
+            )
+        return "\n\n".join(parts)
+    except Exception as e:
+        return f"Error searching knowledge base: {str(e)}"

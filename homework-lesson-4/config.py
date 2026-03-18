@@ -7,6 +7,7 @@ class Settings(BaseSettings):
     model_name: str
 
     max_search_results: int = 5
+    max_snippet_length: int = 300
     max_url_content_length: int = 5000
     output_dir: str = "output"
     max_iterations: int = 20
