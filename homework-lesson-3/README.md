@@ -1,157 +1,62 @@
-# Завдання: Research Agent
+# Homework Lesson 3 - Research Agent
 
-Побудуйте агента, який отримує питання від користувача, самостійно шукає інформацію через набір інструментів, збирає знахідки, і генерує структурований Markdown-звіт.
+LangChain ReAct агент, який отримує питання від користувача, самостійно шукає інформацію через набір інструментів і генерує структурований Markdown-звіт.
 
-> **Примітка:** Проєкт містить приклад коду, який є відправною точкою. Ви можете вільно змінювати, доповнювати та адаптувати його під свої потреби.
+## Що реалізовано
 
-**Приклад взаємодії:**
-```
-User: "Порівняй три підходи до побудови RAG: naive, sentence-window та parent-child retrieval"
+### Інструменти агента (`tools.py`)
 
-Agent:
-  Thought: Потрібно знайти інформацію про кожен підхід окремо
-  → web_search("naive RAG pipeline approach")
-  → web_search("sentence window retrieval RAG")
-  → web_search("parent child retrieval RAG")
-  → read_url("https://...стаття з порівнянням підходів...")
-  → web_search("RAG approaches comparison tradeoffs 2024")
+**`web_search(query)`** — пошук через DuckDuckGo (`ddgs`):
+- Повертає список результатів з `title`, `url`, `snippet`
+- Сніпети обрізаються до `max_snippet_length` (300 символів) — context engineering
+- Обробка помилок: мережеві збої повертають `[{"error": "..."}]` замість краша
 
-Final Answer: [структурований Markdown-звіт з порівнянням трьох підходів]
+**`read_url(url)`** — витягує повний текст сторінки через `trafilatura`:
+- Обрізає до `max_url_content_length` (5000 символів)
+- Обробка помилок: недоступна сторінка або помилка парсингу повертає рядок з описом помилки
 
-Output: → research_report.md
-```
+**`write_report(filename, content)`** — зберігає Markdown-звіт у `output/`:
+- Автоматично додає `.md` до імені файлу
+- Повертає повний шлях до збереженого файлу
 
----
+### Agent Loop (`agent.py`)
 
-### Секрети та змінні середовища
+- `ChatGoogleGenerativeAI` (Gemini) як LLM
+- `create_react_agent` з LangGraph — ReAct цикл без ручної реалізації
+- `MemorySaver` (checkpointer) — збереження контексту між повідомленнями в межах сесії
+- `_AgentWrapper` — обгортка для автоматичного підставляння `thread_id` та `recursion_limit`
+- Нормалізація Gemini-контенту: Gemini повертає `list[dict]`, обгортка конвертує в рядок
 
-**НІКОЛИ не комітьте API-ключі в репозиторій!**
+### Конфігурація (`config.py`)
 
-- Зберігайте всі секрети (API-ключі, токени) у файлі `.env`
-- Файл `.env` вже додано до `.gitignore` — він не потрапить у git
-- Для налаштування конфігурації використовується Pydantic Settings (`config.py`), який автоматично читає змінні з `.env` файлу
-- Шаблон змінних середовища — у файлі `.env.example`
+- `Settings` (Pydantic) читає `.env`: `API_KEY`, `MODEL_NAME`
+- Константи: `max_search_results=5`, `max_snippet_length=300`, `max_url_content_length=5000`, `max_iterations=10`
+- `SYSTEM_PROMPT` — роль агента, опис інструментів, стратегія дослідження
 
----
+## Запуск
 
-### Що потрібно реалізувати
-
-#### 1. Інструменти агента (Tools)
-
-Визначте та реалізуйте мінімум **3 інструменти** з tool calling:
-
-##### `web_search(query: str) -> list[dict]`
-
-Пошук в інтернеті. Використайте бібліотеку [`ddgs`](https://pypi.org/project/ddgs/). Вона безкоштовна і не потребує API-ключа.
-
-Що повертає DuckDuckGo: **список результатів**, де кожен містить `title` (заголовок сторінки), `href` (URL) та `body` (сніпет — 1-2 речення зі сторінки). Це **не повний текст** сторінки, а лише короткий фрагмент, як на сторінці результатів Google. Цього достатньо, щоб агент зрозумів, які сторінки релевантні, але недостатньо для глибокого аналізу — для цього є `read_url`.
-
-Приклад того, що повертає DuckDuckGo:
-```python
-from ddgs import DDGS
-
-results = DDGS().text("LangChain vs LlamaIndex RAG", max_results=5)
-# [
-#   {
-#     "title": "LangChain vs LlamaIndex: A Detailed Comparison",
-#     "href": "https://example.com/article",
-#     "body": "LangChain focuses on composable chains while LlamaIndex specializes in..."
-#   },
-#   ...
-# ]
+```bash
+pip install -r requirements.txt
+python main.py
 ```
 
-**Що очікується від вашої реалізації:**
-- Обгортка над `DDGS().text()`, яка оформлена як tool із JSON Schema (description, parameters)
-- Параметр `max_results` можна зафіксувати (наприклад, 5) або зробити параметром tool
-- Повертайте результати у форматі, зручному для LLM — наприклад, список із `title`, `url`, `snippet`
-
-##### `read_url(url: str) -> str`
-
-Отримання **повного тексту** зі сторінки за URL. Це потрібно, тому що `web_search` повертає лише сніпети — коротенькі фрагменти. Коли агент знаходить через пошук релевантну сторінку, він може прочитати її повністю через `read_url`, щоб отримати деталі.
-
-Рекомендовані бібліотеки (на вибір):
-- [`trafilatura`](https://pypi.org/project/trafilatura/) — витягує основний текст зі сторінки, ігноруючи меню, рекламу, футери
-- `httpx` + `readability-lxml` — більш ручний підхід, але теж працює
-- Простий `httpx.get()` + `BeautifulSoup` — мінімальний варіант
-
-Приклад із `trafilatura`:
-```python
-import trafilatura
-
-downloaded = trafilatura.fetch_url("https://example.com/article")
-text = trafilatura.extract(downloaded)
-# "LangChain is a framework for building LLM-powered applications..."
-# (повний текст статті, без HTML, меню, реклами)
+`.env`:
+```
+API_KEY=<google-gemini-api-key>
+MODEL_NAME=gemini-2.0-flash
 ```
 
-**Що очікується від вашої реалізації:**
-- Tool, що приймає URL і повертає текст сторінки
-- **Обрізання результату** — повний текст сторінки може бути 20 000+ символів, що забʼє контекстне вікно. Обріжте до розумного ліміту (наприклад, перші 5 000-10 000 символів). Це і є context engineering на практиці
-- Обробка помилок: невалідний URL, таймаут, сторінка недоступна — повертайте зрозуміле повідомлення про помилку, а не crash
+## Приклад роботи
 
-##### `write_report(filename: str, content: str) -> str`
+Запит: *"Що таке RAG (Retrieval-Augmented Generation)?"*
 
-Зберігає фінальний Markdown-звіт у файл.
+Агент виконав кілька `web_search` та `read_url` викликів, зібрав інформацію з Wikipedia, IBM та AWS, після чого викликав `write_report` і зберіг структурований звіт.
 
-**Що очікується від вашої реалізації:**
-- Приймає назву файлу та текст звіту (Markdown)
-- Зберігає у файл у директорію `output/` (або іншу, за вашим вибором)
-- Повертає підтвердження з повним шляхом до файлу
+Збережений звіт: [`example_output/report.md`](example_output/report.md)
 
-Це найпростіший tool — по суті обгортка над `open(path, 'w').write(content)`. Але він потрібен, щоб агент міг **сам** зберегти результат, а не покладатися на зовнішній код.
+## Зауваження від куратора та виправлення
 
-##### Додаткові tools (необовʼязково)
+Після здачі роботи отримав два зауваження, які були виправлені:
 
-Ви можете додати інші інструменти, якщо вважаєте корисним — наприклад, `calculate`, `read_file`, `list_files`. Додаткові tools не обовʼязкові, але можуть підвищити оцінку, якщо вони осмислені та інтегровані в agent loop.
-
-#### 2. Agent Loop
-
-Реалізуйте агента за допомогою **LangChain**.
-
-Використайте `create_react_agent` (або `create_agent`) з `@tool` декоратором для визначення інструментів. LangChain сам реалізує ReAct-цикл — вам потрібно правильно описати tools, налаштувати агента та підключити модель.
-
-Модель — будь-яка на ваш вибір: `ChatOpenAI`, `ChatAnthropic`, `ChatGoogleGenerativeAI` тощо. LangChain дозволяє змінити провайдера одним рядком — скористайтесь цим.
-
-**Вимоги до агента:**
-- Агент запускається з терміналу (`python main.py`) та працює в інтерактивному режимі — користувач вводить запитання, отримує відповідь, і може продовжити діалог
-- Агент **підтримує зв'язний діалог** — пам'ятає попередні повідомлення в межах сесії. Наприклад, якщо користувач спочатку попросив дослідити тему, а потім каже "а тепер порівняй це з X", агент розуміє контекст. Використайте `MemorySaver` (checkpointer) або аналогічний механізм
-- Агент **сам вирішує**, які tools викликати та в якій послідовності — ви не хардкодите порядок
-- Підтримка **multi-step**: мінімум 3-5 tool calls на один запит
-- **Ліміт кроків** (max_iterations) — щоб агент не зациклився
-- **Обробка помилок**: якщо tool повертає помилку — агент отримує її в контекст і реагує (повторює з іншими параметрами або продовжує без цього результату)
-
-#### 3. Context Engineering
-
-Реалізуйте **обрізання tool results** — якщо результат `web_search` або `read_url` завеликий, обрізайте до N символів перед поверненням у контекст. Наприклад, повний текст сторінки з `read_url` може бути 20 000+ символів — поверніть лише перші 5 000-10 000.
-
-#### 4. Промпти та конфігурація
-
-- System prompt та всі шаблони промптів мають бути **винесені в окремий файл** (`config.py` або `prompts.py`), а не захардкоджені в логіці агента
-- System prompt має чітко описувати роль агента, доступні інструменти, та стратегію дослідження
-
-#### 5. Середовище та документація
-
-- **Залежності**: проєкт повинен містити файл залежностей — `requirements.txt`, `pyproject.toml`, `Pipfile`, або аналог — щоб можна було відтворити середовище однією командою (наприклад, `pip install -r requirements.txt`). Вказуйте конкретні версії бібліотек
-- **Мінімальні версії бібліотек:**
-  - `langchain >= 1.2.0` — https://pypi.org/project/langchain/
-  - `ddgs >= 7.0` — https://pypi.org/project/ddgs/
-  - `trafilatura >= 2.0.0` — https://pypi.org/project/trafilatura/
-- **README.md**: як запустити, які залежності встановити, який API-ключ потрібен, короткий опис архітектури
-- **Приклад роботи**: збережіть у `example_output/` один згенерований звіт, щоб було видно результат
-
----
-
-### Структура проєкту
-
-```
-research-agent/
-├── main.py              # Entry point — interactive REPL loop
-├── agent.py             # Agent setup (LLM, tools, memory, create_react_agent)
-├── tools.py             # Tool definitions and implementations
-├── config.py            # System prompt, settings, constants
-├── requirements.txt
-├── example_output/
-│   └── report.md        # Example generated report
-└── README.md            # Setup instructions, architecture overview
-```
+1. **Відсутнє обрізання у `web_search`** — додано `snippet[:max_snippet_length]` (300 символів на результат), щоб уникнути переповнення контексту при 5 результатах пошуку
+2. **Відсутня обробка помилок у `web_search`** — загорнуто у `try/except`, помилки повертаються як `[{"error": "..."}]` аналогічно до `read_url`
