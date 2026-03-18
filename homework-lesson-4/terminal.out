@@ -1,4 +1,38 @@
-# Порівняння Naive RAG та Sentence-Window Retrieval
+Research Agent (type 'exit' to quit)
+----------------------------------------
+
+You: Порівняй naive RAG та sentence-window retrieval
+
+🔧 Tool call: web_search(query="naive RAG vs sentence window retrieval")
+📎 Result: [{'title': "Aman's AI Journal • NLP • Retrieval Augmented Generation", 'url': 'https://aman.ai/primers/ai/RAG/', 'snippet': 'Retrieval-Augmented Generation (RAG) is an advanced technique designed to e...
+
+🔧 Tool call: web_search(query="what is naive RAG")
+📎 Result: [{'title': 'Naive RAG vs. Advanced RAG. In the modern world, large ... - Medium', 'url': 'https://medium.com/@myscale/naive-rag-vs-advanced-rag-17b38cda44c1', 'snippet': 'NaiveRAGTheNaiveRAGisthe simp...
+
+🔧 Tool call: web_search(query="what is sentence window retrieval for RAG")
+📎 Result: [{'title': 'Advanced RAG: Building and Evaluating a Sentence Window Retriever Setup Using LlamaIndex and Trulens | by Priyanthan Govindaraj | Medium', 'url': 'https://medium.com/@govindarajpriyanthan/...
+
+🔧 Tool call: read_url(url="https://medium.com/@myscale/naive-rag-vs-advanced-rag-17b38cda44c1")
+📎 Result: Naive RAG vs. Advanced RAG
+In the modern world, large language models (LLMs) have transformed the world by their impressive capacity to produce texts that imitate human-written text. These models are ...
+
+🔧 Tool call: read_url(url="https://learn.deeplearning.ai/courses/building-evaluating-advanced-rag/lesson/4/sentence-window-retrieval")
+📎 Result: Error: could not extract readable text from https://learn.deeplearning.ai/courses/building-evaluating-advanced-rag/lesson/4/sentence-window-retrieval
+
+🔧 Tool call: read_url(url="https://www.mcloudtechnology.com/post/naive-rag-the-foundation-of-retrieval-augmented-generation")
+📎 Result: Naive RAG: The Foundation of Retrieval-Augmented Generation
+- TomT
+- Nov 4, 2025
+- 12 min read
+Updated: Dec 8, 2025
+Context
+Naive RAG - The foundational RAG technique that combines vector similarity s...
+
+🔧 Tool call: read_url(url="https://www.linkedin.com/pulse/part-1-advanced-rag-sentence-window-retriever-sanjaya-kanungo-qzwnc")
+📎 Result: Part 1: Advanced RAG- Sentence Window Retriever (LlamaIndex)
+In my previous blog, we tried to implement a naive RAG system to augment a LLM with an external knowledge source (VMware Cloud Foundation p...
+
+🔧 Tool call: write_report(filename="naive_rag_vs_sentence_window_retrieval", content="# Порівняння Naive RAG та Sentence-Window Retrieval
 
 Цей звіт порівнює дві архітектури Retrieval-Augmented Generation (RAG): Naive RAG та Sentence-Window Retrieval, висвітлюючи їхні принципи роботи, переваги та обмеження.
 
@@ -66,3 +100,10 @@ Naive RAG є чудовою відправною точкою для впров�
 *   [Naive RAG vs. Advanced RAG - Medium](https://medium.com/@myscale/naive-rag-vs-advanced-rag-17b38cda44c1)
 *   [Naive RAG: The Foundation of Retrieval-Augmented Generation - mCloud Technology](https://www.mcloudtechnology.com/post/naive-rag-the-foundation-of-retrieval-augmented-generation)
 *   [Part 1: Advanced RAG- Sentence Window Retriever (LlamaIndex) - LinkedIn](https://www.linkedin.com/pulse/part-1-advanced-rag-sentence-window-retriever-sanjaya-kanungo-qzwnc)
+")
+📎 Result: Report saved to output/naive_rag_vs_sentence_window_retrieval.md
+
+Agent: Я завершив дослідження та підготував звіт. Він містить порівняння Naive RAG та Sentence-Window Retrieval, їхні визначення, принципи роботи, переваги та обмеження, а також порівняльну таблицю. Звіт збережено у файл `naive_rag_vs_sentence_window_retrieval.md`.
+
+You: exit
+Goodbye!
