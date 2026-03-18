@@ -1,0 +1,114 @@
+Research Agent (type 'exit' to quit)
+----------------------------------------
+
+You: Порівняй Naive RAG та Sentence-Window Retrieval  
+
+🔧 Tool call: web_search(query="Naive RAG explained")
+📎 Result: [{'title': 'RAG Explained: From Simple Retrieval to Agentic AI - Medium', 'url': 'https://medium.com/@bogamabhishek27/rag-explained-from-simple-retrieval-to-agentic-ai-c794b9f77a7f', 'snippet': 'Naive...
+
+🔧 Tool call: web_search(query="Sentence-Window Retrieval RAG technique")
+📎 Result: [{'title': 'Advanced RAG — Sentence Window Retrieval', 'url': 'https://glaforge.dev/posts/2025/02/25/advanced-rag-sentence-window-retrieval/', 'snippet': 'The name of the technique comes from this art...
+
+🔧 Tool call: web_search(query="Naive RAG vs Sentence-Window Retrieval comparison")
+📎 Result: [{'title': 'Beyond Naive RAG: Comparing Basic, Sentence-Window ... - Medium', 'url': 'https://medium.com/@harsh_77214/beyond-naive-rag-comparing-basic-sentence-window-and-auto-merging-retrieval-with-l...
+
+🔧 Tool call: read_url(url="https://medium.com/@bogamabhishek27/rag-explained-from-simple-retrieval-to-agentic-ai-c794b9f77a7f")
+📎 Result: RAG Explained: From Simple Retrieval to Agentic AI
+A practical guide to Naive RAG, Graph RAG, and Agentic RAG — with real scenarios anyone can understand.
+What Is RAG, Really?
+Let’s be real — most peo...
+
+🔧 Tool call: read_url(url="https://www.devstark.com/blog/naive-rag-advanced-rag-and-modular-rag-architectures/")
+📎 Result: Error: could not extract readable text from https://www.devstark.com/blog/naive-rag-advanced-rag-and-modular-rag-architectures/
+
+🔧 Tool call: read_url(url="https://glaforge.dev/posts/2025/02/25/advanced-rag-sentence-window-retrieval/")
+📎 Result: Advanced RAG — Sentence Window Retrieval
+Retrieval Augmented Generation (RAG) is a great way to expand the knowledge of Large Language Models to let them know about your own data and documents. With R...
+
+🔧 Tool call: read_url(url="https://learn.deeplearning.ai/courses/building-evaluating-advanced-rag/lesson/4/sentence-window-retrieval")
+📎 Result: Error: could not extract readable text from https://learn.deeplearning.ai/courses/building-evaluating-advanced-rag/lesson/4/sentence-window-retrieval
+
+🔧 Tool call: read_url(url="https://medium.com/@harsh_77214/beyond-naive-rag-comparing-basic-sentence-window-and-auto-merging-retrieval-with-llamaindex-f778173bed98")
+📎 Result: Member-only story
+Beyond Naive RAG: Comparing Basic, Sentence-Window, and Auto-Merging Retrieval (with LlamaIndex)
+5 min readJan 12, 2026
+In my previous post, “Evaluating RAG Systems with the RAG Tria...
+
+🔧 Tool call: read_url(url="https://dev.to/diviks_1fd539c1fb4beb685b/from-naive-retrieval-to-sentence-window-retrieval-in-rag-systems-2o1c")
+📎 Result: RAG systems? Oh,
+they not like us.
+They don’t read between the lines.
+Why RAG Systems Need Extra Help to Shine
+RAG systems might seem magical, but their performance heavily depends on well-structured ...
+
+🔧 Tool call: write_report(filename="naive_rag_vs_sentence_window_retrieval", content="# Порівняння Naive RAG та Sentence-Window Retrieval
+
+## Вступ
+
+Retrieval Augmented Generation (RAG) — це техніка, яка покращує відповіді великих мовних моделей (LLM) шляхом надання їм додаткової інформації з зовнішніх джерел. Замість того, щоб покладатися виключно на свої попередньо навчені знання, LLM спочатку "шукає" релевантні документи, а потім використовує їх для генерації більш точних та обґрунтованих відповідей. Ефективність RAG значною мірою залежить від якості етапу вибірки (retrieval), і різні стратегії вибірки можуть суттєво впливати на кінцевий результат. У цьому звіті ми порівняємо дві такі стратегії: Naive RAG та Sentence-Window Retrieval.
+
+## Naive RAG (Базовий RAG)
+
+**Визначення та принцип роботи:**
+Naive RAG (також відомий як базовий RAG) є найпростішою та найпоширенішою формою RAG. Він передбачає поділ великих документів на фіксовані або напівфіксовані за розміром "чанки" (фрагменти тексту). Кожен чанк перетворюється на векторне представлення (ембедінг) і зберігається у векторній базі даних. Коли користувач ставить запитання, його запит також перетворюється на ембедінг, а потім використовується для пошуку найбільш схожих чанків у векторній базі даних. Знайдені чанки безпосередньо передаються LLM як контекст для генерації відповіді.
+
+**Переваги:**
+*   **Простота реалізації:** Naive RAG відносно легко налаштувати та впровадити.
+*   **Швидкість:** Завдяки простоті процесу, він може бути досить швидким для багатьох сценаріїв.
+*   **Ефективний для прямих запитань:** Добре працює, коли відповідь на запитання міститься в одному чіткому та очевидному фрагменті тексту.
+
+**Недоліки:**
+*   **Втрата точності контексту:** Фіксовані за розміром чанки часто можуть містити неповну інформацію або змішувати непов'язаний контент, що ускладнює для LLM фокусування на релевантних деталях.
+*   **Інформаційне перевантаження:** Передача великих чанків LLM може призвести до надлишку нерелевантної інформації, що може відволікати модель і зменшувати точність відповідей.
+*   **Відсутність гранулярності:** Важливі деталі можуть бути "розмиті" або загублені всередині великих текстових блоків, що знижує точність вибірки.
+*   **Проблеми з посиланням:** Якщо запитання стосується чогось, що посилається на інший фрагмент тексту (наприклад, займенники), Naive RAG може мати труднощі з розв'язанням цих зв'язків через обмежений контекст у чанку.
+
+## Sentence-Window Retrieval (Вибірка за Вікном Речень)
+
+**Визначення та принцип роботи:**
+Sentence-Window Retrieval — це вдосконалена стратегія вибірки, розроблена для подолання обмежень Naive RAG. Замість того, щоб створювати ембедінги для великих чанків, ця техніка фокусується на окремих реченнях. Кожне речення ембедується та зберігається у векторній базі даних як "менший" контекст для вибірки. Однак, при вибірці, окрім релевантного речення, також витягується "вікно" з навколишніх речень (наприклад, одне речення до та два після). Цей розширений контекст передається LLM для генерації відповіді.
+
+**Переваги:**
+*   **Дрібнозернистий контекст для вибірки:** Ембедування менших одиниць (речень) призводить до більш точного зіставлення запиту з релевантною інформацією, оскільки вектори менш "розмиті".
+*   **Багатший контекст для генерації:** Надання LLM вікна навколишніх речень забезпечує достатній контекст для розуміння зв'язків, розв'язання посилань (наприклад, займенників) та формулювання більш цілісних і точних відповідей.
+*   **Покращене розв'язання зв'язків:** LLM може краще розуміти, про що йдеться в реченні, оскільки має доступ до його оточення.
+*   **Зменшення галюцинацій:** Завдяки наданню більш релевантного та цілісного контексту, ймовірність галюцинацій з боку LLM зменшується.
+*   **Висока точність:** Особливо ефективно в доменах, що вимагають високої точності, таких як юридичні, медичні або технічні документи.
+
+**Недоліки:**
+*   **Складність реалізації:** Дещо складніша у впровадженні порівняно з Naive RAG, оскільки вимагає додаткових кроків для створення та керування вікнами контексту.
+*   **Потенційно вищі обчислювальні витрати:** Зберігання ембедінгів для кожного речення та подальше витягування розширеного контексту може бути дещо дорожчим з точки зору пам'яті та обчислень.
+
+## Порівняння
+
+| Характеристика           | Naive RAG (Базовий RAG)                               | Sentence-Window Retrieval (Вибірка за Вікном Речень)         |
+| :----------------------- | :---------------------------------------------------- | :----------------------------------------------------------- |
+| **Одиниця ембедування**  | Великі текстові чанки (наприклад, 256-1024 токени)    | Окремі речення                                               |
+| **Контекст для вибірки** | Ембедінг великого чанку                               | Ембедінг речення                                             |
+| **Контекст для LLM**     | Весь витягнутий чанк (той самий, що й для ембедування) | Витягнуте речення + "вікно" навколишніх речень (розширений контекст) |
+| **Точність вибірки**     | Може бути нижчою через "розмиті" ембедінги            | Вища, завдяки дрібнозернистим ембедінгам                      |
+| **Якість контексту для LLM** | Може бути перевантаженим або неточним                 | Більш цілісний, релевантний та сфокусований                  |
+| **Розв'язання посилань** | Складно                                               | Краще, завдяки вікну контексту                               |
+| **Складність реалізації**| Проста                                                | Середня                                                      |
+| **Сценарії використання**| FAQ-боти, прості QA, швидкий пошук                     | Складні QA, юридичні/медичні документи, технічна документація, де потрібна висока точність |
+
+## Висновок
+
+Вибір між Naive RAG та Sentence-Window Retrieval залежить від конкретних вимог до системи RAG та складності запитань, на які вона має відповідати.
+
+*   **Naive RAG** є чудовою відправною точкою для простих додатків RAG, де запитання є прямими, а відповіді легко знаходяться в окремих, чітких фрагментах тексту. Його простота та швидкість роблять його ідеальним для початкового впровадження.
+
+*   **Sentence-Window Retrieval** є більш досконалою технікою, яка пропонує значні покращення в точності та якості відповідей, особливо для складних запитань, які вимагають глибокого розуміння контексту та розв'язання посилань. Незважаючи на дещо більшу складність реалізації, переваги в точності та зменшенні галюцинацій часто переважують ці витрати, що робить його кращим вибором для критично важливих застосувань.
+
+В цілому, Sentence-Window Retrieval представляє собою крок вперед у еволюції RAG, пропонуючи баланс між точністю вибірки та повнотою контексту для LLM.
+
+## Джерела
+
+*   https://medium.com/@bogamabhishek27/rag-explained-from-simple-retrieval-to-agentic-ai-c794b9f77a7f
+*   https://glaforge.dev/posts/2025/02/25/advanced-rag-sentence-window-retrieval/
+*   https://medium.com/@harsh_77214/beyond-naive-rag-comparing-basic-sentence-window-and-auto-merging-retrieval-with-llamaindex-f778173bed98
+*   https://dev.to/diviks_1fd539c1fb4beb685b/from-naive-retrieval-to-sentence-window-retrieval-in-rag-systems-2o1c")
+📎 Result: Report saved to output/naive_rag_vs_sentence_window_retrieval.md
+
+Agent: Звіт про порівняння Naive RAG та Sentence-Window Retrieval збережено за адресою `output/naive_rag_vs_sentence_window_retrieval.md`.
+
