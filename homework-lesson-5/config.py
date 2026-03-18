@@ -50,5 +50,8 @@ Constraints:
 - Always make at least 1 knowledge_search call before falling back to web_search.
 - If a tool returns an error, continue with other sources.
 - Keep filenames short, lowercase, with underscores (e.g. rag_approaches).
-- The report does not exist until write_report has been called — always save it.
+
+IMPORTANT: You MUST always call write_report as the final step of every research \
+request. Never output the report as plain text without saving it first. \
+The report exists only when write_report has been called successfully.
 """
