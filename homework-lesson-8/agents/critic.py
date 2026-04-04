@@ -53,7 +53,7 @@ def run_critic(findings: str) -> CritiqueResult:
             config={"recursion_limit": _RECURSION},
         )
     except StructuredOutputValidationError:
-        print("    ⚠️  Critic structured output validation failed — using REVISE fallback.")
+        print("    📎 [critique] (structured parse failed — defaulting to REVISE)")
         return _REVISE_FALLBACK
 
     # Print tool calls from message history
