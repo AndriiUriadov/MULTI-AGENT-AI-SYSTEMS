@@ -1,0 +1,86 @@
+"""
+Supervisor Agent — orchestrates the Plan → Research → Critique → Save cycle.
+
+Wraps the three sub-agents as @tool functions and creates the top-level agent
+with HumanInTheLoopMiddleware gating save_report.
+
+Exposed:
+    supervisor  — compiled LangGraph agent (with HITL + InMemorySaver)
+"""
+
+from langchain.agents import create_agent
+from langchain.agents.middleware import HumanInTheLoopMiddleware
+from langchain.tools import tool
+from langchain_openai import ChatOpenAI
+from langgraph.checkpoint.memory import InMemorySaver
+
+from agents.critic import run_critic
+from agents.planner import run_planner
+from agents.research import run_researcher
+from config import Settings, SUPERVISOR_PROMPT
+from tools import save_report
+
+settings = Settings()
+
+# ---------------------------------------------------------------------------
+# Sub-agent @tool wrappers — exposed to the Supervisor as tools
+# ---------------------------------------------------------------------------
+
+@tool
+def plan(request: str) -> str:
+    """Decompose a research request into a structured plan.
+
+    Sends the request to the Planner Agent, which searches the domain
+    and returns a ResearchPlan with goal, search queries, sources, and
+    output format. Always call this first before research().
+    """
+    research_plan = run_planner(request)
+    return research_plan.model_dump_json(indent=2)
+
+
+@tool
+def research(request: str) -> str:
+    """Execute research using web search and the local knowledge base.
+
+    Sends the instruction to the Research Agent, which follows the plan,
+    runs searches, reads pages, and returns Markdown findings.
+    Pass the full plan from plan() plus any revision feedback from critique().
+    """
+    return run_researcher(request)
+
+
+@tool
+def critique(findings: str) -> str:
+    """Evaluate research findings and return a structured verdict.
+
+    Sends findings to the Critic Agent, which independently verifies
+    freshness, completeness, and structure, then returns a CritiqueResult
+    with verdict APPROVE or REVISE, strengths, gaps, and revision_requests.
+    Include the original user request in the findings so the Critic can
+    assess completeness against it.
+    """
+    critique_result = run_critic(findings)
+    return critique_result.model_dump_json(indent=2)
+
+
+# ---------------------------------------------------------------------------
+# Supervisor Agent
+# ---------------------------------------------------------------------------
+
+_model = ChatOpenAI(
+    model=settings.model_name,
+    api_key=settings.api_key.get_secret_value(),
+)
+
+supervisor = create_agent(
+    _model,
+    tools=[plan, research, critique, save_report],
+    system_prompt=SUPERVISOR_PROMPT,
+    middleware=[
+        HumanInTheLoopMiddleware(
+            interrupt_on={"save_report": True},
+            description_prefix="📄 Report requires your approval before saving",
+        ),
+    ],
+    checkpointer=InMemorySaver(),
+)
