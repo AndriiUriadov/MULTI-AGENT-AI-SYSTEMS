@@ -5,13 +5,17 @@
 ## Що реалізовано
 
 ### Архітектура
+
+```
 User (REPL: main.py)
-  └── Supervisor Agent  <- InMemorySaver + HumanInTheLoopMiddleware
-        ├── plan(request)      -> Planner Agent   -> ResearchPlan (Pydantic)
-        ├── research(plan)     -> Research Agent  -> Markdown findings
-        ├── critique(findings) -> Critic Agent    -> CritiqueResult (Pydantic)
-        │      └── verdict=REVISE -> повторний research (max 2 раунди)
-        └── save_report(...)   -> HITL: approve / edit / reject
+  └── Supervisor Agent  ← InMemorySaver + HumanInTheLoopMiddleware
+        ├── plan(request)      → Planner Agent   → ResearchPlan (Pydantic)
+        ├── research(plan)     → Research Agent  → Markdown findings
+        ├── critique(findings) → Critic Agent    → CritiqueResult (Pydantic)
+        │      └── verdict=REVISE → повторний research (max 2 раунди)
+        └── save_report(...)   → HITL: approve / edit / reject
+```
+
 **Ключові патерни:**
 - **Evaluator-optimizer loop** — Critic може повернути дослідника на доопрацювання з конкретним зворотним зв'язком
 - **Structured output** — Planner і Critic повертають валідовані Pydantic-моделі через `response_format`
