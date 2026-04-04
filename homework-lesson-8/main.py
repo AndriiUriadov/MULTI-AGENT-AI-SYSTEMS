@@ -15,12 +15,14 @@ import warnings
 # Must be set before any HF/transformers imports to suppress loading noise.
 os.environ.setdefault("TOKENIZERS_PARALLELISM", "false")
 os.environ.setdefault("HF_HUB_DISABLE_PROGRESS_BARS", "1")
+os.environ.setdefault("HF_HUB_VERBOSITY", "error")
 os.environ.setdefault("TRANSFORMERS_VERBOSITY", "error")
 os.environ.setdefault("TRANSFORMERS_NO_ADVISORY_WARNINGS", "true")
 
 warnings.filterwarnings("ignore")
 
-for _noisy_logger in ("sentence_transformers", "transformers", "huggingface_hub"):
+for _noisy_logger in ("sentence_transformers", "transformers",
+                      "huggingface_hub", "huggingface_hub.utils._headers"):
     logging.getLogger(_noisy_logger).setLevel(logging.ERROR)
 
 from langchain_core.messages import AIMessage, ToolMessage

@@ -93,40 +93,60 @@ MODEL_NAME=gpt-4o-mini
 
 ## Реальний приклад роботи
 
-Запит: *"What is RAG? Write a short 1-paragraph report."*
+Запит: *"Compare naive RAG, sentence-window RAG, and parent-child RAG approaches. Write a detailed report."*
+
+Повний вивід терміналу: [`terminal.out`](terminal.out)
 
 ```
-🔧 plan({"request": "What is RAG?"})
-📎 [plan] {"goal": "Provide a comprehensive understanding of RAG...",
-           "search_queries": ["Overview of RAG", ...],
-           "sources_to_check": ["knowledge_base", "web"], ...}
+============================================================
+  Multi-Agent Research System  (homework-lesson-8)
+  Type 'quit' or 'exit' to stop.
+============================================================
+  Loading retriever model… ready.
 
-🔧 research({"request": "Provide a comprehensive understanding..."})
-📎 [research] # Comprehensive Overview of RAG...
+You: Compare naive RAG, sentence-window RAG, and parent-child RAG...
 
-🔧 critique({"findings": "..."})
-📎 [critique] {"verdict": "REVISE", "is_fresh": false,
-               "gaps": ["No recent 2024-2025 benchmarks"],
-               "revision_requests": ["Find current benchmarks"]}
+  🔧 plan({"request": "Compare naive RAG, sentence-window RAG, and parent-child RAG..."})
+  📎 [plan] {"goal": "Produce a detailed comparative report...",
+             "search_queries": ["naive RAG vs sentence-window RAG comparison", ...],
+             "sources_to_check": ["knowledge_base", "web"], ...}
 
-🔧 research({"request": "...include specific benchmarks 2024-2025..."})
-📎 [research] # Overview of RAG (updated with 2024-2025 data)...
+  🔧 research({"request": "Research and compare naive RAG, sentence-window RAG..."})
+  📎 [research] # Comparative Analysis of RAG Approaches...
 
-🔧 critique({"findings": "..."})
-📎 [critique] {"verdict": "APPROVE", "is_fresh": true, "is_complete": true, ...}
+  🔧 critique({"findings": "..."})
+  📎 [critique] {"verdict": "REVISE", "is_fresh": false,
+                 "gaps": ["Missing 2024 benchmarks for Sentence-Window RAG"],
+                 "revision_requests": ["Find 2024 performance metrics"]}
 
-🔧 save_report({"filename": "rag_overview", "content": "..."})
+  🔧 research({"request": "Research the latest findings on Sentence-Window RAG from 2024..."})
+  📎 [research] # Report on Sentence-Window RAG and Performance Comparisons...
 
-⏸️  ACTION REQUIRES APPROVAL
-  Tool: save_report  |  File: rag_overview.md
+  🔧 critique({"findings": "..."})
+  📎 [critique] {"verdict": "REVISE", "is_fresh": false, ...}
 
-👉 approve / edit / reject: approve
-📎 [save_report] Report saved to output/rag_overview.md
+  🔧 research({"request": "Research the latest 2024 findings on RAG performance metrics..."})
+  📎 [research] [REVISION LIMIT REACHED — 3 research rounds completed]
+                You MUST now call save_report()...
 
-Agent: The research report has been successfully saved to output/rag_overview.md
+  ============================================================
+  ⏸️  ACTION REQUIRES APPROVAL
+  ============================================================
+    Tool: save_report
+    File: rag_comparison.md
+    --- Report preview ---
+    # Comparative Analysis of RAG Approaches...
+    ---
+
+  👉 approve / edit / reject: approve
+  📎 [save_report] Report saved to output/rag_comparison.md
+
+Agent: The detailed report has been successfully created and saved.
 ```
 
-**Збережений звіт:** [`output/rag_overview.md`](output/rag_overview.md)
+**Збережені звіти:**
+- [`output/rag_comparison.md`](output/rag_comparison.md) — порівняння підходів RAG (з реального тесту)
+- [`output/rag_overview.md`](output/rag_overview.md) — огляд RAG
 
 ## Що нового порівняно з lesson-5
 
@@ -161,8 +181,8 @@ Command(resume={interrupt.id: {"decisions": [{"type": "reject",
 ```
 
 ### Спостережена поведінка LLM
-1. **Перший виклик `research` з dict замість str** — Supervisor спробував передати JSON-об'єкт `ResearchPlan` замість текстової інструкції. Виникла помилка, але Supervisor самостійно виправився і повторив виклик з коректним рядком. Система стійка до таких помилок.
+1. **Critic майже завжди повертає REVISE** через перевірку freshness — навіть якщо знахідки якісні, він шукає новіші джерела і знаходить їх. Це нормальна поведінка активного верифікатора. Програмний ліміт у `research` tool (`ToolRuntime` підраховує попередні виклики) примусово зупиняє цикл після `max_revisions` раундів.
 
-2. **Critic завжди активно верифікує** — не просто переглядає текст, а виконує власні `web_search` виклики для перевірки актуальності даних.
+2. **Supervisor іноді викликає research двічі паралельно** після отримання повідомлення про ліміт — LangGraph обробляє обидва виклики, обидва повертають `[REVISION LIMIT REACHED]`, після чого Supervisor коректно переходить до `save_report`.
 
 3. **InMemorySaver** — зберігає стан між HITL interrupt і resume в межах сесії. Втрачається при перезапуску `main.py`.
