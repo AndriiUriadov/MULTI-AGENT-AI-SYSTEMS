@@ -32,6 +32,7 @@ def run_critic(findings: str) -> CritiqueResult:
     """Invoke the Critic Agent and return a validated CritiqueResult."""
     result = critic_agent.invoke(
         {"messages": [{"role": "user", "content": findings}]},
-        config={"recursion_limit": settings.max_iterations * 2 + 1},
+        # Critic makes several verification searches — allow more steps than default.
+        config={"recursion_limit": settings.max_iterations * 4 + 1},
     )
     return result["structured_response"]

@@ -8,13 +8,20 @@ Usage: python main.py
 """
 
 import json
+import logging
 import os
 import warnings
 
-# Suppress HuggingFace model-load noise before any heavy imports.
+# Must be set before any HF/transformers imports to suppress loading noise.
 os.environ.setdefault("TOKENIZERS_PARALLELISM", "false")
-warnings.filterwarnings("ignore", category=UserWarning)
-warnings.filterwarnings("ignore", message=".*position_ids.*")
+os.environ.setdefault("HF_HUB_DISABLE_PROGRESS_BARS", "1")
+os.environ.setdefault("TRANSFORMERS_VERBOSITY", "error")
+os.environ.setdefault("TRANSFORMERS_NO_ADVISORY_WARNINGS", "true")
+
+warnings.filterwarnings("ignore")
+
+for _noisy_logger in ("sentence_transformers", "transformers", "huggingface_hub"):
+    logging.getLogger(_noisy_logger).setLevel(logging.ERROR)
 
 from langchain_core.messages import AIMessage, ToolMessage
 from langgraph.types import Command, Interrupt
@@ -165,15 +172,12 @@ def _stream(inputs_or_command, config: dict) -> None:
 # ---------------------------------------------------------------------------
 
 def _warmup() -> None:
-    """Pre-load the reranker model so it doesn't print during streaming."""
-    import contextlib, io
+    """Pre-load the reranker model before the REPL starts."""
     from retriever import get_retriever
-    with contextlib.redirect_stdout(io.StringIO()), \
-         contextlib.redirect_stderr(io.StringIO()):
-        try:
-            get_retriever()
-        except Exception:
-            pass  # index may not exist; retriever will fail gracefully later
+    try:
+        get_retriever()
+    except Exception:
+        pass  # index may not exist; retriever will fail gracefully later
 
 
 def main() -> None:

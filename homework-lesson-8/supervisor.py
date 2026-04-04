@@ -10,7 +10,8 @@ Exposed:
 
 from langchain.agents import create_agent
 from langchain.agents.middleware import HumanInTheLoopMiddleware
-from langchain.tools import tool
+from langchain.tools import tool, ToolRuntime
+from langchain_core.messages import ToolMessage
 from langchain_openai import ChatOpenAI
 from langgraph.checkpoint.memory import InMemorySaver
 
@@ -39,7 +40,7 @@ def plan(request: str) -> str:
 
 
 @tool
-def research(request: str) -> str:
+def research(request: str, runtime: ToolRuntime) -> str:
     """Execute research using web search and the local knowledge base.
 
     Sends the instruction to the Research Agent, which follows the plan,
@@ -50,6 +51,19 @@ def research(request: str) -> str:
     or the raw plan output. Convert the plan into a clear text instruction,
     e.g.: "Research X, Y, Z. Focus on A and B. Check the knowledge base first."
     """
+    # Count how many times research has already been called in this session.
+    messages = runtime.state.get("messages", [])
+    research_calls = sum(
+        1 for m in messages
+        if isinstance(m, ToolMessage) and m.name == "research"
+    )
+    if research_calls >= settings.max_revisions + 1:
+        return (
+            f"[REVISION LIMIT REACHED — {research_calls} research rounds completed] "
+            f"You have used all {settings.max_revisions} allowed revision rounds. "
+            f"You MUST now call save_report() with the best findings gathered. "
+            f"Do NOT call research() again."
+        )
     return run_researcher(request)
 
 
