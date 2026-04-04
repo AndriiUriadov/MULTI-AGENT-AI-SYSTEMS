@@ -25,9 +25,9 @@ Supervisor Agent  ← InMemorySaver + HumanInTheLoopMiddleware
 ```
 
 **Ключові патерни:**
-- **Evaluator-optimizer loop** — Critic може повернути дослідника на доопрацювання з конкретним зворотним зв'язком
-- **Structured output** — Planner і Critic повертають валідовані Pydantic-моделі через `response_format`
-- **Human-in-the-Loop** — `HumanInTheLoopMiddleware` перехоплює `save_report` до запису, дозволяючи approve / edit / reject
+- **Evaluator-optimizer loop** : Critic може повернути дослідника на доопрацювання з конкретним зворотним зв'язком
+- **Structured output** : Planner і Critic повертають валідовані Pydantic-моделі через `response_format`
+- **Human-in-the-Loop** : `HumanInTheLoopMiddleware` перехоплює `save_report` до запису, дозволяючи approve / edit / reject
 
 ### Файлова структура
 
@@ -95,7 +95,7 @@ python main.py
 
 `.env`:
 ```
-API_KEY=your-openai-api-key
+API_KEY=my-super-secret-openai-api-key
 MODEL_NAME=gpt-4o-mini
 ```
 
@@ -188,13 +188,13 @@ Agent: The report comparing Naive RAG, Sentence-Window RAG, and Parent-Child RAG
 
 ## Очікуваний результат (відповідність завданню)
 
-1. ✅ **Ingestion працює** — `python ingest.py` будує FAISS-індекс (52 стор., 462 чанки)
-2. ✅ **Planner декомпозує** — запит розбивається у структурований `ResearchPlan` з `goal`, `search_queries`, `sources_to_check`, `output_format`
-3. ✅ **Researcher виконує** — слідує плану, використовує `web_search`, `read_url`, `knowledge_search`
-4. ✅ **Critic оцінює** — повертає структурований `CritiqueResult` з `verdict`, `is_fresh`, `is_complete`, `is_well_structured`, `strengths`, `gaps`, `revision_requests`
-5. ✅ **Ітерація працює** — якщо Critic повертає `REVISE`, Researcher повторює з конкретним зворотним зв'язком (max 2 раунди, далі — примусовий перехід до збереження)
-6. ✅ **HITL працює** — при виклику `save_report` користувач бачить preview звіту і обирає дію
-7. ✅ **Звіт збережено** — після `approve` звіт зберігається у `./output/`
+1.  **Ingestion працює** — `python ingest.py` будує FAISS-індекс (52 стор., 462 чанки)
+2.  **Planner декомпозує** — запит розбивається у структурований `ResearchPlan` з `goal`, `search_queries`, `sources_to_check`, `output_format`
+3.  **Researcher виконує** — слідує плану, використовує `web_search`, `read_url`, `knowledge_search`
+4.  **Critic оцінює** — повертає структурований `CritiqueResult` з `verdict`, `is_fresh`, `is_complete`, `is_well_structured`, `strengths`, `gaps`, `revision_requests`
+5.  **Ітерація працює** — якщо Critic повертає `REVISE`, Researcher повторює з конкретним зворотним зв'язком (max 2 раунди, далі — примусовий перехід до збереження)
+6.  **HITL працює** — при виклику `save_report` користувач бачить preview звіту і обирає дію
+7.  **Звіт збережено** — після `approve` звіт зберігається у `./output/`
 
 ## Що нового порівняно з lesson-5
 
