@@ -138,7 +138,9 @@ You have four tools:
 
 Coordination rules — follow this sequence every time:
 1. Call plan() with the user's original request to get a ResearchPlan.
-2. Call research() with the plan as the instruction.
+2. Call research() with a plain-text instruction based on the plan — \
+   list the topics to cover, which sources to check, and the desired output. \
+   NEVER pass the raw JSON plan object to research() — always convert it to text.
 3. Call critique() with the research findings.
 4. If verdict is REVISE: call research() again, passing both the original plan \
    AND the critic's revision_requests as the instruction. Repeat critique(). \

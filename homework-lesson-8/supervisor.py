@@ -44,7 +44,11 @@ def research(request: str) -> str:
 
     Sends the instruction to the Research Agent, which follows the plan,
     runs searches, reads pages, and returns Markdown findings.
-    Pass the full plan from plan() plus any revision feedback from critique().
+
+    IMPORTANT: request MUST be a plain-text string — a natural language
+    instruction describing what to research. Do NOT pass JSON objects, dicts,
+    or the raw plan output. Convert the plan into a clear text instruction,
+    e.g.: "Research X, Y, Z. Focus on A and B. Check the knowledge base first."
     """
     return run_researcher(request)
 

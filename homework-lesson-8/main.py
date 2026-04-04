@@ -8,6 +8,13 @@ Usage: python main.py
 """
 
 import json
+import os
+import warnings
+
+# Suppress HuggingFace model-load noise before any heavy imports.
+os.environ.setdefault("TOKENIZERS_PARALLELISM", "false")
+warnings.filterwarnings("ignore", category=UserWarning)
+warnings.filterwarnings("ignore", message=".*position_ids.*")
 
 from langchain_core.messages import AIMessage, ToolMessage
 from langgraph.types import Command, Interrupt
@@ -19,6 +26,10 @@ _CONFIG = {"configurable": {"thread_id": "session-1"}}
 
 _PREVIEW_LEN = 400  # chars of report content to preview before approve/edit/reject
 
+# Tools that the HITL handler displays — skip their tool-call lines to avoid
+# showing the same call twice (once pre-interrupt, once post-resume).
+_HITL_TOOLS = {"save_report"}
+
 
 # ---------------------------------------------------------------------------
 # Display helpers
@@ -26,8 +37,9 @@ _PREVIEW_LEN = 400  # chars of report content to preview before approve/edit/rej
 
 def _print_tool_calls(msg: AIMessage) -> None:
     for tc in msg.tool_calls:
+        if tc["name"] in _HITL_TOOLS:
+            continue  # shown by the HITL UI instead
         args_str = json.dumps(tc["args"], ensure_ascii=False)
-        # Trim long args for readability
         if len(args_str) > 200:
             args_str = args_str[:200] + "…"
         print(f"  🔧 {tc['name']}({args_str})")
@@ -71,17 +83,17 @@ def _handle_interrupt(interrupt: Interrupt) -> Command:
     print("⏸️  ACTION REQUIRES APPROVAL")
     print("=" * 60)
 
-    # Display all pending tool calls (usually just save_report)
     for req in action_requests:
         tool_name = req.get("name", "unknown")
         args = req.get("args", {})
         print(f"  Tool: {tool_name}")
         if tool_name == "save_report":
             print(f"  File: {args.get('filename', '?')}.md")
-            content_preview = str(args.get("content", ""))[:_PREVIEW_LEN]
-            if len(str(args.get("content", ""))) > _PREVIEW_LEN:
-                content_preview += "\n  …"
-            print(f"\n  --- Report preview ---\n{content_preview}\n  ---")
+            content = str(args.get("content", ""))
+            preview = content[:_PREVIEW_LEN]
+            if len(content) > _PREVIEW_LEN:
+                preview += "\n  …"
+            print(f"\n  --- Report preview ---\n{preview}\n  ---")
         else:
             print(f"  Args: {json.dumps(args, ensure_ascii=False)[:300]}")
 
@@ -136,13 +148,11 @@ def _stream(inputs_or_command, config: dict) -> None:
     for chunk in supervisor.stream(inputs_or_command, config):
 
         if "__interrupt__" in chunk:
-            # HITL interrupt — ask user and resume
             interrupt = chunk["__interrupt__"][0]
             command = _handle_interrupt(interrupt)
             _stream(command, config)
             return
 
-        # Normal graph update — print messages
         for node, update in chunk.items():
             if node.startswith("__"):
                 continue
@@ -154,11 +164,27 @@ def _stream(inputs_or_command, config: dict) -> None:
 # REPL
 # ---------------------------------------------------------------------------
 
+def _warmup() -> None:
+    """Pre-load the reranker model so it doesn't print during streaming."""
+    import contextlib, io
+    from retriever import get_retriever
+    with contextlib.redirect_stdout(io.StringIO()), \
+         contextlib.redirect_stderr(io.StringIO()):
+        try:
+            get_retriever()
+        except Exception:
+            pass  # index may not exist; retriever will fail gracefully later
+
+
 def main() -> None:
     print("=" * 60)
     print("  Multi-Agent Research System  (homework-lesson-8)")
     print("  Type 'quit' or 'exit' to stop.")
     print("=" * 60)
+
+    print("  Loading retriever model…", end=" ", flush=True)
+    _warmup()
+    print("ready.")
 
     while True:
         try:
