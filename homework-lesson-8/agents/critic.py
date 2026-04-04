@@ -6,7 +6,11 @@ Exposed:
     run_critic(findings) → CritiqueResult
 """
 
+import json
+
 from langchain.agents import create_agent
+from langchain.agents.structured_output import StructuredOutputValidationError
+from langchain_core.messages import AIMessage, ToolMessage
 from langchain_openai import ChatOpenAI
 
 from config import Settings, CRITIC_PROMPT
@@ -27,12 +31,42 @@ critic_agent = create_agent(
     response_format=CritiqueResult,
 )
 
+# Critic is capped at 4 tool calls (see CRITIC_PROMPT), but allow headroom.
+_RECURSION = 31
+
+_REVISE_FALLBACK = CritiqueResult(
+    verdict="REVISE",
+    is_fresh=False,
+    is_complete=False,
+    is_well_structured=True,
+    strengths=[],
+    gaps=["Critic could not produce a structured verdict — assuming revision needed."],
+    revision_requests=["Re-evaluate findings and produce a complete structured report."],
+)
+
 
 def run_critic(findings: str) -> CritiqueResult:
-    """Invoke the Critic Agent and return a validated CritiqueResult."""
-    result = critic_agent.invoke(
-        {"messages": [{"role": "user", "content": findings}]},
-        # Critic makes several verification searches — allow more steps than default.
-        config={"recursion_limit": settings.max_iterations * 4 + 1},
-    )
+    """Invoke the Critic Agent, print verification tool calls, return CritiqueResult."""
+    try:
+        result = critic_agent.invoke(
+            {"messages": [{"role": "user", "content": findings}]},
+            config={"recursion_limit": _RECURSION},
+        )
+    except StructuredOutputValidationError:
+        print("    ⚠️  Critic structured output validation failed — using REVISE fallback.")
+        return _REVISE_FALLBACK
+
+    # Print tool calls from message history
+    for msg in result.get("messages", []):
+        if isinstance(msg, AIMessage) and msg.tool_calls:
+            for tc in msg.tool_calls:
+                args_str = json.dumps(tc["args"], ensure_ascii=False)
+                if len(args_str) > 120:
+                    args_str = args_str[:120] + "…"
+                print(f"    🔧 {tc['name']}({args_str})")  # indented — sub-agent
+        elif isinstance(msg, ToolMessage):
+            preview = str(msg.content)[:120]
+            if len(str(msg.content)) > 120:
+                preview += "…"
+            print(f"    📎 [{msg.name}] {preview}")
     return result["structured_response"]

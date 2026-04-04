@@ -121,13 +121,15 @@ def _handle_interrupt(interrupt: Interrupt) -> Command:
             if not feedback:
                 print("  (feedback cannot be empty, try again)")
                 continue
+            # "edit" means: reject the current report and ask the supervisor to
+            # revise it based on the feedback, then present a new HITL prompt.
             return Command(
                 resume={
                     interrupt.id: {
                         "decisions": [
                             {
-                                "type": "edit",
-                                "edited_action": {"feedback": feedback},
+                                "type": "reject",
+                                "message": f"Please revise the report: {feedback}",
                             }
                         ]
                     }
@@ -204,6 +206,11 @@ def main() -> None:
         if user_input.lower() in ("quit", "exit", "q"):
             print("Bye!")
             break
+
+        # When input is piped (non-interactive), echo the query so logs are readable.
+        import sys as _sys
+        if not _sys.stdin.isatty():
+            print(user_input)
 
         print()
         _stream(

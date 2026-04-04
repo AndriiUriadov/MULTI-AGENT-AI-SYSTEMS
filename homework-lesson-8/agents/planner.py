@@ -6,7 +6,10 @@ Exposed:
     run_planner(request) → ResearchPlan
 """
 
+import json
+
 from langchain.agents import create_agent
+from langchain_core.messages import AIMessage, ToolMessage
 from langchain_openai import ChatOpenAI
 
 from config import Settings, PLANNER_PROMPT
@@ -27,11 +30,26 @@ planner_agent = create_agent(
     response_format=ResearchPlan,
 )
 
+_RECURSION = settings.max_iterations * 2 + 1
+
 
 def run_planner(request: str) -> ResearchPlan:
-    """Invoke the Planner Agent and return a validated ResearchPlan."""
+    """Invoke the Planner Agent, print sub-agent tool calls, return ResearchPlan."""
     result = planner_agent.invoke(
         {"messages": [{"role": "user", "content": request}]},
-        config={"recursion_limit": settings.max_iterations * 2 + 1},
+        config={"recursion_limit": _RECURSION},
     )
+    # Print tool calls from message history
+    for msg in result.get("messages", []):
+        if isinstance(msg, AIMessage) and msg.tool_calls:
+            for tc in msg.tool_calls:
+                args_str = json.dumps(tc["args"], ensure_ascii=False)
+                if len(args_str) > 120:
+                    args_str = args_str[:120] + "…"
+                print(f"    🔧 {tc['name']}({args_str})")
+        elif isinstance(msg, ToolMessage):
+            preview = str(msg.content)[:120]
+            if len(str(msg.content)) > 120:
+                preview += "…"
+            print(f"    📎 [{msg.name}] {preview}")
     return result["structured_response"]

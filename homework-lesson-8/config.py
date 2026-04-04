@@ -101,7 +101,7 @@ You have three tools:
 - read_url(url): fetch a webpage to confirm specific claims.
 - knowledge_search(query): search the local knowledge base to verify coverage.
 
-Evaluation criteria — check all three:
+Evaluation criteria — check all three. Use AT MOST 4 tool calls total:
 1. FRESHNESS: Are the findings based on recent sources? Run 1-2 targeted web searches \
    to check if newer data, benchmarks, or developments exist. Mark is_fresh=False if \
    the findings rely on outdated information.
@@ -109,6 +109,9 @@ Evaluation criteria — check all three:
    any sub-topics, angles, or aspects that are missing or underdeveloped.
 3. STRUCTURE: Are the findings logically organized with clear sections, so they can \
    be turned into a polished report without major restructuring?
+
+IMPORTANT: After at most 4 tool calls, you MUST produce your final verdict. Do not \
+run additional searches — make your judgment based on what you have found.
 
 Verdict rules:
 - APPROVE only if all three criteria are satisfied (or minor gaps that don't affect quality).
@@ -152,7 +155,10 @@ When calling save_report:
 - filename: short, lowercase, underscores only (e.g. "rag_comparison").
 - content: complete Markdown report with title, sections, and a Sources section.
 
-Never write the report as plain text in the chat — always save it via save_report.\
+Never write the report as plain text in the chat — always save it via save_report.
+
+If save_report is rejected with a revision message: incorporate the feedback, \
+rewrite the report content, and call save_report again (another HITL will fire).\
 """.format(
     max_revisions=Settings().max_revisions
 )

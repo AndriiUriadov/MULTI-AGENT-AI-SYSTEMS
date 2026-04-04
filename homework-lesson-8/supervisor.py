@@ -67,6 +67,9 @@ def research(request: str, runtime: ToolRuntime) -> str:
     return run_researcher(request)
 
 
+_MAX_FINDINGS_LEN = 6000  # chars — keep critic input within API limits
+
+
 @tool
 def critique(findings: str) -> str:
     """Evaluate research findings and return a structured verdict.
@@ -77,7 +80,11 @@ def critique(findings: str) -> str:
     Include the original user request in the findings so the Critic can
     assess completeness against it.
     """
-    critique_result = run_critic(findings)
+    # Strip control characters (null bytes, etc.) that break JSON serialization.
+    cleaned = "".join(c for c in findings if c >= " " or c in "\n\t")
+    if len(cleaned) > _MAX_FINDINGS_LEN:
+        cleaned = cleaned[:_MAX_FINDINGS_LEN] + "\n\n[...truncated for review...]"
+    critique_result = run_critic(cleaned)
     return critique_result.model_dump_json(indent=2)
 
 

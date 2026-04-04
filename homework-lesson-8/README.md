@@ -1,21 +1,17 @@
-# Homework Lesson 8 — Мультиагентна дослідницька система
+# Homework Lesson 8 - Мультиагентна дослідницька система
 
-Розширення Research Agent з `homework-lesson-5` до **мультиагентної системи** з патерном **Plan → Research → Critique** та Human-in-the-Loop контролем над збереженням звітів.
+Розширення Research Agent з `homework-lesson-5` до **мультиагентної системи** з патерном **Plan -> Research -> Critique** та Human-in-the-Loop контролем над збереженням звітів.
 
 ## Що реалізовано
 
 ### Архітектура
-
-```
 User (REPL: main.py)
-  └── Supervisor Agent  ← InMemorySaver + HumanInTheLoopMiddleware
-        ├── plan(request)      → Planner Agent   → ResearchPlan (Pydantic)
-        ├── research(plan)     → Research Agent  → Markdown findings
-        ├── critique(findings) → Critic Agent    → CritiqueResult (Pydantic)
-        │      └── verdict=REVISE → повторний research (max 2 раунди)
-        └── save_report(...)   → HITL: approve / edit / reject
-```
-
+  └── Supervisor Agent  <- InMemorySaver + HumanInTheLoopMiddleware
+        ├── plan(request)      -> Planner Agent   -> ResearchPlan (Pydantic)
+        ├── research(plan)     -> Research Agent  -> Markdown findings
+        ├── critique(findings) -> Critic Agent    -> CritiqueResult (Pydantic)
+        │      └── verdict=REVISE -> повторний research (max 2 раунди)
+        └── save_report(...)   -> HITL: approve / edit / reject
 **Ключові патерни:**
 - **Evaluator-optimizer loop** — Critic може повернути дослідника на доопрацювання з конкретним зворотним зв'язком
 - **Structured output** — Planner і Critic повертають валідовані Pydantic-моделі через `response_format`
@@ -67,10 +63,10 @@ class CritiqueResult(BaseModel):
   --- Report preview ---
   # Overview of RAG...
   ---
-👉 approve / edit / reject:
-  approve  → зберегти як є
-  edit     → ввести feedback → Supervisor переробляє → новий HITL
-  reject   → скасувати збереження
+ approve / edit / reject:
+  approve  -> зберегти як є
+  edit     -> ввести feedback -> Supervisor переробляє -> новий HITL
+  reject   -> скасувати збереження
 ```
 
 ## Запуск
@@ -104,49 +100,79 @@ MODEL_NAME=gpt-4o-mini
 ============================================================
   Loading retriever model… ready.
 
-You: Compare naive RAG, sentence-window RAG, and parent-child RAG...
+You: Compare naive RAG, sentence-window RAG, and parent-child RAG approaches. Write a detailed report.
 
-  🔧 plan({"request": "Compare naive RAG, sentence-window RAG, and parent-child RAG..."})
-  📎 [plan] {"goal": "Produce a detailed comparative report...",
-             "search_queries": ["naive RAG vs sentence-window RAG comparison", ...],
-             "sources_to_check": ["knowledge_base", "web"], ...}
+  🔧 plan({"request": "Compare naive RAG, sentence-window RAG, and parent-child RAG approaches..."})
+    🔧 knowledge_search({"query": "naive RAG vs sentence-window RAG vs parent-child RAG comparison"})
+    🔧 web_search({"query": "RAG techniques naive sentence-window parent-child comparison"})
+    📎 [knowledge_search] [1] Source: retrieval-augmented-generation.pdf, page 0 ...
+    📎 [web_search] [{"title": "Recent RAG advancements...", ...}]
+  📎 [plan] {"goal": "Produce a detailed comparison report...", "search_queries": [...], ...}
 
-  🔧 research({"request": "Research and compare naive RAG, sentence-window RAG..."})
-  📎 [research] # Comparative Analysis of RAG Approaches...
+  🔧 research({"request": "Research and compile a detailed comparison on naive RAG..."})
+    🔧 knowledge_search({"query": "naive RAG, sentence-window RAG, parent-child RAG definitions..."})
+    🔧 web_search({"query": "naive RAG vs sentence-window RAG vs parent-child RAG comparison"})
+    🔧 read_url({"url": "https://medium.com/..."})
+    📎 [knowledge_search] [1] Source: retrieval-augmented-generation.pdf ...
+    📎 [web_search] [{"title": "Beyond Naive RAG...", ...}]
+    📎 [read_url] Beyond Naive RAG: Comparing Basic, Sentence-Window...
+  📎 [research] # Comparative Report on RAG Approaches...
 
   🔧 critique({"findings": "..."})
-  📎 [critique] {"verdict": "REVISE", "is_fresh": false,
-                 "gaps": ["Missing 2024 benchmarks for Sentence-Window RAG"],
-                 "revision_requests": ["Find 2024 performance metrics"]}
+    🔧 web_search({"query": "latest developments in RAG approaches 2024"})
+    🔧 knowledge_search({"query": "latest benchmarks on RAG approaches..."})
+    📎 [web_search] [...] 📎 [knowledge_search] ...
+  📎 [critique] {"verdict": "REVISE", "is_fresh": false, "is_complete": true,
+                 "gaps": ["No recent benchmarks or performance metrics from 2024"],
+                 "revision_requests": ["Find 2024 performance metrics for RAG approaches"]}
 
-  🔧 research({"request": "Research the latest findings on Sentence-Window RAG from 2024..."})
-  📎 [research] # Report on Sentence-Window RAG and Performance Comparisons...
+  🔧 research({"request": "Research the latest advancements in RAG as of 2024..."})
+    🔧 web_search({"query": "latest advancements RAG 2024 performance metrics..."})
+    🔧 knowledge_search({"query": "RAG performance metrics benchmarks 2024"})
+    🔧 read_url({"url": "https://arxiv.org/..."}) 🔧 read_url({"url": "https://evidentlyai.com/..."})
+    📎 [read_url] A Comprehensive Survey of RAG... 📎 [read_url] RAG benchmarks...
+  📎 [research] # Latest Advancements in RAG as of 2024...
 
   🔧 critique({"findings": "..."})
-  📎 [critique] {"verdict": "REVISE", "is_fresh": false, ...}
+    🔧 web_search({"query": "Retrieval-Augmented Generation RAG advancements 2024"})
+    🔧 knowledge_search({"query": "..."}) 🔧 read_url({"url": "..."})
+    📎 [web_search] [...] 📎 [read_url] ...
+  📎 [critique] {"verdict": "REVISE", "is_fresh": true, "is_complete": false, ...}
 
-  🔧 research({"request": "Research the latest 2024 findings on RAG performance metrics..."})
+  🔧 research({"request": "Research latest RAG benchmarks from 2024..."})
   📎 [research] [REVISION LIMIT REACHED — 3 research rounds completed]
                 You MUST now call save_report()...
 
-  ============================================================
-  ⏸️  ACTION REQUIRES APPROVAL
-  ============================================================
-    Tool: save_report
-    File: rag_comparison.md
-    --- Report preview ---
-    # Comparative Analysis of RAG Approaches...
-    ---
+============================================================
+⏸️  ACTION REQUIRES APPROVAL
+============================================================
+  Tool: save_report
+  File: rag_comparison.md
+  --- Report preview ---
+  # Comparative Report on RAG Approaches: Naive RAG, Sentence-Window RAG...
+  ---
 
-  👉 approve / edit / reject: approve
+👉 approve / edit / reject: edit
+✏️  Your feedback: Add a comparison table summarizing all three approaches
+  📎 [save_report] Please revise the report: Add a comparison table summarizing all three approaches
+
+============================================================
+⏸️  ACTION REQUIRES APPROVAL
+============================================================
+  Tool: save_report
+  File: rag_comparison.md
+  --- Report preview ---
+  # Comparative Report on RAG Approaches (revised with comparison table)...
+  ---
+
+👉 approve / edit / reject: approve
   📎 [save_report] Report saved to output/rag_comparison.md
 
-Agent: The detailed report has been successfully created and saved.
+Agent: The report comparing Naive RAG, Sentence-Window RAG, and Parent-Child RAG has been saved.
 ```
 
-**Збережені звіти:**
+**Збережений звіт:**
 - [`output/rag_comparison.md`](output/rag_comparison.md) — порівняння підходів RAG (з реального тесту)
-- [`output/rag_overview.md`](output/rag_overview.md) — огляд RAG
 
 ## Що нового порівняно з lesson-5
 
@@ -174,10 +200,22 @@ chunk["__interrupt__"][0].id                                    # для resume
 
 # Resume:
 Command(resume={interrupt.id: {"decisions": [{"type": "approve"}]}})
-Command(resume={interrupt.id: {"decisions": [{"type": "edit",
-    "edited_action": {"feedback": "Add a table"}}]}})
+Command(resume={interrupt.id: {"decisions": [{"type": "reject",
+    "message": "Please revise: feedback text"}]}})   # "edit" → reject з feedback
 Command(resume={interrupt.id: {"decisions": [{"type": "reject",
     "message": "Not needed"}]}})
+```
+
+**Примітка щодо `edit`**: `EditDecision` у middleware очікує `edited_action: {"name": ..., "args": {...}}` — тобто повну заміну аргументів інструменту. Для сценарію «перепиши звіт на основі feedback» використовується `reject` з feedback-текстом як message. Supervisor бачить відхилений виклик і переписує звіт згідно з поясненням у повідомленні.
+
+### Видимість викликів суб-агентів
+
+Кожен суб-агент (planner, researcher, critic) використовує єдиний `invoke()`. Після завершення `result["messages"]` містить повну історію розмови, включно з усіма `AIMessage.tool_calls` та `ToolMessage`. Ці виклики друкуються з відступом 4 пробіли — рівень суб-агента під Supervisor-рівнем (2 пробіли):
+
+```
+  🔧 research(...)            ← Supervisor рівень
+    🔧 knowledge_search(...)  ← Research Agent рівень
+    📎 [knowledge_search] ... ← результат
 ```
 
 ### Спостережена поведінка LLM
