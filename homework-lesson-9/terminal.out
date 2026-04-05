@@ -836,5 +836,3 @@ INFO:     HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.
 Agent: The report comparing naive RAG and modular RAG approaches has been completed and saved successfully. You can find the report at the following location: [rag_comparison.md](output/rag_comparison.md). If you need any further assistance or modifications, feel free to let me know!
 
 You: Bye!
-ERROR:    Task was destroyed but it is pending!
-task: <Task pending name='Task-16' coro=<Executor._run_coro() running at /Users/a.uriadov/miniconda3/lib/python3.13/site-packages/acp_sdk/server/executor.py:303> wait_for=<Future pending cb=[Task.task_wakeup()]>>
