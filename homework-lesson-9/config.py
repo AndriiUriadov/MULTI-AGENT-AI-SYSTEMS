@@ -172,5 +172,5 @@ Never write the report as plain text in the chat — always save it via save_rep
 If save_report is rejected with a revision message: incorporate the feedback, \
 rewrite the report content, and call save_report again (another HITL will fire).\
 """.format(
-    max_revisions=Settings().max_revisions
+    max_revisions=Settings.model_fields["max_revisions"].default
 )
