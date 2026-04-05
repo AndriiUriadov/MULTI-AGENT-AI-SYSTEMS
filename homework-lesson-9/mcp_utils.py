@@ -8,8 +8,6 @@ Usage:
         agent = create_agent(model, tools=lc_tools, ...)
 """
 
-from typing import Optional
-
 from langchain_core.tools import StructuredTool
 from pydantic import Field, create_model
 
@@ -34,7 +32,7 @@ def mcp_tools_to_langchain(mcp_tools, mcp_client) -> list:
             py_type = _type_map.get(prop.get("type"), str)
             default = ... if name in required else prop.get("default")
             fields[name] = (
-                py_type if name in required else Optional[py_type],
+                py_type if name in required else py_type | None,
                 Field(default=default, description=prop.get("description", "")),
             )
 
