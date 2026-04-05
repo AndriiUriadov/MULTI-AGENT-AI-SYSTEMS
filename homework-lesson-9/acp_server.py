@@ -34,8 +34,8 @@ settings = Settings()
 server = Server()
 
 # Recursion limits — planner/researcher need headroom for multiple tool calls
-_PLANNER_RECURSION = 31
-_RESEARCHER_RECURSION = 31
+_PLANNER_RECURSION = 51
+_RESEARCHER_RECURSION = 51
 _CRITIC_RECURSION = 31
 
 _CRITIC_REVISE_FALLBACK = CritiqueResult(
