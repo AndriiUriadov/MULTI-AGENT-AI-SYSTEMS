@@ -107,13 +107,8 @@ def delegate_to_critic(findings: str) -> str:
     verdict (APPROVE/REVISE), is_fresh, is_complete, is_well_structured,
     strengths, gaps, and revision_requests.
     """
-    # Sanitize and truncate to avoid API context errors
-    cleaned = "".join(c for c in findings if c >= " " or c in "\n\t")
-    if len(cleaned) > 6000:
-        cleaned = cleaned[:6000] + "\n\n[...truncated for review...]"
-
     print("  🤖 [critic via ACP]")
-    result = asyncio.run(_acp_call("critic", cleaned))
+    result = asyncio.run(_acp_call("critic", findings))
     return result
 
 
