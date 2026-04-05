@@ -13,7 +13,9 @@ Port: 8901 (SEARCH_MCP_PORT from config)
 """
 
 import asyncio
+import datetime
 import os
+import pickle
 import sys
 
 # Ensure project root is on path so config/retriever resolve correctly
@@ -116,12 +118,10 @@ def knowledge_base_stats() -> str:
     if not os.path.exists(chunks_path):
         return "Knowledge base index not found. Run ingest.py first."
 
-    import pickle
     with open(chunks_path, "rb") as f:
         chunks = pickle.load(f)
 
     mtime = os.path.getmtime(index_path)
-    import datetime
     updated = datetime.datetime.fromtimestamp(mtime).strftime("%Y-%m-%d %H:%M")
 
     return (
