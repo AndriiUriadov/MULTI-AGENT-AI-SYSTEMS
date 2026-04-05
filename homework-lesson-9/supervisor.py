@@ -43,6 +43,8 @@ async def _acp_call(agent_name: str, text: str) -> str:
             agent=agent_name,
             input=[Message(role="user", parts=[MessagePart(content=text)])],
         )
+    if not run.output:
+        return f"[{agent_name} returned no output]"
     return run.output[-1].parts[0].content
 
 

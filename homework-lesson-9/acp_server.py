@@ -33,9 +33,9 @@ settings = Settings()
 
 server = Server()
 
-# Recursion limits (same rationale as hw8)
-_PLANNER_RECURSION = settings.max_iterations * 2 + 1
-_RESEARCHER_RECURSION = settings.max_iterations * 2 + 1
+# Recursion limits — planner/researcher need headroom for multiple tool calls
+_PLANNER_RECURSION = 31
+_RESEARCHER_RECURSION = 31
 _CRITIC_RECURSION = 31
 
 _CRITIC_REVISE_FALLBACK = CritiqueResult(
@@ -71,12 +71,20 @@ def _print_tool_calls(result: dict, indent: str = "    ") -> None:
 # Planner agent handler
 # ---------------------------------------------------------------------------
 
+def _sanitize(text: str, max_len: int = 0) -> str:
+    """Remove control characters and optionally truncate."""
+    cleaned = "".join(c for c in text if c >= " " or c in "\n\t")
+    if max_len and len(cleaned) > max_len:
+        cleaned = cleaned[:max_len] + "\n\n[...truncated...]"
+    return cleaned
+
+
 @server.agent(
     name="planner",
     description="Decomposes a research request into a structured ResearchPlan.",
 )
 async def planner_handler(input: list[Message]) -> Message:
-    user_text = input[-1].parts[0].content
+    user_text = _sanitize(input[-1].parts[0].content)
 
     async with Client(SEARCH_MCP_URL) as mcp_client:
         mcp_tools = await mcp_client.list_tools()
@@ -102,7 +110,7 @@ async def planner_handler(input: list[Message]) -> Message:
     description="Executes a research plan using web search and the local knowledge base.",
 )
 async def researcher_handler(input: list[Message]) -> Message:
-    user_text = input[-1].parts[0].content
+    user_text = _sanitize(input[-1].parts[0].content, max_len=8000)
 
     async with Client(SEARCH_MCP_URL) as mcp_client:
         mcp_tools = await mcp_client.list_tools()
@@ -129,11 +137,7 @@ async def researcher_handler(input: list[Message]) -> Message:
 )
 async def critic_handler(input: list[Message]) -> Message:
     findings = input[-1].parts[0].content
-
-    # Sanitize and truncate to avoid API context errors
-    cleaned = "".join(c for c in findings if c >= " " or c in "\n\t")
-    if len(cleaned) > _MAX_FINDINGS_LEN:
-        cleaned = cleaned[:_MAX_FINDINGS_LEN] + "\n\n[...truncated for review...]"
+    cleaned = _sanitize(findings, max_len=_MAX_FINDINGS_LEN)
 
     try:
         async with Client(SEARCH_MCP_URL) as mcp_client:
