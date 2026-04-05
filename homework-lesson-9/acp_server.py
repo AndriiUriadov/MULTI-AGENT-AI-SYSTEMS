@@ -79,23 +79,23 @@ def _sanitize(text: str, max_len: int = 0) -> str:
     return cleaned
 
 
+async def _invoke_agent(build_fn, user_text: str, recursion_limit: int) -> dict:
+    """Open SearchMCP, build agent via build_fn, invoke, return result dict."""
+    async with Client(SEARCH_MCP_URL) as mcp_client:
+        lc_tools = mcp_tools_to_langchain(await mcp_client.list_tools(), mcp_client)
+        return await build_fn(lc_tools).ainvoke(
+            {"messages": [("user", user_text)]},
+            config={"recursion_limit": recursion_limit},
+        )
+
+
 @server.agent(
     name="planner",
     description="Decomposes a research request into a structured ResearchPlan.",
 )
 async def planner_handler(input: list[Message]) -> Message:
     user_text = _sanitize(input[-1].parts[0].content)
-
-    async with Client(SEARCH_MCP_URL) as mcp_client:
-        mcp_tools = await mcp_client.list_tools()
-        lc_tools = mcp_tools_to_langchain(mcp_tools, mcp_client)
-        agent = build_planner(lc_tools)
-
-        result = await agent.ainvoke(
-            {"messages": [("user", user_text)]},
-            config={"recursion_limit": _PLANNER_RECURSION},
-        )
-
+    result = await _invoke_agent(build_planner, user_text, _PLANNER_RECURSION)
     _print_tool_calls(result)
     plan = result["structured_response"]
     return Message(role="agent", parts=[MessagePart(content=plan.model_dump_json(indent=2))])
@@ -111,17 +111,7 @@ async def planner_handler(input: list[Message]) -> Message:
 )
 async def researcher_handler(input: list[Message]) -> Message:
     user_text = _sanitize(input[-1].parts[0].content, max_len=8000)
-
-    async with Client(SEARCH_MCP_URL) as mcp_client:
-        mcp_tools = await mcp_client.list_tools()
-        lc_tools = mcp_tools_to_langchain(mcp_tools, mcp_client)
-        agent = build_researcher(lc_tools)
-
-        result = await agent.ainvoke(
-            {"messages": [("user", user_text)]},
-            config={"recursion_limit": _RESEARCHER_RECURSION},
-        )
-
+    result = await _invoke_agent(build_researcher, user_text, _RESEARCHER_RECURSION)
     _print_tool_calls(result)
     findings = result["messages"][-1].content
     return Message(role="agent", parts=[MessagePart(content=findings)])
@@ -136,20 +126,10 @@ async def researcher_handler(input: list[Message]) -> Message:
     description="Evaluates research findings for freshness, completeness, and structure.",
 )
 async def critic_handler(input: list[Message]) -> Message:
-    findings = input[-1].parts[0].content
-    cleaned = _sanitize(findings, max_len=_MAX_FINDINGS_LEN)
+    cleaned = _sanitize(input[-1].parts[0].content, max_len=_MAX_FINDINGS_LEN)
 
     try:
-        async with Client(SEARCH_MCP_URL) as mcp_client:
-            mcp_tools = await mcp_client.list_tools()
-            lc_tools = mcp_tools_to_langchain(mcp_tools, mcp_client)
-            agent = build_critic(lc_tools)
-
-            result = await agent.ainvoke(
-                {"messages": [("user", cleaned)]},
-                config={"recursion_limit": _CRITIC_RECURSION},
-            )
-
+        result = await _invoke_agent(build_critic, cleaned, _CRITIC_RECURSION)
         _print_tool_calls(result)
         critique = result["structured_response"]
 
