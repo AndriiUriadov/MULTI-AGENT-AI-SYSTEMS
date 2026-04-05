@@ -11,6 +11,7 @@ import asyncio
 import json
 import logging
 import os
+import sys
 import threading
 import time
 import warnings
@@ -37,6 +38,7 @@ from supervisor import supervisor
 _CONFIG = {"configurable": {"thread_id": "session-1"}}
 _PREVIEW_LEN = 400
 _HITL_TOOLS = {"save_report"}
+_SERVER_STARTUP_DELAY = 3  # seconds to wait for all servers to bind their ports
 
 
 # ---------------------------------------------------------------------------
@@ -72,7 +74,7 @@ def _start_servers() -> None:
         acp_server.run(port=ACP_PORT)
     threading.Thread(target=_run_acp, daemon=True, name="ACPServer").start()
 
-    time.sleep(3)
+    time.sleep(_SERVER_STARTUP_DELAY)
 
 
 # ---------------------------------------------------------------------------
@@ -242,8 +244,7 @@ def main() -> None:
             print("Bye!")
             break
 
-        import sys as _sys
-        if not _sys.stdin.isatty():
+        if not sys.stdin.isatty():
             print(user_input)
 
         print()
