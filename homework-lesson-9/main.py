@@ -235,12 +235,14 @@ def main() -> None:
         try:
             user_input = input("\nYou: ").strip()
         except (KeyboardInterrupt, EOFError):
+            logging.getLogger("uvicorn.error").setLevel(logging.CRITICAL)
             print("\nBye!")
             break
 
         if not user_input:
             continue
         if user_input.lower() in ("quit", "exit", "q"):
+            logging.getLogger("uvicorn.error").setLevel(logging.CRITICAL)
             print("Bye!")
             break
 
