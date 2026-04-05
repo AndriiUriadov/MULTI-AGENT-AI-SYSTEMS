@@ -238,5 +238,8 @@ def _sanitize(text: str, max_len: int = 0) -> str:
     return cleaned
 ```
 
+### Recursion limit: 51 для planner і researcher
+LangGraph рахує кожен tool call як 2 кроки графа (виклик + результат). Planner і Researcher роблять кілька паралельних `web_search` + `knowledge_search` одночасно — при ліміті 31 planner іноді падав з `GraphRecursionError`. ACP-сервер логував `ERROR: Run failed`, але система не зупинялась — supervisor отримував `[planner returned no output]` і продовжував без плану. Ліміт підвищено до 51. Critic залишається на 31 — він робить мало tool calls.
+
 ### StructuredOutputValidationError в critic
 Якщо OpenAI не може розпарсити structured output для `CritiqueResult`, `critic_handler` перехоплює `StructuredOutputValidationError` і повертає fallback REVISE — цикл продовжується, а не падає.
