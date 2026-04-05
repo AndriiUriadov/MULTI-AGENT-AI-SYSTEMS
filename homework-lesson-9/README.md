@@ -1,9 +1,8 @@
 # Homework Lesson 9 - Мультиагентна система з MCP + ACP протоколами
 
-Розширення `homework-lesson-8` до **повноцінної мікросервісної архітектури**: інструменти переїхали в MCP-сервери, суб-агенти — в ACP-сервер. Один термінал запускає все.
+Розширення `homework-lesson-8` до **повноцінної мікросервісної архітектури**: інструменти переїхали в MCP-сервери, суб-агенти - в ACP-сервер. Все запускається в одному терміналі щоб не ускладнювати процес запуску.
 
 ## Що реалізовано
-
 ### Архітектура
 
 ```
@@ -26,8 +25,8 @@ Supervisor Agent  ← InMemorySaver + HumanInTheLoopMiddleware
 ```
 
 **MCP-сервери:**
-- **SearchMCP** (порт 8901) — `web_search`, `read_url`, `knowledge_search`, resource `knowledge-base-stats`
-- **ReportMCP** (порт 8902) — `save_report`, resource `output-dir`
+- **SearchMCP** (порт 8901): `web_search`, `read_url`, `knowledge_search`, resource `knowledge-base-stats`
+- **ReportMCP** (порт 8902): `save_report`, resource `output-dir`
 
 **ACP-сервер (порт 8903):**
 - `planner` — `build_planner()` з `response_format=ResearchPlan`
@@ -101,7 +100,7 @@ async def researcher_handler(input: list[Message]) -> Message:
 ```bash
 pip install -r requirements.txt
 
-# Побудувати індекс (або скопіювати з lesson-5/index/ або lesson-8/index/)
+# Побудувати індекс (або можна скопіювати з lesson-5/index/ або lesson-8/index/)
 python ingest.py
 
 # Запустити всю систему одною командою
@@ -196,17 +195,17 @@ Agent: The report has been saved to output/rag_comparison.md.
 **Збережений звіт:**
 - [`output/rag_comparison.md`](output/rag_comparison.md) — порівняння підходів RAG (з реального тесту)
 
-## Очікуваний результат (відповідність завданню)
+## Відповідність завданню
 
-1. ✅ **MCP-сервери запускаються** — SearchMCP (8901) і ReportMCP (8902) стартують автоматично при `python main.py`
-2. ✅ **ACP-сервер запускається** — три агенти (planner/researcher/critic) доступні на порту 8903
-3. ✅ **Planner декомпозує через ACP** — `delegate_to_planner` → ACP call → `ResearchPlan` JSON
-4. ✅ **Researcher використовує MCP tools** — `web_search`, `read_url`, `knowledge_search` через SearchMCP
-5. ✅ **Critic оцінює через ACP** — `delegate_to_critic` → ACP call → `CritiqueResult` JSON з APPROVE/REVISE
-6. ✅ **REVISE-ітерація працює** — Supervisor повертає Researcher на доопрацювання з конкретним feedback
-7. ✅ **save_report через ReportMCP** — запис файлу виконується через MCP `save_report` tool
-8. ✅ **HITL працює** — `save_report` перехоплюється middleware: approve / edit / reject
-9. ✅ **edit → approve flow** — після edit Supervisor переписує звіт, другий HITL → approve → файл збережено
+1.  **MCP-сервери запускаються** — SearchMCP (8901) і ReportMCP (8902) стартують автоматично при `python main.py`
+2.  **ACP-сервер запускається** — три агенти (planner/researcher/critic) доступні на порту 8903
+3.  **Planner декомпозує через ACP** — `delegate_to_planner` → ACP call → `ResearchPlan` JSON
+4.  **Researcher використовує MCP tools** — `web_search`, `read_url`, `knowledge_search` через SearchMCP
+5.  **Critic оцінює через ACP** — `delegate_to_critic` → ACP call → `CritiqueResult` JSON з APPROVE/REVISE
+6.  **REVISE-ітерація працює** — Supervisor повертає Researcher на доопрацювання з конкретним feedback
+7.  **save_report через ReportMCP** — запис файлу виконується через MCP `save_report` tool
+8.  **HITL працює** — `save_report` перехоплюється middleware: approve / edit / reject
+9.  **edit → approve flow** — після edit Supervisor переписує звіт, другий HITL → approve → файл збережено
 
 ## Що нового порівняно з lesson-8
 
