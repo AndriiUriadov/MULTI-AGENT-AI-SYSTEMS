@@ -55,6 +55,27 @@ homework-lesson-9/
 └── requirements.txt
 ```
 
+### Схеми (schemas.py)
+
+```python
+class ResearchPlan(BaseModel):
+    goal: str
+    search_queries: list[str]
+    sources_to_check: list[Literal["knowledge_base", "web"]]
+    output_format: str
+
+class CritiqueResult(BaseModel):
+    verdict: Literal["APPROVE", "REVISE"]
+    is_fresh: bool
+    is_complete: bool
+    is_well_structured: bool
+    strengths: list[str]
+    gaps: list[str]
+    revision_requests: list[str]
+```
+
+Planner повертає `ResearchPlan` як JSON через ACP. Supervisor передає його текстом у `delegate_to_researcher`. Critic повертає `CritiqueResult` — Supervisor читає `verdict` і вирішує: APPROVE → `save_report`, REVISE → ще один раунд `delegate_to_researcher`.
+
 ### Ключові технічні рішення
 
 **Sync Supervisor + async ACP/MCP:**
@@ -82,6 +103,7 @@ for tool in mcp_tools:
         return str(result.data)
     lc_tools.append(StructuredTool.from_function(coroutine=_invoke, name=tool.name, ...))
 ```
+`_name=tool.name` — навмисне: Python closure захоплює змінну `tool` за посиланням, а не за значенням. Без default argument усі closure-и в циклі посилалися б на одне й те саме `tool` — останнє в списку.
 
 **ACP-агент відкриває MCP-з'єднання для кожного запиту:**
 ```python
