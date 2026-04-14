@@ -8,16 +8,21 @@ component-level метрики (GEval), ToolCorrectnessMetric і e2e з каст
 ## Передумови
 
 1. Створити `.env` у корені теки:
-   ```
+
+   ```dotenv
    API_KEY=<OpenAI key>
    MODEL_NAME=gpt-4o-mini
    JUDGE_MODEL=gpt-4o-mini
    ```
+
 2. Встановити залежності:
+
    ```bash
    pip install -r requirements.txt
    ```
+
 3. (Одноразово) зібрати RAG-індекс, якщо теки `index/` немає:
+
    ```bash
    python ingest.py
    ```
@@ -33,4 +38,3 @@ pytest tests/                            # лише детерміністичн
 ## Посилання
 
 - Постановка: [plan10.md](plan10.md)
-- Детальний план виконання: [plan-detailed-10.md](plan-detailed-10.md)
