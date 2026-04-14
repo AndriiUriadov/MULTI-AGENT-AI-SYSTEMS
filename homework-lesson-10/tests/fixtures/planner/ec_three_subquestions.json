@@ -1,0 +1,63 @@
+{
+  "id": "ec_three_subquestions",
+  "input": "For a production RAG system: (1) how should documents be chunked, (2) what embedding model should be chosen, and (3) how should retrieval quality be evaluated?",
+  "plan": {
+    "goal": "Identify optimal document chunking strategies, suitable embedding models, and effective retrieval quality evaluation methods for a production RAG system.",
+    "search_queries": [
+      "document chunking strategies for RAG systems",
+      "best embedding models for retrieval-augmented generation 2024",
+      "how to evaluate retrieval quality in RAG systems",
+      "current practices in chunking for RAG effectiveness",
+      "metrics for assessing embedding model performance in RAG"
+    ],
+    "sources_to_check": [
+      "knowledge_base",
+      "web"
+    ],
+    "output_format": "comprehensive report with sections on chunking, embedding models, and evaluation metrics"
+  },
+  "tools_called": [
+    {
+      "name": "web_search",
+      "input_parameters": {
+        "query": "best practices for document chunking in RAG systems 2024"
+      },
+      "output": "[{\"title\": \"Document Processing for RAG: Best Practices and Tools for 2024\", \"url\": \"https://collabnix.com/document-processing-for-rag-best-practices-and-tools-for-2024/\", \"snippet\": \"Nov 2, 2025 ·Masterdocumentprocessing forRAGsystemswith practical examples, code snippets, andbestpractices. Learnchunkingstrategies, embedding optimization, and production deployment.\"}, {\"title\": \"Document Chunking for RAG: 9 Strategies Tested (70% Accuracy ...\", \"url\": \"https://langcopilot.com/posts/2025-10-11-document-chunking-for-rag-practical-guide\", \"snippet\": \"Oct 11, 2025 ·We'll explore a range ofchunkingstrategies, complete with examples and field-tested advice, to help you build a rock-solid foundation for anyRAGapplication. Want to pressure-test the setup, not just read about it?\"}, {\"title\": \"Chunking Strategies for RAG: Size, Overlap & Best Practices\", \"url\": \"https://stackviv.ai/blog/chunking-strategies-rag\", \"snippet\": \"1 day ago ·Learn thebestchunkingforRAGsystems, including optimalchunksizes, overlap strategies, and advanced techniques to boost retrieval accuracy by up to 40%.\"}, {\"title\": \"How to Chunk Documents for RAG - multimodal.dev\", \"url\": \"https://www.multimodal.dev/post/how-to-chunk-documents-for-rag\", \"snippet\": \"Sep 26,2024·Learn howchunkingdocumentsoptimize retrieval and response generation inRAGsystemsby preserving context, using metadata, and applying embeddings.\"}, {\"title\": \"Mastering Chunking Strategies for RAG: Best Practices & Code ...\", \"url\": \"https://community.databricks.com/t5/technical-blog/the-ultimate-guide-to-chunking-strategies-for-rag-applications/ba-p/113089\", \"snippet\": \"Apr 3, 2025 ·This guide coversbestpractices, code examples, and industry-proven techniques for optimizingchunkinginRAGworkflows, including implementations on Databricks.\"}]"
+    },
+    {
+      "name": "web_search",
+      "input_parameters": {
+        "query": "current embedding models for RAG systems 2024"
+      },
+      "output": "[{\"title\": \"Top 5 Embedding Models for Your RAG Pipeline - KDnuggets\", \"url\": \"https://www.kdnuggets.com/top-5-embedding-models-for-your-rag-pipeline\", \"snippet\": \"Feb 12, 2026 ·The table below provides a detailed comparison of leadingembeddingmodelsforRAGpipelines, focusing on context handling,embeddingflexibility, retrieval capabilities, and what each model does best in practice.\"}, {\"title\": \"Top embedding models for RAG - modal.com\", \"url\": \"https://modal.com/blog/embedding-models-article\", \"snippet\": \"Oct 30,2024·If you’re building a Retrieval-Augmented Generation (RAG)system, choosing the rightembeddingmodelis crucial for good performance. This is because theembeddingmodeldirectly affects the quality and relevance of retrieved information.\"}, {\"title\": \"5 Best Embedding Models for RAG: How to Choose the Right One\", \"url\": \"https://greennode.ai/blog/best-embedding-models-for-rag\", \"snippet\": \"Explore the bestembeddingmodelsforRAGpipeline in 2025 and learn how to choose the right one for accuracy, speed, and scalability.\"}, {\"title\": \"The Complete Guide to Embeddings and RAG: From ... - Medium\", \"url\": \"https://medium.com/@sharanharsoor/the-complete-guide-to-embeddings-and-rag-from-theory-to-production-758a16d747ac\", \"snippet\": \"Jun 2, 2025 ·This comprehensive guide will take you from the fundamentals ofembeddingsto production-readyRAGarchitectures, covering everything from tokenization strategies to vector database selection...\"}, {\"title\": \"Beyond Benchmarks: Evaluating Embedding Model Similarity for ...\", \"url\": \"https://arxiv.org/html/2407.08275v1\", \"snippet\": \"Jul 11,2024·Thus, in this study, we evaluate the similarity ofembeddingmodelswithin the context ofRAGsystems. Our assessment is two-fold: We use Centered Kernel Alignment to compareembeddingson a pair-wise level.\"}]"
+    },
+    {
+      "name": "web_search",
+      "input_parameters": {
+        "query": "evaluating retrieval quality in RAG systems 2024"
+      },
+      "output": "[{\"title\": \"How to Evaluate Retrieval Quality in RAG Pipelines:\", \"url\": \"https://towardsdatascience.com/how-to-evaluate-retrieval-quality-in-rag-pipelines-precisionk-recallk-and-f1k/\", \"snippet\": \"How toEvaluateRetrievalQualityinRAGPipelines: Precision@k, Recall@k, and F1@k ...evaluatingretrievalare the most straightforward and ...\"}, {\"title\": \"How can we measure improvement in information retrieval quality\", \"url\": \"https://mikulskibartosz.name/measuring-information-retrieval-quality-in-rag-systems\", \"snippet\": \"...ininformationretrievalqualityinRAGsystems... Imagine you have aRAGsystemwithretrievalbased on semantic searchina vector database.\"}, {\"title\": \"RAG Evaluation Using Ragas - Zilliz blog\", \"url\": \"https://zilliz.com/blog/rag-evaluation-using-ragas\", \"snippet\": \"Ragas simplifies the evaluation of complexRAGsystemsby providing intuitive metrics and streamlining the process of assessingretrievalquality.\"}, {\"title\": \"How to Effectively Evaluate Retrieval-Augmented Generation\", \"url\": \"https://www.louisbouchard.ai/rag-evals/\", \"snippet\": \"By incorporating these LLM-based evaluations alongside traditionalretrievalmetrics, we can get a more comprehensive view of ourRAGsystem’s ...\"}, {\"title\": \"Progressive Searching for Retrieval in RAG\", \"url\": \"https://arxiv.org/html/2602.07297v1\", \"snippet\": \"The effectiveness of aRAGsystemfully depends on thequalityof the documentretrievalprocess, which is inherently influenced by the embedding ...\"}]"
+    },
+    {
+      "name": "knowledge_search",
+      "input_parameters": {
+        "query": "document chunking strategies in RAG systems"
+      },
+      "output": "[1] Source: retrieval-augmented-generation.pdf, page 3\nIt has been reported that Retro is not reproducible, so modifications were made to make it so. The more\nreproducible version is called Retro++ and includes in-context RAG.[15]\nChunking involves various strategies for breaking up the data into vectors so the retriever can find details\nin it.\nDifferent data styles have patterns that correct chunking can take advantage of.\nThree types of chunking strategies are:\n\n[2] Source: retrieval-augmented-generation.pdf, page 3\nThree types of chunking strategies are:\nFixed length with overlap. This is fast and easy. Overlapping consecutive chunks helps to\nmaintain semantic context across chunks.\nSyntax-based chunks can break the document up into sentences. Libraries such as spaCy\nor NLTK can also help.\nFile format-based chunking. Certain file types have natural chunks built in, and it's best to\nrespect them. For example, code files are best chunked and vectorized as whole functions\n\n[3] Source: retrieval-augmented-generation.pdf, page 3\nmitigate this is to do a traditional text search, add those results to the text chunks linked to the retrieved\nvectors from the vector search, and feed the combined hybrid text into the language model for generation.\nRAG systems are commonly evaluated using benchmarks designed to test retrievability, retrieval\naccuracy and generative quality. Popular datasets include BEIR, a suite of information retrieval tasks\nacross diverse domains, and Natural Questions or Google QA for open-domain QA."
+    },
+    {
+      "name": "knowledge_search",
+      "input_parameters": {
+        "query": "embedding models for retrieval augmented generation RAG"
+      },
+      "output": "[1] Source: retrieval-augmented-generation.pdf, page 0\nRetrieval-augmented generation\nRetrieval-augmented generation (RAG) is a technique that enables large language models (LLMs) to\nretrieve and incorporate new information from external data sources.[1] With RAG, LLMs first refer to a\nspecified set of documents, then respond to user queries. These documents supplement information from\nthe LLM's pre-existing training data.[2] This allows LLMs to use domain-specific and/or updated\n\n[2] Source: retrieval-augmented-generation.pdf, page 1\nOverview of RAG process, combining\nexternal documents and user input into\nan LLM prompt to get tailored output\nRetrieval-augmented generation (RAG) enhances large language models (LLMs) by incorporating an\ninformation-retrieval mechanism that allows models to access and utilize additional data beyond their\noriginal training set. Ars Technica notes that \"when new information becomes available, rather than\n\n[3] Source: retrieval-augmented-generation.pdf, page 1\nTypically, the data to be referenced is converted into LLM\nembeddings, numerical representations in the form of a large\nvector space. RAG can be used on unstructured (usually text),\nsemi-structured, or structured data (for example knowledge\ngraphs). These embeddings are then stored in a vector\ndatabase to allow for document retrieval.\nGiven a user query, a document retriever is first called to\nselect the most relevant documents that will be used to"
+    },
+    {
+      "name": "knowledge_search",
+      "input_parameters": {
+        "query": "evaluating RAG retrieval quality"
+      },
+      "output": "[1] Source: retrieval-augmented-generation.pdf, page 3\nmitigate this is to do a traditional text search, add those results to the text chunks linked to the retrieved\nvectors from the vector search, and feed the combined hybrid text into the language model for generation.\nRAG systems are commonly evaluated using benchmarks designed to test retrievability, retrieval\naccuracy and generative quality. Popular datasets include BEIR, a suite of information retrieval tasks\nacross diverse domains, and Natural Questions or Google QA for open-domain QA.\n\n[2] Source: retrieval-augmented-generation.pdf, page 0\nRetrieval-augmented generation\nRetrieval-augmented generation (RAG) is a technique that enables large language models (LLMs) to\nretrieve and incorporate new information from external data sources.[1] With RAG, LLMs first refer to a\nspecified set of documents, then respond to user queries. These documents supplement information from\nthe LLM's pre-existing training data.[2] This allows LLMs to use domain-specific and/or updated\n\n[3] Source: retrieval-augmented-generation.pdf, page 1\nOverview of RAG process, combining\nexternal documents and user input into\nan LLM prompt to get tailored output\nRetrieval-augmented generation (RAG) enhances large language models (LLMs) by incorporating an\ninformation-retrieval mechanism that allows models to access and utilize additional data beyond their\noriginal training set. Ars Technica notes that \"when new information becomes available, rather than"
+    }
+  ]
+}

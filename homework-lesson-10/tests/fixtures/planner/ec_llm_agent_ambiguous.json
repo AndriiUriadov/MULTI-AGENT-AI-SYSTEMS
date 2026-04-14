@@ -1,0 +1,35 @@
+{
+  "id": "ec_llm_agent_ambiguous",
+  "input": "Explain what an 'agent' means in the context of LLMs.",
+  "plan": {
+    "goal": "Define and explain the concept of an 'agent' in the context of large language models (LLMs).",
+    "search_queries": [
+      "definition of agent in LLMs",
+      "how LLMs can operate as agents",
+      "examples of agents built with LLMs",
+      "agent architecture in large language models",
+      "recent advancements in LLM agents"
+    ],
+    "sources_to_check": [
+      "knowledge_base",
+      "web"
+    ],
+    "output_format": "executive summary with sections"
+  },
+  "tools_called": [
+    {
+      "name": "knowledge_search",
+      "input_parameters": {
+        "query": "agent in context of LLMs"
+      },
+      "output": "[1] Source: large-language-model.pdf, page 7\ncarry out these actions.[71]\nThe ReAct pattern, a portmanteau of reason and act, constructs an agent out of an LLM, using the LLM\nas a planner. The LLM is prompted to \"think out loud\". Specifically, the language model is prompted with\na textual description of the environment, a goal, a list of possible actions, and a record of the actions and\nobservations so far. It generates one or more thoughts before generating an action, which is then executed\nin the environment.[72]\n\n[2] Source: large-language-model.pdf, page 7\nenvironments, recall past behaviors, and plan future actions. But it can be transformed into an agent by\nadding supporting elements: the role (profile) and the surrounding environment of an agent can be\nadditional inputs to the LLM, while memory can be integrated as a tool or provided as additional input.\nInstructions and input patterns are used to make the LLM plan actions and tool use is used to potentially\ncarry out these actions.[71]\n\n[3] Source: large-language-model.pdf, page 8\ncan be used as a reward signal to guide a normal (non-LLM) reinforcement learning agent.[76]\nAlternatively, it can propose increasingly difficult tasks for curriculum learning.[77] Instead of outputting\nindividual actions, an LLM planner can also construct \"skills\", or functions for complex action\nsequences. The skills can be stored and later invoked, allowing increasing levels of abstraction in\nplanning.[77]\nMultiple agents with memory can interact socially.[78]"
+    },
+    {
+      "name": "web_search",
+      "input_parameters": {
+        "query": "what is an agent in large language models"
+      },
+      "output": "[{\"title\": \"Large Language Models for Agents\", \"url\": \"https://llmagents.github.io/\", \"snippet\": \"AgentInstructsLargeLanguageModelsto be General Zero-Shot Reasoners , Nicholas Crispino, Kyle Montgomery, Fankun Zeng, Dawn Song, Chenguang Wang\"}, {\"title\": \"[2312.11970] Large Language Models Empowered Agent-based\", \"url\": \"https://arxiv.org/abs/2312.11970\", \"snippet\": \"This paper surveys the landscape of utilizinglargelanguagemodelsinagent-basedmodelingand simulation, examining their challenges and promising ...\"}, {\"title\": \"[2504.03274] Do Large Language Models Solve the Problems of\", \"url\": \"https://arxiv.org/abs/2504.03274\", \"snippet\": \"Abstract: Recent advancementsinAI have reinvigoratedAgent-BasedModels(ABMs), as the integration ofLargeLanguageModels(LLMs) has led to the ...\"}, {\"title\": \"Large Language Model Agent: A Survey on Methodology,\", \"url\": \"https://speakerdeck.com/shunk031/large-language-model-agent-a-survey-on-methodology-applications-and-challenges\", \"snippet\": \"... LLMエージェントの全貌を、最新の包括的サーベイ論文「LargeLanguageModelAgent: A Survey on Methodology, Applications and ...\"}, {\"title\": \"Language agents help large language models 'think' better and\", \"url\": \"https://techxplore.com/news/2024-09-language-agents-large-cheaper.html\", \"snippet\": \"Louis decided to tackle this challenge by buildinganautonomousagentto instruct the reasoning process oflargelanguagemodels.\"}]"
+    }
+  ]
+}

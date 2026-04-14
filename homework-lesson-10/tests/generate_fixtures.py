@@ -42,13 +42,15 @@ load_dotenv(_ROOT / ".env")
 if not os.environ.get("OPENAI_API_KEY") and os.environ.get("API_KEY"):
     os.environ["OPENAI_API_KEY"] = os.environ["API_KEY"]
 
+from langchain.agents.structured_output import StructuredOutputValidationError
 from langchain_core.messages import AIMessage, ToolMessage
 from langgraph.types import Command
 
-from agents.critic import critic_agent
+from agents.critic import _REVISE_FALLBACK, critic_agent
 from agents.planner import planner_agent
 from agents.research import researcher_agent
 from config import Settings
+from schemas import CritiqueResult
 from supervisor import supervisor
 
 settings = Settings()
@@ -164,12 +166,18 @@ def run_critic_fixture(
     with researcher_fixture_path.open(encoding="utf-8") as f:
         researcher = json.load(f)
     findings = researcher.get("findings", "")
-    result = critic_agent.invoke(
-        {"messages": [{"role": "user", "content": findings}]},
-        config={"recursion_limit": _CRITIC_RECURSION},
-    )
-    messages = result.get("messages", [])
-    critique_obj = result.get("structured_response")
+    try:
+        result = critic_agent.invoke(
+            {"messages": [{"role": "user", "content": findings}]},
+            config={"recursion_limit": _CRITIC_RECURSION},
+        )
+        messages = result.get("messages", [])
+        critique_obj = result.get("structured_response")
+    except StructuredOutputValidationError:
+        # Mirror run_critic()'s fallback so the script survives one bad example.
+        print(f"  [critic {example['id']}] structured parse failed — using REVISE fallback")
+        messages = []
+        critique_obj = _REVISE_FALLBACK
     critique_json = critique_obj.model_dump() if critique_obj is not None else None
     write_fixture(out_path, {
         "id": example["id"],
@@ -258,6 +266,14 @@ def main() -> None:
             raise SystemExit(f"No golden example with id={args.id!r}")
 
     targets = (args.only,) if args.only else AGENTS
+    failures: list[tuple[str, str, str]] = []
+
+    def _try(agent: str, ex_id: str, fn, *fn_args) -> None:
+        try:
+            fn(*fn_args)
+        except Exception as exc:
+            failures.append((agent, ex_id, f"{type(exc).__name__}: {exc}"))
+            print(f"  [FAIL {agent} {ex_id}] {type(exc).__name__}: {exc}")
 
     for example in dataset:
         ex_id = example["id"]
@@ -269,7 +285,7 @@ def main() -> None:
                 print(f"  [skip planner] {path.name} exists")
             else:
                 print(f"  planner → {path.name}")
-                run_planner_fixture(example, path)
+                _try("planner", ex_id, run_planner_fixture, example, path)
 
         if "researcher" in targets:
             path = FIXTURES_ROOT / "researcher" / f"{ex_id}.json"
@@ -277,7 +293,7 @@ def main() -> None:
                 print(f"  [skip researcher] {path.name} exists")
             else:
                 print(f"  researcher → {path.name}")
-                run_researcher_fixture(example, path)
+                _try("researcher", ex_id, run_researcher_fixture, example, path)
 
         if "critic" in targets:
             path = FIXTURES_ROOT / "critic" / f"{ex_id}.json"
@@ -286,7 +302,7 @@ def main() -> None:
                 print(f"  [skip critic] {path.name} exists")
             else:
                 print(f"  critic → {path.name}")
-                run_critic_fixture(example, path, researcher_path)
+                _try("critic", ex_id, run_critic_fixture, example, path, researcher_path)
 
         if "e2e" in targets:
             path = FIXTURES_ROOT / "e2e" / f"{ex_id}.json"
@@ -294,8 +310,12 @@ def main() -> None:
                 print(f"  [skip e2e] {path.name} exists")
             else:
                 print(f"  e2e → {path.name}")
-                run_e2e_fixture(example, path)
+                _try("e2e", ex_id, run_e2e_fixture, example, path)
 
+    if failures:
+        print(f"\n{len(failures)} failures:")
+        for agent, ex_id, msg in failures:
+            print(f"  - {agent} {ex_id}: {msg}")
     print("\nDone.")
 
 
