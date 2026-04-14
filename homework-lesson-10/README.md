@@ -10,7 +10,7 @@ component-level метрики (GEval), ToolCorrectnessMetric і e2e з каст
 1. Створити `.env` у корені теки:
 
    ```dotenv
-   API_KEY=<OpenAI key>
+   API_KEY=<My_Super_Secret_OpenAI_Key>
    MODEL_NAME=gpt-4o-mini
    JUDGE_MODEL=gpt-4o-mini
    ```
@@ -150,6 +150,3 @@ findings без заголовка `## Sources` / `## References`.
    `ConfidentApiError: Invalid API key`. На pass/fail тестів не
    впливає — сам прогін уже завершений.
 
-## Посилання
-
-- Постановка: [plan10.md](plan10.md)
