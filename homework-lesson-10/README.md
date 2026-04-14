@@ -47,6 +47,18 @@ python tests/generate_fixtures.py --force         # перезаписати і�
 python tests/generate_fixtures.py --id hp_rag_pipeline
 ```
 
+## Відповідність вимогам `plan10.md`
+
+| № | Вимога | Реалізація |
+| --- | --- | --- |
+| 1 | Golden Dataset 15–20 прикладів, 3 категорії | [`tests/golden_dataset.json`](tests/golden_dataset.json) — 15 прикладів (5 happy_path, 5 edge_case, 5 failure_case) |
+| 2 | Component tests для Planner / Researcher / Critic | [`tests/test_planner.py`](tests/test_planner.py) — Plan Quality GEval + детерміністичні; [`tests/test_researcher.py`](tests/test_researcher.py) — Groundedness GEval + Sources-перевірка; [`tests/test_critic.py`](tests/test_critic.py) — Critique Quality GEval + verdict-consistency |
+| 3 | ≥3 tool-correctness тест-кейси | [`tests/test_tools.py`](tests/test_tools.py) — 4 функції (`test_planner_tools`, `test_researcher_tools`, `test_supervisor_saves_on_approve`, параметризований `test_failure_case_does_not_save` × 5) |
+| 4 | E2E на повному golden dataset, ≥2 метрики | [`tests/test_e2e.py`](tests/test_e2e.py) — `test_e2e_golden` × 15 з `AnswerRelevancy + Correctness + CitationPresence` (3 метрики) |
+| 5 | ≥1 кастомна GEval метрика | `citation_presence_metric` у [`tests/metrics.py`](tests/metrics.py) — перевіряє наявність `## Sources` секції, ≥2 джерела та чи вони реально згадані в тілі звіту |
+| 6 | Обґрунтовані пороги | Секція "Thresholds and rationale" нижче — пороги 0.5–0.7, встановлені як baseline, не як "pass-rate 100%" |
+| 7 | `deepeval test run tests/` запускається без помилок | Так: exit 0, **35 passed, 10 failed, 7 skipped** (8:09 хв). Провали зафіксовано як baseline, див. "Baseline" і "Known weak spots" |
+
 ## Thresholds and rationale
 
 Пороги встановлені як baseline, а не як "pass rate 100%". Не підвищувати
