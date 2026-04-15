@@ -1,7 +1,7 @@
-# homework-lesson-10 — DeepEval tests for the multi-agent system
+# homework-lesson-10: DeepEval tests for the multi-agent system
 
-Тестове покриття системи з `homework-lesson-8` (Supervisor → Planner →
-Researcher → Critic) за допомогою DeepEval: golden dataset,
+Тестове покриття системи з `homework-lesson-8` (Supervisor -> Planner ->
+Researcher -> Critic) за допомогою DeepEval: golden dataset,
 component-level метрики (GEval), ToolCorrectnessMetric і e2e з кастомною
 метрикою `CitationPresence`.
 
@@ -21,7 +21,7 @@ component-level метрики (GEval), ToolCorrectnessMetric і e2e з каст
    pip install -r requirements.txt
    ```
 
-3. (Одноразово) зібрати RAG-індекс, якщо теки `index/` немає:
+3. (Одноразово) зібрати RAG-індекс, якщо часом теки `index/` немає:
 
    ```bash
    python ingest.py
@@ -47,7 +47,7 @@ python tests/generate_fixtures.py --force         # перезаписати і�
 python tests/generate_fixtures.py --id hp_rag_pipeline
 ```
 
-## Відповідність вимогам `plan10.md`
+## Відповідність вимогам завдання (збережено в файлі `plan10.md`)
 
 | № | Вимога | Реалізація |
 | --- | --- | --- |
@@ -61,8 +61,8 @@ python tests/generate_fixtures.py --id hp_rag_pipeline
 
 ## Thresholds and rationale
 
-Пороги встановлені як baseline, а не як "pass rate 100%". Не підвищувати
-їх штучно, щоб зазеленити тести — замість того оновлювати систему під
+Пороги встановлені як baseline, а не як "pass rate 100%". Не підвищуємо
+їх штучно, щоб зазеленити тести — замість того оновлюємо систему під
 тестом.
 
 | Метрика | Threshold | Обґрунтування |
@@ -149,4 +149,3 @@ findings без заголовка `## Sources` / `## References`.
    закешований логін десь у середовищі) і падає з
    `ConfidentApiError: Invalid API key`. На pass/fail тестів не
    впливає — сам прогін уже завершений.
-
