@@ -1,6 +1,6 @@
 # Homework Lesson 12 — MAS з Langfuse Observability
 
-Розширення системи з `homework-lesson-8` (Plan → Research → Critique + HITL) через **Langfuse**:
+Розширення системи з `homework-lesson-8` (Plan -> Research -> Critique + HITL) через **Langfuse**:
 
 - **Tracing** — кожен запуск створює trace з повним деревом суб-агентів і tool calls
 - **Session / User tracking** — трейси згруповані в сесію, мають `user_id`
@@ -49,7 +49,6 @@ homework-lesson-12/
 ├── retriever.py         # Hybrid FAISS+BM25+reranker (з lesson-5)
 ├── ingest.py            # PDF → FAISS index (з lesson-5)
 ├── config.py            # Settings + load_prompt(name, **vars) helper (жодних захардкоджених промптів)
-├── LANGFUSE_SETUP.md    # Крок-за-кроком інструкція для налаштування UI Langfuse
 ├── screenshots/         # 4 скріншоти з Langfuse UI (trace tree, session, evaluator scores, prompts)
 └── requirements.txt
 ```
@@ -111,7 +110,7 @@ MODEL_NAME=gpt-4o-mini
 LANGFUSE_PUBLIC_KEY=pk-lf-...
 LANGFUSE_SECRET_KEY=sk-lf-...
 LANGFUSE_BASE_URL=https://cloud.langfuse.com     # або https://us.cloud.langfuse.com
-LANGFUSE_USER_ID=your-user-id
+LANGFUSE_USER_ID=my-user-id
 ```
 
 ## Langfuse Observability
@@ -140,58 +139,40 @@ LANGFUSE_USER_ID=your-user-id
 
 ## Реальний приклад роботи
 
-Запит: *"Compare naive RAG, sentence-window RAG, and parent-child RAG approaches. Write a detailed report."*
-
-Повний вивід терміналу: [`terminal.out`](terminal.out)
+Сесія `hw12-cc94d0d1` з двома турами. Повний вивід терміналу: [`terminal.out`](terminal.out).
 
 ```
 ============================================================
   Multi-Agent Research System  (homework-lesson-12)
-  Langfuse session: hw12-a1b2c3d4
+  Langfuse session: hw12-cc94d0d1
   Type 'quit' or 'exit' to stop.
 ============================================================
   Loading retriever model… ready.
 
-You: Compare naive RAG, sentence-window RAG, and parent-child RAG approaches. Write a detailed report.
+You: What is a chain in LangChain?
 
-  🔧 plan({"request": "Compare naive RAG, sentence-window RAG, and parent-child RAG approaches..."})
-    🔧 knowledge_search({"query": "naive RAG vs sentence-window RAG vs parent-child RAG comparison"})
-    🔧 web_search({"query": "RAG techniques naive sentence-window parent-child comparison"})
-    📎 [knowledge_search] [1] Source: retrieval-augmented-generation.pdf, page 0 ...
-    📎 [web_search] [{"title": "Recent RAG advancements...", ...}]
-  📎 [plan] {"goal": "Produce a detailed comparison report...", "search_queries": [...], ...}
+  🔧 plan({"request": "Explain what a chain is in LangChain, including its purpose, types of chains, and examples of how it is used."})
+    🔧 knowledge_search({"query": "what is a chain in LangChain, purpose and types of chains"})
+    🔧 web_search({"query": "LangChain chain types examples"})
+    📎 [knowledge_search] [1] Source: langchain.pdf, page 0 ...
+    📎 [web_search] [{"title": "LangChain Expression Language", ...}]
+  📎 [plan] {"goal": "Explain what a chain is in LangChain...", "search_queries": [...], ...}
 
-  🔧 research({"request": "Research and compile a detailed comparison on naive RAG..."})
-    🔧 knowledge_search({"query": "naive RAG, sentence-window RAG, parent-child RAG definitions..."})
-    🔧 web_search({"query": "naive RAG vs sentence-window RAG vs parent-child RAG comparison"})
-    🔧 read_url({"url": "https://medium.com/..."})
-    📎 [knowledge_search] [1] Source: retrieval-augmented-generation.pdf ...
-    📎 [web_search] [{"title": "Beyond Naive RAG...", ...}]
-    📎 [read_url] Beyond Naive RAG: Comparing Basic, Sentence-Window...
-  📎 [research] # Comparative Report on RAG Approaches...
+  🔧 research({"request": "Research what a chain is in LangChain. Explain its purpose, types of chains, and provide examples..."})
+    🔧 knowledge_search({"query": "what is a chain in LangChain"})
+    🔧 web_search({"query": "LangChain chains purpose types examples"})
+    🔧 read_url({"url": "https://www.comet.com/site/blog/chaining-the-future-..."})
+    📎 [knowledge_search] [1] Source: langchain.pdf ...
+  📎 [research] # Understanding Chains in LangChain ...
 
   🔧 critique({"findings": "..."})
-    🔧 web_search({"query": "latest developments in RAG approaches 2024"})
-    🔧 knowledge_search({"query": "latest benchmarks on RAG approaches..."})
+    🔧 web_search({"query": "LangChain vs LangGraph comparison 2024"})
+    🔧 knowledge_search({"query": "LangChain chain advancements"})
     📎 [web_search] [...] 📎 [knowledge_search] ...
-  📎 [critique] {"verdict": "REVISE", "is_fresh": false, "is_complete": true,
-                 "gaps": ["No recent benchmarks or performance metrics from 2024"],
-                 "revision_requests": ["Find 2024 performance metrics for RAG approaches"]}
+  📎 [critique] {"verdict": "REVISE", "is_fresh": false, ...,
+                 "revision_requests": ["Include recent LangChain vs LangGraph developments"]}
 
-  🔧 research({"request": "Research the latest advancements in RAG as of 2024..."})
-    🔧 web_search({"query": "latest advancements RAG 2024 performance metrics..."})
-    🔧 knowledge_search({"query": "RAG performance metrics benchmarks 2024"})
-    🔧 read_url({"url": "https://arxiv.org/..."}) 🔧 read_url({"url": "https://evidentlyai.com/..."})
-    📎 [read_url] A Comprehensive Survey of RAG... 📎 [read_url] RAG benchmarks...
-  📎 [research] # Latest Advancements in RAG as of 2024...
-
-  🔧 critique({"findings": "..."})
-    🔧 web_search({"query": "Retrieval-Augmented Generation RAG advancements 2024"})
-    🔧 knowledge_search({"query": "..."}) 🔧 read_url({"url": "..."})
-    📎 [web_search] [...] 📎 [read_url] ...
-  📎 [critique] {"verdict": "REVISE", "is_fresh": true, "is_complete": false, ...}
-
-  🔧 research({"request": "Research latest RAG benchmarks from 2024..."})
+  🔧 research({"request": "Find 2024 benchmarks comparing LangChain and LangGraph..."})
   📎 [research] [REVISION LIMIT REACHED — 3 research rounds completed]
                 You MUST now call save_report()...
 
@@ -199,32 +180,41 @@ You: Compare naive RAG, sentence-window RAG, and parent-child RAG approaches. Wr
 ⏸️  ACTION REQUIRES APPROVAL
 ============================================================
   Tool: save_report
-  File: rag_comparison.md
-  --- Report preview ---
-  # Comparative Report on RAG Approaches: Naive RAG, Sentence-Window RAG...
-  ---
+  File: understanding_chains_in_langchain.md
 
-👉 approve / edit / reject: edit
-✏️  Your feedback: Add a comparison table summarizing all three approaches
-  📎 [save_report] Please revise the report: Add a comparison table summarizing all three approaches
-
-============================================================
-⏸️  ACTION REQUIRES APPROVAL
-============================================================
-  Tool: save_report
-  File: rag_comparison.md
   --- Report preview ---
-  # Comparative Report on RAG Approaches (revised with comparison table)...
+# Understanding Chains in LangChain
+
+LangChain is a software framework designed to facilitate the integration of large
+language models (LLMs) into various applications. One of its core features is the
+concept of "chains," which allows developers to orchestrate multiple components...
   ---
 
 👉 approve / edit / reject: approve
-  📎 [save_report] Report saved to output/rag_comparison.md
+  📎 [save_report] Report saved to output/understanding_chains_in_langchain.md
 
-Agent: The report comparing Naive RAG, Sentence-Window RAG, and Parent-Child RAG has been saved.
+Agent: The research report on "Understanding Chains in LangChain" has been successfully saved...
+
+You: How does retrieval augmentation work?
+
+  🔧 plan({"request": "Explain how retrieval augmentation works, focusing on its principles, applications..."})
+  ...
+  📎 [save_report] Report saved to output/retrieval_augmentation.md
+
+You: exit
+Bye!
 ```
 
-**Збережений звіт:**
-- [`output/rag_comparison.md`](output/rag_comparison.md) — порівняння підходів RAG (з реального тесту)
+**Збережені звіти цієї сесії:**
+
+- [`output/understanding_chains_in_langchain.md`](output/understanding_chains_in_langchain.md)
+- [`output/retrieval_augmentation.md`](output/retrieval_augmentation.md)
+
+**Додатково в `output/` — з інших прогонів:**
+
+- [`output/hybrid_retrieval_faiss_bm25.md`](output/hybrid_retrieval_faiss_bm25.md)
+- [`output/model_context_protocol.md`](output/model_context_protocol.md)
+- [`output/rag_vs_fine_tuning.md`](output/rag_vs_fine_tuning.md)
 
 ## Очікуваний результат (відповідність завданню)
 
