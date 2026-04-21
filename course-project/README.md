@@ -1,6 +1,10 @@
 # Курсовий проєкт — Конвеєр створення контенту
 
-Мультиагентна система для створення контенту блогу / соцмереж: **Content Strategist** планує, **Writer** пише, **Editor** рев'ює. Обгорнуто в LangGraph з HITL на затвердженні плану + Evaluator-Optimizer loop'ом Writer ↔ Editor. Повна observability через Langfuse (tracing + Prompt Management + LLM-as-a-Judge evaluators). Тести — pytest + власна `judge()` функція.
+Мультиагентна система генерації контенту для соцмереж КПІ ім. Ігоря Сікорського.
+**Content Strategist** планує, **Writer** пише, **Editor** рев'ює. LangGraph +
+HITL на затвердженні плану + Evaluator-Optimizer loop Writer ↔ Editor.
+Повна observability через Langfuse (tracing + Prompt Management + LLM-as-a-Judge).
+Тести — pytest + власна `judge()` функція.
 
 ## Архітектура
 
@@ -24,51 +28,59 @@
        │            ▼                              │   │
        │     ┌──────────────┐                      │   │
        │     │   Editor     │──────────────────────┘   │
-       │     └──────────────┘     (iter < 5)           │
+       │     └──────────────┘  (iter < max_iter)       │
        │            │                                  │
-       │     APPROVED or iter ≥ 5                      │
+       │   APPROVED або iter ≥ max_iter                │
        │            ▼                                  │
        │     ┌──────────────┐                          │
        └─────│    save      │──► output/*.md   ◄───────┘ (Strategist re-plan)
              └──────────────┘
 ```
 
+`max_writer_iterations = 3` ([config.py](config.py)) — спец дозволяє до 5,
+ми тримаємо коротший loop, щоб Writer не дрейфив у формальну прозу після
+кількох revisions. Editor повертає REVISION_NEEDED ще раз — save забирає
+останній чорновик, `[Editor] max iterations reached` логується як warning.
+
 ## Стек
 
 - **LangGraph / LangChain** — граф, агенти (`create_agent` з `response_format=PydanticModel`), HITL через `interrupt()` + `Command(resume=...)`.
-- **Pydantic** — контракти `ContentPlan`, `DraftContent`, `EditFeedback` (див. [schemas.py](schemas.py)).
-- **Model Gateway** ([model_gateway.py](model_gateway.py)) — task → model + LangChain `.with_fallbacks([...])` на випадок RateLimitError.
-- **Langfuse** — всі system prompts у Prompt Management (label `production`), `@observe` + `propagate_attributes` для session/user/tags, 2–3 evaluator'и (numeric/boolean/categorical).
-- **RAG** — FAISS + BM25 + `BAAI/bge-reranker-base` (перенесено з hw-8) для бренд-довідника (style guide, brand, приклади).
-- **Tests** — pytest + LLM-as-a-Judge helper у [tests/judge.py](tests/judge.py).
+- **Pydantic** — контракти `ContentPlan` (з `word_count_target`), `DraftContent`, `EditFeedback` — див. [schemas.py](schemas.py).
+- **Model Gateway** ([model_gateway.py](model_gateway.py)) — task → ChatOpenAI з LangChain `.with_fallbacks([...])` на `RateLimitError` / `APIError`.
+- **Langfuse** — усі 4 system prompts у Prompt Management (label `production`, mustache variables), `@observe` + `propagate_attributes` для session/user/tags, 2–3 evaluator'и (numeric / boolean / categorical).
+- **RAG** — FAISS + BM25 (50/50 ensemble) + `BAAI/bge-reranker-v2-m3` (мультимовний) для бренд-корпусу КПІ.
+- **Tests** — pytest з власним LLM-as-a-Judge helper у [tests/judge.py](tests/judge.py).
 
 ## Структура
 
 ```
 course-project/
-├── config.py                # Settings + load_prompt()
+├── config.py                # Settings + load_prompt() (Langfuse)
 ├── model_gateway.py         # task → ChatOpenAI з fallbacks
 ├── schemas.py               # ContentPlan, DraftContent, EditFeedback
 ├── tools.py                 # web_search, read_url, knowledge_search, save_content
-├── retriever.py             # hybrid RAG (FAISS + BM25 + reranker)
+├── retriever.py             # hybrid RAG (FAISS + BM25 + bge-reranker-v2-m3)
 ├── ingest.py                # build index from data/
 ├── agents/
-│   ├── strategist.py
-│   ├── writer.py
-│   └── editor.py
+│   ├── strategist.py        # + graceful fallback
+│   ├── writer.py            # + graceful fallback
+│   └── editor.py            # + graceful fallback
 ├── graph.py                 # LangGraph: nodes + HITL + Evaluator-Optimizer
-├── main.py                  # REPL + Langfuse wrapping
+├── main.py                  # REPL + Langfuse session wrapping
 ├── tests/
-│   ├── judge.py             # спільна LLM-as-a-Judge функція
-│   ├── goldens.py           # тестові брифи + очікування
-│   ├── test_strategist.py
-│   ├── test_writer.py
-│   ├── test_editor.py
-│   └── test_e2e.py
-├── data/                    # RAG корпус (style guide, brand, приклади)
-├── index/                   # FAISS + BM25 після ingest
-├── output/                  # збережені .md артефакти
-└── screenshots/             # скріншоти Langfuse UI
+│   ├── judge.py             # спільна LLM-as-a-Judge функція (@observe tag=eval)
+│   ├── goldens.py           # КПІ-тестові брифи
+│   ├── test_strategist.py   # ✅ gpt-4o  ~18s
+│   ├── test_writer.py       # ✅ gpt-4o  ~25s
+│   ├── test_editor.py       # ✅ gpt-4o  ~8s
+│   └── test_e2e.py          # ✅ gpt-4o  ~6min
+├── data/
+│   ├── style/               # KPI Social Media Style Guide (PDF, 20 стор.)
+│   ├── examples/            # Референсні дописи за платформами (PDF)
+│   └── brand/               # brand.md: місія, продукт, аудиторії, переваги
+├── index/                   # FAISS + BM25 після ingest (152 chunks із 37 docs)
+├── output/                  # Артефакти pipeline (саме тут Writer зберігає фінальні .md)
+└── screenshots/             # Скріншоти Langfuse UI (заповнити перед здачею)
 ```
 
 ## Запуск
@@ -77,98 +89,131 @@ course-project/
 cd course-project
 pip install -r requirements.txt
 cp .env.example .env         # і заповнити значення
-python main.py
+python ingest.py             # RAG індекс з data/ → index/  (одноразово)
+python main.py               # REPL
 ```
 
-Перед першим запуском **налаштуйте Langfuse через UI** (LLM Connection, 4 prompts з label `production`, 2–3 evaluators). Код без цього впаде на `load_prompt()` з `404 prompt not found`. Інструкції з текстом промптів — у локальному `LANGFUSE_SETUP.md` (не комітиться).
-
-Для роботи RAG додайте бренд-матеріали в `data/` і зробіть `python ingest.py`. Без цього `knowledge_search` повертає заглушку — pipeline працює, але без brand grounding.
+Перед першим запуском **налаштуй Langfuse через UI**: створи проєкт, LLM Connection,
+4 prompts (`strategist_system`, `writer_system`, `editor_system`, `judge_system`)
+з label `production`, 2–3 evaluator'и. Без цього код впаде на `load_prompt()` з
+`404 prompt not found`. Готовий текст промптів — у локальному `LANGFUSE_SETUP.md`
+(не комітиться, `LANGFUSE_*` у `.gitignore`).
 
 ### `.env`
 
 ```
 API_KEY=sk-...
 
-# Model gateway — per-task моделі + fallback-ланцюг
-MODEL_STRATEGIST=gpt-4o-mini
-MODEL_WRITER=gpt-4o-mini
-MODEL_EDITOR=gpt-4o-mini
+# Model gateway — per-task моделі + fallback-ланцюг.
+# gpt-4o-mini ігнорує HARD TOOL BUDGET у агентах: gpt-4o потрібен для
+# Strategist / Writer / Editor, інакше recursion-loop + fallback-гілки.
+# Judge лишаємо на gpt-4o-mini — внутрішнє оцінювання score'ів толерантне.
+MODEL_STRATEGIST=gpt-4o
+MODEL_WRITER=gpt-4o
+MODEL_EDITOR=gpt-4o
 MODEL_JUDGE=gpt-4o-mini
 FALLBACK_MODELS=gpt-4o-mini,gpt-4o
 
-# Langfuse
+# Langfuse (us.cloud.langfuse.com)
 LANGFUSE_PUBLIC_KEY=pk-lf-...
 LANGFUSE_SECRET_KEY=sk-lf-...
 LANGFUSE_BASE_URL=https://us.cloud.langfuse.com
 LANGFUSE_USER_ID=your-id
 ```
 
-## Приклад
+## Приклад прогону
 
 ```
-Brief: Write a 400-word LinkedIn post for senior software engineers about why AI coding agents are changing how teams do code review. Tone: professional.
+Brief: Напиши короткий пост для Instagram (формат опису під Reels) акаунту
+КПІ ім. Ігоря Сікорського про щорічну подію «Дослідник року 2026».
+Цільова аудиторія: нинішні студенти КПІ та старшокласники-абітурієнти.
+Обсяг: 150–220 слів. Тон: теплий, з почуттям спільноти, природний. Українською.
 
 [Strategist] planning…
-    🔧 knowledge_search(...)
-    🔧 web_search(...)
-[Strategist] plan ready — outline: 5 sections, keywords: 7, tone: professional, confident
+    🔧 knowledge_search(...)    ← 1 запит у RAG (бренд тон/аудиторія)
+    🔧 web_search(...)          ← 1 запит у DuckDuckGo
+[Strategist] plan ready — outline: 5 sections, keywords: 7, tone: теплий, з почуттям спільноти
 
 ============================================================
 📋 CONTENT PLAN — awaiting your approval
 ============================================================
-  target_audience: Senior software engineers on LinkedIn
-  tone: professional, confident
+  target_audience: Нинішні студенти КПІ та старшокласники-абітурієнти
+  tone: теплий, з почуттям спільноти, природний
   outline:
-    • Why AI coding agents now make it into review loops
-    • Where they help most: triage, style, obvious bugs
+    • Вступ: Що таке «Дослідник року 2026»
+    • Історія та значення події для КПІ
+    • Основні моменти цьогорічної події
+    • Як взяти участь або відвідати
+    • Заклик до дії: приєднуйтесь до спільноти дослідників
+  keywords:
+    • Дослідник року 2026
+    • КПІ ім. Ігоря Сікорського
     ...
 
 👉 approve / revise: approve
 
-[Writer] iteration 1/5…
+[Writer] iteration 1/3…
     🔧 web_search(...)
-[Writer] draft ready — 412 words, keywords used: 7/7
+[Writer] draft ready — 214 words, keywords used: 7/7
 
 [Editor] reviewing…
-[Editor] verdict: APPROVED — tone=0.90 acc=0.85 struct=0.90
+[Editor] verdict: APPROVED — tone=1.00 acc=0.50 struct=1.00
 
-[Save] output/write-a-400-word-linkedin-post-for-senior-software-engineers-about-why.md
+[Save] output/instagram-reels-2026-150-220.md
 ```
+
+Фінальний Markdown лежить у [output/instagram-reels-2026-150-220.md](output/instagram-reels-2026-150-220.md).
 
 ## Тести
 
 ```bash
-pytest tests/ -v                # усі 4 сценарії
-pytest tests/test_editor.py -v  # один файл
+pytest tests/ -v                     # усі 4 сценарії
+pytest tests/test_editor.py -v       # один файл
 ```
 
-Кожен тест виконує компонент на golden-сценарії й валідує результат через `judge()` — окремий LLM-виклик з рубрикою (поріг `score >= 0.7`). Judge-виклики обгорнуті `@observe` → видно в Langfuse з тегом `eval` окремо від продакшн-трейсів.
+Кожен тест виконує компонент на golden-сценарії і валідує результат через
+`judge()` — окремий LLM-виклик з рубрикою. Judge-виклики обгорнуті `@observe`
+з тегом `eval` → видно в Langfuse окремо від продакшн-трейсів.
 
-| Файл | Що тестується |
-|---|---|
-| [test_strategist.py](tests/test_strategist.py) | plan відповідає audience / tone / channel з брифу |
-| [test_writer.py](tests/test_writer.py) | draft покриває всі пункти outline + заявлені keywords є в тексті |
-| [test_editor.py](tests/test_editor.py) | Editor rejects off-topic/off-tone draft, scores ≤ 0.5, issues ≥ 2 |
-| [test_e2e.py](tests/test_e2e.py) | повний прогін `strategist → writer ↔ editor → save` |
+| Файл | Сценарій | Threshold judge | Тип моделі |
+|---|---|---|---|
+| [test_strategist.py](tests/test_strategist.py) | LinkedIn-анонс запуску наносупутника PolyITAN-HP-30 на Falcon 9 — план має бути укр., target audience = міжнародні партнери, tone офіційний | 0.7 | gpt-4o |
+| [test_writer.py](tests/test_writer.py) | Фіксований план → draft покриває всі 5 секцій outline + усі 5 keywords (stem-tolerant до укр. відмінювання) | 0.7 | gpt-4o |
+| [test_editor.py](tests/test_editor.py) | Катастрофічно поганий draft («йоу фам 🚀 КПІ ЛІТАЄ В КОСМОС») → Editor видає REVISION_NEEDED, scores ≤ 0.5, issues ≥ 2 | 0.7 | gpt-4o |
+| [test_e2e.py](tests/test_e2e.py) | Повний прогін: Instagram Reels про «Дослідник року 2026», auto-approve HITL, Writer↔Editor, save | 0.6 (composite variance) | gpt-4o |
 
 ## Observability
 
-- **Один бриф = один trace** у Langfuse, зібраний через `@observe(name="content-pipeline-turn")` в `main.py`.
-- **`propagate_attributes`** прокидає `session_id` (один на REPL-сесію), `user_id`, та tags `["course-project","content-pipeline"]` на все дерево trace'а.
-- **`CallbackHandler`** з `langfuse.langchain` під'єднано до LangGraph через `config["callbacks"]` — усі LLM-виклики, tool calls, node-переходи автоматично стають spans'ами.
+- **Один бриф = один trace** у Langfuse через `@observe(name="content-pipeline-turn")` в [main.py](main.py).
+- **`propagate_attributes`** прокидає `session_id` (один на REPL-сесію), `user_id`, tags `["course-project","content-pipeline"]` на все дерево trace'а.
+- **`CallbackHandler`** з `langfuse.langchain` під'єднано до LangGraph через `config["callbacks"]` — усі LLM-виклики, tool calls, node-переходи автоматично стають spans'ами з input/output/latency/tokens.
 - **Evaluators** налаштовані в Langfuse UI на `target = New traces`, sampling 100% — нові trace'и оцінюються автоматично без змін коду.
+- **Judge-виклики** (тести) теж трейсяться, але з тегом `eval` — легко відфільтрувати від продакшн-трейсів.
+
+## Інженерні рішення — корисно знати
+
+| Рішення | Чому саме так |
+|---|---|
+| `max_writer_iterations = 3` (а не 5, як у спеці) | Writer дрейфить у формальний article-stiлль після 3+ revisions; коротший loop = якісніший фінальний драфт |
+| Fallback-гілки у всіх агентах | `GraphRecursionError` / `RateLimitError` / `StructuredOutputValidationError` → повертаємо conservative default замість хард-fail; pipeline завжди доходить до save |
+| `BAAI/bge-reranker-v2-m3` замість `base` | Корпус українською — base-reranker оптимізований під англ./кит., multilingual v2-m3 дає правильний ranking |
+| Editor `accuracy_score = 1.0` при відсутності claims | Інакше lifestyle/promo-контент блокується назавжди: editor ставить 0.5 «не можу верифікувати» + verdict rule «all ≥ 0.75» → infinite loop |
+| `word_count_target` у `ContentPlan` | Без цього Writer не знає обсягу з брифу — писав article-length на Instagram (378 слів замість 200) |
+| Multilingual prompts + LANGUAGE RULE | `gpt-4o` без explicit rule переходив на англійську в outline, хоча бриф був українською |
 
 ## Відповідність вимогам `project_content.md`
 
-- [x] 3 агенти: Strategist / Writer / Editor з мінімальним набором інструментів
+- [x] 3 агенти Strategist / Writer / Editor з мінімальним набором інструментів (DuckDuckGo, RAG, file system)
 - [x] Structured Output через Pydantic (`ContentPlan`, `DraftContent`, `EditFeedback`)
-- [x] RAG для brand / style guide (hybrid retrieval + reranker)
+- [x] RAG для brand / style guide / examples (hybrid retrieval + multilingual reranker)
 - [x] HITL gate на затвердженні плану
-- [x] Evaluator-Optimizer loop (Writer ↔ Editor), capped на `max_writer_iterations`
-- [x] Command API для routing Editor → Writer із payload'ом
-- [x] Langfuse tracing з input/output/latency/tokens + metadata (agent name, iteration, session)
-- [x] Langfuse Prompt Management (жодного захардкодженого промпту в коді)
-- [x] LLM-as-a-Judge evaluators у Langfuse (мінімум 2, різні score types)
-- [x] Тести: 4 сценарії (Strategist, Writer, Editor, E2E) з LLM-as-a-Judge
-- [ ] Демо (відео/GIF) — записується після фінального прогону
-- [ ] Бонус: Google Drive MCP — додамо після основного pipeline
+- [x] Evaluator-Optimizer loop Writer ↔ Editor, capped на `max_writer_iterations`
+- [x] Command API для routing Editor → Writer із payload'ом (`Command(goto=, update=)`)
+- [x] Langfuse tracing: input/output/latency/tokens + metadata (agent, iteration, session)
+- [x] Langfuse Prompt Management — жодного захардкодженого system prompt у коді
+- [x] LLM-as-a-Judge evaluators у Langfuse (numeric, boolean, categorical)
+- [x] 4 pytest-тести з LLM-as-a-Judge (Strategist / Writer / Editor / E2E)
+- [x] Model Gateway з fallback'ами (LangChain `.with_fallbacks`)
+- [ ] Демо (відео/GIF) — на моєму боці, після отримання сценарію
+- [ ] Скріншоти Langfuse — додати перед здачею
+- [ ] Бонус: Google Drive MCP — опційно в кінці
