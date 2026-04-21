@@ -41,7 +41,7 @@ class Settings(BaseSettings):
 
     # Pipeline
     output_dir: str = "output"
-    max_writer_iterations: int = 5  # Evaluator-Optimizer cap (Writer ↔ Editor)
+    max_writer_iterations: int = 3  # Evaluator-Optimizer cap (spec allows up to 5; we keep it tight to avoid Writer drifting into formal prose across loops)
 
     # Langfuse observability
     langfuse_public_key: SecretStr
