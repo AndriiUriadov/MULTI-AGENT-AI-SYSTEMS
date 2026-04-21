@@ -1,18 +1,20 @@
-# Brand Knowledge Base
+# Brand Knowledge Base — КПІ ім. Ігоря Сікорського
 
-RAG corpus for the Content Strategist. Drop files here, then run `python ingest.py`
-from the project root to (re)build the FAISS + BM25 index in `../index/`.
+RAG-корпус, з якого Content Strategist підтягує бренд-контекст (style guide,
+опис бренду, приклади контенту) на етапі планування. Запускай
+`python ingest.py` з кореня проєкту, щоб (пере)зібрати FAISS + BM25 індекс
+у `../index/`.
 
-Supported formats: `.md`, `.txt`, `.pdf` (any subfolder depth — DirectoryLoader
-globs recursively).
+Підтримувані формати: `.md`, `.txt`, `.pdf` (recursive — `DirectoryLoader`
+з `glob="**/*.md"` та аналогами).
 
-## Expected subfolders
+## Структура
 
-| Folder | What goes here | Status |
+| Папка | Що лежить | Джерело |
 |---|---|---|
-| `style/` | Tone of voice, audience, dos & don'ts (1–2 pages) | ✅ KPI style guide added |
-| `examples/` | 5–10 "good" posts/articles that represent the brand voice | ⏳ pending |
-| `brand/` | Mission, product, competitive positioning (1 page) | ⏳ pending |
+| `style/` | KPI Social Media Style Guide (тон, аудиторії, заборони, платформи) | `kpi-social-media-style-guide.pdf` |
+| `examples/` | Референсні приклади дописів за платформами (FB, Instagram, YouTube, Telegram, LinkedIn, TikTok, Facebook Physics) | `examples.pdf` |
+| `brand/` | Опис бренду КПІ: місія, продукт, аудиторії, конкурентні переваги, заборонені теми, ключові слова позиціонування | `brand.md` |
 
-After the other agent adds the missing corpora, re-run `python ingest.py` —
-the index is rebuilt from scratch every time.
+Після будь-якої зміни вмісту — `python ingest.py` з кореня `course-project/`.
+Індекс пересобирається з нуля щоразу.
