@@ -43,11 +43,6 @@ HITL на затвердженні плану + Evaluator-Optimizer loop Writer 
              └──────────────┘
 ```
 
-`max_writer_iterations = 3` ([config.py](config.py)) — спец дозволяє до 5,
-ми тримаємо коротший loop, щоб Writer не дрейфив у формальну прозу після
-кількох revisions. Editor повертає REVISION_NEEDED ще раз — save забирає
-останній чорновик, `[Editor] max iterations reached` логується як warning.
-
 ## Стек
 
 - **LangGraph / LangChain** — граф, агенти (`create_agent` з `response_format=PydanticModel`), HITL через `interrupt()` + `Command(resume=...)`.
@@ -76,10 +71,10 @@ course-project/
 ├── tests/
 │   ├── judge.py             # спільна LLM-as-a-Judge функція (@observe tag=eval)
 │   ├── goldens.py           # КПІ-тестові брифи
-│   ├── test_strategist.py   # ✅ gpt-4o  ~18s
-│   ├── test_writer.py       # ✅ gpt-4o  ~25s
-│   ├── test_editor.py       # ✅ gpt-4o  ~8s
-│   └── test_e2e.py          # ✅ gpt-4o  ~6min
+│   ├── test_strategist.py
+│   ├── test_writer.py
+│   ├── test_editor.py
+│   └── test_e2e.py
 ├── data/
 │   ├── style/               # KPI Social Media Style Guide (PDF, 20 стор.)
 │   ├── examples/            # Референсні дописи за платформами (PDF)
@@ -129,46 +124,43 @@ LANGFUSE_USER_ID=your-id
 
 ## Приклад прогону
 
+Скорочений фрагмент — HITL з одним revise, approve, один прохід Writer, Editor з APPROVED. Повний лог — у [terminal.out](terminal.out).
+
 ```
-Brief: Напиши короткий пост для Instagram (формат опису під Reels) акаунту
-КПІ ім. Ігоря Сікорського про щорічну подію «Дослідник року 2026».
-Цільова аудиторія: нинішні студенти КПІ та старшокласники-абітурієнти.
-Обсяг: 150–220 слів. Тон: теплий, з почуттям спільноти, природний. Українською.
+Brief: Напиши пост для Facebook в стилі Facebook Physics про одиницю виміру 1 Дірак…
 
 [Strategist] planning…
-    🔧 knowledge_search(...)    ← 1 запит у RAG (бренд тон/аудиторія)
-    🔧 web_search(...)          ← 1 запит у DuckDuckGo
-[Strategist] plan ready — outline: 5 sections, keywords: 7, tone: теплий, з почуттям спільноти
+    🔧 knowledge_search({"query": "Facebook Physics tone audience voice"})
+    🔧 web_search({"query": "1 Dirac unit measurement"})
+    🔧 read_url({"url": "https://en.wikipedia.org/wiki/Dirac_measure"})
+    🔧 ContentPlan(outline=["Вступ: Що таке одиниця виміру 1 Дірак?", …])
+[Strategist] plan ready — outline: 5 sections, keywords: 5, tone: теплий, гумористичний
 
-============================================================
 📋 CONTENT PLAN — awaiting your approval
-============================================================
-  target_audience: Нинішні студенти КПІ та старшокласники-абітурієнти
-  tone: теплий, з почуттям спільноти, природний
-  outline:
-    • Вступ: Що таке «Дослідник року 2026»
-    • Історія та значення події для КПІ
-    • Основні моменти цьогорічної події
-    • Як взяти участь або відвідати
-    • Заклик до дії: приєднуйтесь до спільноти дослідників
-  keywords:
-    • Дослідник року 2026
-    • КПІ ім. Ігоря Сікорського
-    ...
+  outline: • Вступ… • Історія виникнення… • Застосування в фізиці…
+  keywords: • 1 Дірак • Дірак-міра • Діраковська дельта-функція …
+
+👉 approve / revise: revise
+✏️  What to change: Ця гумористична одиниця зʼявилася із-за того, що Пол Дірак був дуже мовчазним
+
+[Strategist] planning…   ← переплановує з урахуванням feedback'а
+    📎 [read_url] Paul Dirac, one of the most famous scientists of the 20th century, was a very quiet man…
+    🔧 ContentPlan(outline=["Вступ: Хто такий Пол Дірак?", "Історії з життя: мовчазний геній", …])
+[Strategist] plan ready — outline: 5 sections, keywords: 5, tone: теплий, гумористичний
 
 👉 approve / revise: approve
 
 [Writer] iteration 1/3…
-    🔧 web_search(...)
-[Writer] draft ready — 214 words, keywords used: 7/7
+[Writer] draft ready — 224 words, keywords used: 5/5
 
 [Editor] reviewing…
-[Editor] verdict: APPROVED — tone=1.00 acc=0.50 struct=1.00
+    🔧 EditFeedback(verdict=APPROVED, tone=1.0, accuracy=1.0, structure=1.0)
+[Editor] verdict: APPROVED — tone=1.00 acc=1.00 struct=1.00
 
-[Save] output/instagram-reels-2026-150-220.md
+[Save] Content saved to output/facebook-facebook-physics-1-150.md
 ```
 
-Фінальний Markdown лежить у [output/instagram-reels-2026-150-220.md](output/instagram-reels-2026-150-220.md).
+Фінальний пост — [output/facebook-facebook-physics-1-150.md](output/facebook-facebook-physics-1-150.md).
 
 ## Тести
 
@@ -196,7 +188,7 @@ pytest tests/test_editor.py -v       # один файл
 - **Evaluators** налаштовані в Langfuse UI на `target = New traces`, sampling 100% — нові trace'и оцінюються автоматично без змін коду.
 - **Judge-виклики** (тести) теж трейсяться, але з тегом `eval` — легко відфільтрувати від продакшн-трейсів.
 
-## Інженерні рішення — корисно знати
+## Інженерні рішення
 
 | Рішення | Чому саме так |
 |---|---|
@@ -209,17 +201,17 @@ pytest tests/test_editor.py -v       # один файл
 
 ## Відповідність вимогам `project_content.md`
 
-- [x] 3 агенти Strategist / Writer / Editor з мінімальним набором інструментів (DuckDuckGo, RAG, file system)
-- [x] Structured Output через Pydantic (`ContentPlan`, `DraftContent`, `EditFeedback`)
-- [x] RAG для brand / style guide / examples (hybrid retrieval + multilingual reranker)
-- [x] HITL gate на затвердженні плану
-- [x] Evaluator-Optimizer loop Writer ↔ Editor, capped на `max_writer_iterations`
-- [x] Command API для routing Editor → Writer із payload'ом (`Command(goto=, update=)`)
-- [x] Langfuse tracing: input/output/latency/tokens + metadata (agent, iteration, session)
-- [x] Langfuse Prompt Management — жодного захардкодженого system prompt у коді
-- [x] LLM-as-a-Judge evaluators у Langfuse (numeric, boolean, categorical)
-- [x] 4 pytest-тести з LLM-as-a-Judge (Strategist / Writer / Editor / E2E)
-- [x] Model Gateway з fallback'ами (LangChain `.with_fallbacks`)
-- [x] Демо — [YouTube](https://youtu.be/d8382ey__BI) (повний прогін pipeline'а на брифі Facebook Physics про «1 Дірак»)
-- [x] Скріншоти Langfuse — 5 файлів у [screenshots/](screenshots/)
+- 3 агенти Strategist / Writer / Editor з мінімальним набором інструментів (DuckDuckGo, RAG, file system)
+- Structured Output через Pydantic (`ContentPlan`, `DraftContent`, `EditFeedback`)
+- RAG для brand / style guide / examples (hybrid retrieval + multilingual reranker)
+- HITL gate на затвердженні плану
+- Evaluator-Optimizer loop Writer ↔ Editor, capped на `max_writer_iterations`
+- Command API для routing Editor → Writer із payload'ом (`Command(goto=, update=)`)
+- Langfuse tracing: input/output/latency/tokens + metadata (agent, iteration, session)
+- Langfuse Prompt Management — жодного захардкодженого system prompt у коді
+- LLM-as-a-Judge evaluators у Langfuse (numeric, boolean, categorical)
+- 4 pytest-тести з LLM-as-a-Judge (Strategist / Writer / Editor / E2E)
+- Model Gateway з fallback'ами (LangChain `.with_fallbacks`)
+- Демо — [YouTube](https://youtu.be/d8382ey__BI) (повний прогін pipeline'а на брифі Facebook Physics про «1 Дірак»)
+- Скріншоти Langfuse — 5 файлів у [screenshots/](screenshots/)
 - Бонус: Google Drive MCP
