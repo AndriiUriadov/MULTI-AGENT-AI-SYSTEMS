@@ -214,4 +214,3 @@ pytest tests/test_editor.py -v       # один файл
 - Model Gateway з fallback'ами (LangChain `.with_fallbacks`)
 - Демо — [YouTube](https://youtu.be/d8382ey__BI) (повний прогін pipeline'а на брифі Facebook Physics про «1 Дірак»)
 - Скріншоти Langfuse — 5 файлів у [screenshots/](screenshots/)
-- Бонус: Google Drive MCP
