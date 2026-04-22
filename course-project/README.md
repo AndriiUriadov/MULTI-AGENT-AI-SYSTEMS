@@ -12,8 +12,6 @@ HITL на затвердженні плану + Evaluator-Optimizer loop Writer 
 
 [![Watch the demo](https://img.youtube.com/vi/d8382ey__BI/hqdefault.jpg)](https://youtu.be/d8382ey__BI)
 
-Сценарій запису — [scenario.md](scenario.md).
-
 ## Архітектура
 
 **Патерни:** Prompt Chaining (Strategist → HITL → Writer) + Evaluator-Optimizer (Writer ↔ Editor).
@@ -224,4 +222,4 @@ pytest tests/test_editor.py -v       # один файл
 - [x] Model Gateway з fallback'ами (LangChain `.with_fallbacks`)
 - [x] Демо — [YouTube](https://youtu.be/d8382ey__BI) (повний прогін pipeline'а на брифі Facebook Physics про «1 Дірак»)
 - [x] Скріншоти Langfuse — 5 файлів у [screenshots/](screenshots/)
-- [ ] Бонус: Google Drive MCP — опційно в кінці
+- Бонус: Google Drive MCP
