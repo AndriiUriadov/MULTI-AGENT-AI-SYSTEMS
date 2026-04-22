@@ -48,7 +48,7 @@ HITL на затвердженні плану + Evaluator-Optimizer loop Writer 
 - **LangGraph / LangChain** — граф, агенти (`create_agent` з `response_format=PydanticModel`), HITL через `interrupt()` + `Command(resume=...)`.
 - **Pydantic** — контракти `ContentPlan` (з `word_count_target`), `DraftContent`, `EditFeedback` — див. [schemas.py](schemas.py).
 - **Model Gateway** ([model_gateway.py](model_gateway.py)) — task → ChatOpenAI з LangChain `.with_fallbacks([...])` на `RateLimitError` / `APIError`.
-- **Langfuse** — усі 4 system prompts у Prompt Management (label `production`, mustache variables), `@observe` + `propagate_attributes` для session/user/tags, 2–3 evaluator'и (numeric / boolean / categorical).
+- **Langfuse** — усі 4 system prompts у Prompt Management (label `production`, mustache variables), `@observe` + `propagate_attributes` для session/user/tags, 3 evaluator'и різних типів (numeric / boolean / categorical).
 - **RAG** — FAISS + BM25 (50/50 ensemble) + `BAAI/bge-reranker-v2-m3` (мультимовний) для бренд-корпусу КПІ.
 - **Tests** — pytest з власним LLM-as-a-Judge helper у [tests/judge.py](tests/judge.py).
 
@@ -81,7 +81,7 @@ course-project/
 │   └── brand/               # brand.md: місія, продукт, аудиторії, переваги
 ├── index/                   # FAISS + BM25 після ingest (152 chunks із 37 docs)
 ├── output/                  # Артефакти pipeline (саме тут Writer зберігає фінальні .md)
-└── screenshots/             # Скріншоти Langfuse UI (заповнити перед здачею)
+└── screenshots/             # Скріншоти Langfuse UI
 ```
 
 ## Запуск
@@ -192,7 +192,7 @@ pytest tests/test_editor.py -v       # один файл
 
 | Рішення | Чому саме так |
 |---|---|
-| `max_writer_iterations = 3` (а не 5, як у спеці) | Writer дрейфить у формальний article-stiлль після 3+ revisions; коротший loop = якісніший фінальний драфт |
+| `max_writer_iterations = 3` (а не 5, як у спеці) | Writer дрейфить у формальний article-style після 3+ revisions; коротший loop = якісніший фінальний драфт |
 | Fallback-гілки у всіх агентах | `GraphRecursionError` / `RateLimitError` / `StructuredOutputValidationError` → повертаємо conservative default замість хард-fail; pipeline завжди доходить до save |
 | `BAAI/bge-reranker-v2-m3` замість `base` | Корпус українською — base-reranker оптимізований під англ./кит., multilingual v2-m3 дає правильний ranking |
 | Editor `accuracy_score = 1.0` при відсутності claims | Інакше lifestyle/promo-контент блокується назавжди: editor ставить 0.5 «не можу верифікувати» + verdict rule «all ≥ 0.75» → infinite loop |
