@@ -6,6 +6,14 @@ HITL на затвердженні плану + Evaluator-Optimizer loop Writer 
 Повна observability через Langfuse (tracing + Prompt Management + LLM-as-a-Judge).
 Тести — pytest + власна `judge()` функція.
 
+## Demo
+
+Повний прогін pipeline'а на одному брифі (Facebook Physics про «1 Дірак») — від брифу через HITL revise/approve до збереженого посту, з переходом у Langfuse за спостережуваністю.
+
+[![Watch the demo](https://img.youtube.com/vi/d8382ey__BI/hqdefault.jpg)](https://youtu.be/d8382ey__BI)
+
+Сценарій запису — [scenario.md](scenario.md).
+
 ## Архітектура
 
 **Патерни:** Prompt Chaining (Strategist → HITL → Writer) + Evaluator-Optimizer (Writer ↔ Editor).
@@ -214,6 +222,6 @@ pytest tests/test_editor.py -v       # один файл
 - [x] LLM-as-a-Judge evaluators у Langfuse (numeric, boolean, categorical)
 - [x] 4 pytest-тести з LLM-as-a-Judge (Strategist / Writer / Editor / E2E)
 - [x] Model Gateway з fallback'ами (LangChain `.with_fallbacks`)
-- [ ] Демо (відео/GIF) — на моєму боці, після отримання сценарію
-- [ ] Скріншоти Langfuse — додати перед здачею
+- [x] Демо — [YouTube](https://youtu.be/d8382ey__BI) (повний прогін pipeline'а на брифі Facebook Physics про «1 Дірак»)
+- [x] Скріншоти Langfuse — 5 файлів у [screenshots/](screenshots/)
 - [ ] Бонус: Google Drive MCP — опційно в кінці
