@@ -17,29 +17,29 @@ HITL на затвердженні плану + Evaluator-Optimizer loop Writer 
 **Патерни:** Prompt Chaining (Strategist → HITL → Writer) + Evaluator-Optimizer (Writer ↔ Editor).
 
 ```
-             ┌──────────────┐
- User brief ─►  Strategist   ──►  ContentPlan
-             └──────────────┘
-                    │
-                    ▼
-             ┌──────────────┐       revise + feedback
-             │  HITL gate   │ ─────────────────────────┐
+             ┌──────────────┐       (Strategist re-plan)
+ User brief ─►  Strategist   ◄─────────────────────────┐  
              └──────────────┘                          │
-                    │ approve                          │
+                    │ ContentPlan                      │ 
                     ▼                                  │
-             ┌──────────────┐                          │
-       ┌────►│   Writer     │◄─── REVISION_NEEDED ─┐   │
-       │     └──────────────┘                      │   │
-       │            │                              │   │
-       │            ▼                              │   │
-       │     ┌──────────────┐                      │   │
-       │     │   Editor     │──────────────────────┘   │
-       │     └──────────────┘  (iter < max_iter)       │
-       │            │                                  │
-       │   APPROVED або iter ≥ max_iter                │
-       │            ▼                                  │
-       │     ┌──────────────┐                          │
-       └─────│    save      │──► output/*.md   ◄───────┘ (Strategist re-plan)
+             ┌──────────────┐       revise + feedback. │
+             │  HITL gate   │ ─────────────────────────┘
+             └──────────────┘                          
+                    │ approve                          
+                    ▼                                  
+             ┌──────────────┐                          
+       ┌────►│   Writer     │◄─── REVISION_NEEDED ─┐   
+       │     └──────────────┘                      │   
+       │            │                              │   
+       │            ▼                              │   
+       │     ┌──────────────┐                      │   
+       │     │   Editor     │──────────────────────┘   
+       │     └──────────────┘  (iter < max_iter)       
+       │            │                                  
+       │   APPROVED або iter ≥ max_iter                
+       │            ▼                                  
+       │     ┌──────────────┐                          
+       └─────│    save      │──► output/*.md    
              └──────────────┘
 ```
 
