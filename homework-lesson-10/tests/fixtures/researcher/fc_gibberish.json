@@ -1,7 +1,0 @@
-{
-  "id": "fc_gibberish",
-  "input": "asdf qwer zxcv hjkl",
-  "findings": "It seems like your message may have been entered incorrectly or is not clear. Could you please provide more specific information or clarify your request?",
-  "retrieval_context": [],
-  "tools_called": []
-}

@@ -1,6 +1,0 @@
-{
-  "id": "fc_empty_input",
-  "input": "   ",
-  "final_report": "It seems your message was empty. Could you please provide the research topic or question you'd like me to assist you with?",
-  "all_tools_called": []
-}
