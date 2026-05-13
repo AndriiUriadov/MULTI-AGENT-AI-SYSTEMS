@@ -1,0 +1,121 @@
+Research Agent with RAG (type 'exit' to quit)
+----------------------------------------
+
+You: Що таке RAG і які є підходи до retrieval?
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+config.json: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████| 799/799 [00:00<00:00, 1.48MB/s]
+model.safetensors: 100%|███████████████████████████████████████████████████████████████████████████████████████████| 1.11G/1.11G [00:20<00:00, 54.5MB/s]
+Loading weights: 100%|█████████████████████████████████████████████████████████████████████████████████████████████| 201/201 [00:00<00:00, 19035.75it/s]
+XLMRobertaForSequenceClassification LOAD REPORT from: BAAI/bge-reranker-base
+Key                             | Status     |  | 
+--------------------------------+------------+--+-
+roberta.embeddings.position_ids | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED	:can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+tokenizer_config.json: 100%|███████████████████████████████████████████████████████████████████████████████████████████| 443/443 [00:00<00:00, 1.38MB/s]
+sentencepiece.bpe.model: 100%|█████████████████████████████████████████████████████████████████████████████████████| 5.07M/5.07M [00:00<00:00, 12.5MB/s]
+tokenizer.json: 100%|██████████████████████████████████████████████████████████████████████████████████████████████| 17.1M/17.1M [00:01<00:00, 12.2MB/s]
+special_tokens_map.json: 100%|██████████████████████████████████████████████████████████████████████████████████████████| 279/279 [00:00<00:00, 875kB/s]
+README.md: 34.1kB [00:00, 30.5MB/s]
+
+Agent: # Retrieval-Augmented Generation (RAG) and Retrieval Approaches
+
+## What is RAG?
+Retrieval-Augmented Generation (RAG) is a technique that enhances large language models (LLMs) by incorporating external data retrieval systems. This method allows LLMs to access and include up-to-date and domain-specific information that was not part of their initial training data. The process of RAG generally involves the following steps:
+
+1. **Document Retrieval**: When a user submits a query, RAG first retrieves the most relevant documents from an external knowledge base.
+2. **Incorporation of Retrieved Data**: The retrieved data is then integrated into the LLM's prompt to enrich the context before generating a response.
+3. **Response Generation**: Finally, the LLM generates a response based not only on its training but also on the retrieved documents, improving the accuracy and relevance of the generated content.
+
+## Approaches to Retrieval in RAG
+Several approaches to retrieval exist within the RAG framework, each with unique techniques and applications:
+
+1. **Vector Search**: 
+   - Data is converted into embeddings (numerical representations) using large vector spaces to facilitate quick retrieval from a database.
+   - This approach is often the standard for many RAG implementations.
+
+2. **Retrieval Mechanisms**:
+   - **Naive RAG**: Basic retrieval methods without complex enhancements.
+   - **Advanced RAG**: Incorporates sophisticated retrieval techniques, such as contextual understanding and semantic search, allowing for better matches between queries and documents.
+   - **Modular RAG**: Separates different components (e.g., retrieval, generation) to allow for more flexibility and improvements over time.
+
+3. **Chunking Strategies**:
+   - Chunking involves breaking down data into smaller pieces or vectors to enable the retrieval system to access specific details more efficiently.
+   - There are various chunking strategies adapted for different data styles, which can enhance the retrieval process by ensuring more relevant chunks are accessed based on the nature of the query.
+
+4. **Reranking Techniques**:
+   - After initial retrieval, reranking methods can be applied to prioritize the most relevant documents based on their likelihood of suitability for the user’s query, further refining the output from the LLM.
+
+5. **Hybrid Approaches**:
+   - Some systems utilize both dense and sparse vector representations to enhance retrieval capabilities.
+   - Hybrid methods may also combine traditional keyword-based retrieval with vector retrieval systems to cater to different query types.
+
+## Conclusion
+RAG represents a significant advancement in making LLMs more effective by grounding them in external knowledge bases, thereby overcoming common limitations such as hallucinations and outdated information. With evolving retrieval techniques, RAG allows for dynamic and contextually relevant interactions in various applications, from general Q&A systems to specialized information services.
+
+## Sources
+- **Local Knowledge Base**: 
+  - Various documents on RAG techniques and retrieval approaches.
+- **Web Sources**:
+  - [Retrieval-Augmented Generation for Large Language Models: A Survey](https://arxiv.org/abs/2312.10997)
+  
+To ensure comprehensive understanding and further updates, more recent developments and papers may be consulted regularly.
+
+---
+
+I've stored this information in a Markdown file named `rag_and_retrieval_approaches`. Please let me know if you need further assistance!
+
+
+You: Що таке RAG і які є підходи до retrieval?
+
+Agent: # Що таке RAG і які є підходи до Retrieval?
+
+## Що таке RAG?
+
+Retrieval-Augmented Generation (RAG) — це технологія, яка поєднує можливості великих мовних моделей (LLMs) з системами вилучення документів. Використовуючи RAG, моделі можуть звертатися до нової інформації від зовнішніх джерел даних, що дозволяє їм надавати більш точні та актуальні відповіді на запити користувачів. Процес RAG зазвичай складається з кількох етапів:
+
+1. **Вилучення документів**: Коли користувач подає запит, система RAG спочатку знаходить найбільш релевантні документи з зовнішньої бази даних.
+2. **Обробка отриманих даних**: Отримані дані об'єднуються в запиті для покращення контексту, після чого генерується відповідь.
+3. **Генерація відповіді**: Модель LLM формує відповідь на основі як свого попереднього навчання, так і отриманих документів, підвищуючи точність та релевантність.
+
+## Підходи до Retrieval у RAG
+
+Системи RAG можуть використовувати різні підходи до вилучення інформації, включаючи наступні:
+
+1. **Наївний RAG**:
+   - Цей підхід є базовим і не містить складних оптимізацій. Вилучення документів здійснюється без будь-яких покращень, а відповідь генерується на основі отриманих даних у простій послідовності.
+   - Зазвичай використовується для простих застосунків, де важлива швидкість і простота.
+
+2. **Покращений RAG**:
+   - Поєднує кращі методи вилучення і генерації, використовуючи складні алгоритми, переоптимізацію запитів та механізми зворотного зв'язку.
+   - Цей підхід дозволяє реалізувати гібридний пошук (поєднання векторного пошуку та пошуку за ключовими словами) та ранжування документів на основі контексту.
+
+3. **Гібридний пошук**:
+   - Використання як векторних (для подібності семантичного змісту), так і ключових (для точного попадання за термінами) методів у парних запитах.
+   - Це дозволяє записувати як точність, так і семантичну пам'ять.
+
+4. **Корективний RAG (Corrective RAG)**:
+   - Включає етап оцінки точності отриманих документів, що дозволяє скоригувати вилучення шляхом самооцінки.
+   - Це може підвищити точність, але також вплине на затримку в обробці.
+
+5. **Само-корективний RAG (Self-RAG)**:
+   - Розвиває ідеї корективного RAG, дозволяючи системі самостійно оцінювати і навчатися з результатів вилучення.
+   - Використовує три моделі: вилучувач, критик і генератор, включаючи механізми зворотного зв'язку.
+
+6. **Покращення точності через оптимізацію**:
+   - Додаткові техніки, такі як оптимізація параметрів графу HNSW для точності вилучення, активне навчання та регуляризація у відповідях, використовуються для підвищення ефективності RAG.
+
+## Висновок
+
+RAG є потужним інструментом для інтеграції зовнішньої інформації в процес генерації відповідей за допомогою LLM. Різноманітні підходи до вилучення інформації, такі як наївний, вдосконалений, гібридний, корективний і само-корективний RAG, дозволяють адаптуватися до потреб конкретних завдань, покращуючи точність, актуальність і динамічність генерованих відповідей.
+
+## Джерела
+- [IBM: RAG Techniques](https://www.ibm.com/think/topics/rag-techniques)
+- [10 Techniques to Improve RAG Accuracy - Redis](https://redis.io/blog/10-techniques-to-improve-rag-accuracy/)
+- [Thoughtworks on RAG Improvements](https://www.thoughtworks.com/en-us/insights/blog/generative-ai/four-retrieval-techniques-improve-rag)
+
+Якщо вам потрібна додаткова інформація або деталі, не соромтесь запитувати!
+
+You: exit
+

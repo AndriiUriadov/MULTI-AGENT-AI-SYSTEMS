@@ -1,0 +1,22 @@
+{
+  "id": "fc_empty_input",
+  "input": "It seems that your message was empty. Could you please provide me with your research plan or the specific queries you would like me to execute?",
+  "critique": {
+    "verdict": "REVISE",
+    "is_fresh": false,
+    "is_complete": false,
+    "is_well_structured": false,
+    "strengths": [],
+    "gaps": [
+      "The findings are not based on recent sources or developments that may exist.",
+      "The research does not fully answer the user's original request, lacking specific details or sub-topics.",
+      "The structure of the findings is unclear and needs organization for better readability."
+    ],
+    "revision_requests": [
+      "Conduct a web search for recent developments related to the researched topic to ensure findings are current and updated.",
+      "Address any missing sub-topics or angles that are relevant to the user's original request for comprehensive coverage.",
+      "Organize the findings into clear sections to enhance logical flow and readability for report formatting."
+    ]
+  },
+  "tools_called": []
+}

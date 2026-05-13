@@ -1,0 +1,7 @@
+{
+  "id": "fc_empty_input",
+  "input": "   ",
+  "findings": "It seems that your message was empty. Could you please provide me with your research plan or the specific queries you would like me to execute?",
+  "retrieval_context": [],
+  "tools_called": []
+}

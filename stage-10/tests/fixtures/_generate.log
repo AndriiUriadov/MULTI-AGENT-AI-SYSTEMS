@@ -1,0 +1,946 @@
+
+=== hp_rag_pipeline (happy_path) ===
+  [skip planner] hp_rag_pipeline.json exists
+  [skip researcher] hp_rag_pipeline.json exists
+  critic → hp_rag_pipeline.json
+  e2e → hp_rag_pipeline.json
+    🔧 knowledge_search({"query": "three stages of Retrieval-Augmented Generation (RAG) pipeline"})
+    🔧 web_search({"query": "RAG pipeline stages explanation"})
+    📎 [knowledge_search] [1] Source: retrieval-augmented-generation.pdf, page 1
+memory and self-improvement to learn from previous retrievals.
+Fi…
+    📎 [web_search] [{"title": "RAG 101: Demystifying Retrieval-Augmented Generation Pipelines | NVIDIA Technical Blog", "url": "https://dev…
+    🔧 knowledge_search({"query": "Retrieval-Augmented Generation (RAG) pipeline stages"})
+    🔧 web_search({"query": "RAG pipeline stages Retrieval-Augmented Generation"})
+    📎 [knowledge_search] [1] Source: retrieval-augmented-generation.pdf, page 0
+Retrieval-augmented generation
+Retrieval-augmented generation (RA…
+    📎 [web_search] [{"title": "Retrieval-augmented generation - Wikipedia", "url": "https://en.wikipedia.org/wiki/Retrieval-augmented_gener…
+    🔧 read_url({"url": "https://en.wikipedia.org/wiki/Retrieval-augmented_generation"})
+    🔧 read_url({"url": "https://medium.com/@chuciche/understanding-the-entire-process-of-retrieval-augmented-generation-rag-0d15a7f75b6…)
+    🔧 read_url({"url": "https://www.ibm.com/think/topics/retrieval-augmented-generation"})
+    📎 [read_url] Retrieval-augmented generation
+Retrieval-augmented generation (RAG) is a technique that enables large language models (L…
+    📎 [read_url] Understanding the Entire Process of Retrieval-Augmented Generation (RAG) Step by Step
+Retrieval-Augmented Generation (RA…
+    📎 [read_url] The latest AI trends, brought to you by experts
+Get curated insights on the most important—and intriguing—AI news. Subsc…
+    📎 [critique] (structured parse failed — defaulting to REVISE)
+    🔧 knowledge_search({"query": "three stages of Retrieval-Augmented Generation (RAG) pipeline"})
+    🔧 web_search({"query": "Retrieval-Augmented Generation RAG pipeline stages"})
+    📎 [knowledge_search] [1] Source: retrieval-augmented-generation.pdf, page 1
+memory and self-improvement to learn from previous retrievals.
+Fi…
+    📎 [web_search] [{"title": "RAG System Architecture: A Production Implementation Guide", "url": "https://blog.n8n.io/rag-system-architec…
+    🔧 read_url({"url": "https://blog.n8n.io/rag-system-architecture/"})
+    🔧 read_url({"url": "https://www.nimbleway.com/blog/rag-pipeline-guide"})
+    🔧 read_url({"url": "https://learn.microsoft.com/en-us/azure/developer/ai/advanced-retrieval-augmented-generation"})
+    📎 [read_url] A simple retrieval augmented generation architecture (RAG) setup usually works fine with a few documents and a basic ret…
+    📎 [read_url] Step-by-step Guide to Building a RAG (Retrieval-Augmented Generation) Pipeline
+Step-by-step Guide to Building a RAG (Ret…
+    📎 [read_url] Note
+Access to this page requires authorization. You can try signing in or changing directories.
+Access to this page req…
+    🔧 web_search({"query": "RAG pipeline recent developments 2023"})
+    🔧 knowledge_search({"query": "RAG pipeline stages"})
+    📎 [web_search] [{"title": "How to Monitor Production-grade Agentic RAG Pipelines?", "url": "https://www.analyticsvidhya.com/blog/2024/0…
+    📎 [knowledge_search] [1] Source: retrieval-augmented-generation.pdf, page 1
+memory and self-improvement to learn from previous retrievals.
+Fi…
+    🔧 read_url({"url": "https://blog.skyvia.com/rag-pipeline/"})
+    📎 [read_url] Error: could not extract readable text from https://blog.skyvia.com/rag-pipeline/
+    🔧 read_url({"url": "https://www.analyticsvidhya.com/blog/2024/09/monitor-production-grade-agentic-rag-pipelines/"})
+    📎 [read_url] Error: could not extract readable text from https://www.analyticsvidhya.com/blog/2024/09/monitor-production-grade-agenti…
+    🔧 read_url({"url": "https://expertbeacon.com/retrieval-augmented-generation/"})
+    📎 [read_url] Error: could not extract readable text from https://expertbeacon.com/retrieval-augmented-generation/
+    🔧 read_url({"url": "https://www.nimbleway.com/blog/rag-pipeline-guide"})
+    📎 [read_url] Step-by-step Guide to Building a RAG (Retrieval-Augmented Generation) Pipeline
+Step-by-step Guide to Building a RAG (Ret…
+    🔧 web_search({"query": "2023 benchmarks comparative analyses Retrieval-Augmented Generation RAG pipelines"})
+    🔧 web_search({"query": "2023 challenges in Retrieval-Augmented Generation RAG systems"})
+    📎 [web_search] [{"title": "Investigating the Robustness of Retrieval-Augmented Generation", "url": "https://arxiv.org/html/2507.06956v1…
+    📎 [web_search] [{"title": "Retrieval-augmented generation - Wikipedia", "url": "https://en.wikipedia.org/wiki/Retrieval-augmented_gener…
+    🔧 read_url({"url": "https://arxiv.org/html/2507.06956v1"})
+    🔧 read_url({"url": "https://arxiv.org/html/2505.07671v1"})
+    🔧 read_url({"url": "https://www.devopsconsulting.in/blog/top-10-rag-retrieval-augmented-generation-tooling-features-pros-cons-compa…)
+    🔧 read_url({"url": "https://en.wikipedia.org/wiki/Retrieval-augmented_generation"})
+    🔧 read_url({"url": "https://arxiv.org/abs/2312.10997"})
+    🔧 read_url({"url": "https://www.promptingguide.ai/research/rag"})
+    📎 [read_url] Investigating the Robustness of Retrieval-Augmented Generation at the Query Level
+Abstract
+Large language models (LLMs) …
+    📎 [read_url] Benchmarking Retrieval-Augmented Generation for Chemistry
+Abstract
+Retrieval-augmented generation (RAG) has emerged as a…
+    📎 [read_url] Introduction
+Retrieval-Augmented Generation (RAG) tooling is the set of frameworks, platforms, and services that help AI…
+    📎 [read_url] Retrieval-augmented generation
+Retrieval-augmented generation (RAG) is a technique that enables large language models (L…
+    📎 [read_url] Computer Science > Computation and Language
+[Submitted on 18 Dec 2023 (v1), last revised 27 Mar 2024 (this version, v5)]…
+    📎 [read_url] Error: could not extract readable text from https://www.promptingguide.ai/research/rag
+    🔧 web_search({"query": "2023 benchmarks Retrieval-Augmented Generation RAG systems"})
+    🔧 web_search({"query": "current challenges Retrieval-Augmented Generation RAG systems 2023"})
+    📎 [web_search] [{"title": "Benchmarking Large Language Models in Retrieval-Augmented Generation", "url": "https://arxiv.org/abs/2309.01…
+    📎 [web_search] [{"title": "Advancing Retrieval-Augmented Generation (RAG) Innovations, Challenges ...", "url": "https://www.researchgat…
+    🔧 read_url({"url": "https://arxiv.org/abs/2309.01431"})
+    🔧 read_url({"url": "https://www.researchgate.net/publication/388722115_Advancing_Retrieval-Augmented_Generation_RAG_Innovations_Cha…)
+    📎 [read_url] Computer Science > Computation and Language
+[Submitted on 4 Sep 2023 (v1), last revised 20 Dec 2023 (this version, v2)]
+…
+    📎 [read_url] Error: could not extract readable text from https://www.researchgate.net/publication/388722115_Advancing_Retrieval-Augme…
+    🔧 read_url({"url": "https://researchgate.net/publication/388722115_Advancing_Retrieval-Augmented_Generation_RAG_Innovations_Challen…)
+    📎 [read_url] Error: could not extract readable text from https://researchgate.net/publication/388722115_Advancing_Retrieval-Augmented…
+    🔧 web_search({"query": "2023 challenges Retrieval-Augmented Generation RAG systems"})
+    📎 [web_search] [{"title": "Retrieval-Augmented Generation: A Comprehensive Survey of Architectures ...", "url": "https://arxiv.org/pdf/…
+    🔧 read_url({"url": "https://arxiv.org/pdf/2506.00054"})
+    🔧 read_url({"url": "https://www.mdpi.com/2504-2289/9/12/320"})
+    📎 [read_url] Error: could not extract readable text from https://arxiv.org/pdf/2506.00054
+    📎 [read_url] Error: could not fetch content from https://www.mdpi.com/2504-2289/9/12/320
+
+=== hp_langchain_vector_store (happy_path) ===
+  planner → hp_langchain_vector_store.json
+  researcher → hp_langchain_vector_store.json
+  critic → hp_langchain_vector_store.json
+  e2e → hp_langchain_vector_store.json
+    🔧 knowledge_search({"query": "vector store role in LangChain application"})
+    🔧 web_search({"query": "what is a vector store in LangChain"})
+    📎 [knowledge_search] [1] Source: langchain.pdf, page 3
+(https://python.langchain.com/docs/integrations/vectorstores/weaviate.html). python.la…
+    📎 [web_search] [{"title": "Vector Stores in LangChain - GeeksforGeeks", "url": "https://www.geeksforgeeks.org/artificial-intelligence/v…
+    🔧 knowledge_search({"query": "role of vector stores in LangChain application"})
+    🔧 web_search({"query": "vector stores LangChain application advantages functionality"})
+    📎 [knowledge_search] [1] Source: retrieval-augmented-generation.pdf, page 1
+Typically, the data to be referenced is converted into LLM
+embedd…
+    📎 [web_search] [{"title": "Vector stores | 🦜️🔗 LangChain", "url": "https://python.langchain.com/docs/concepts/vectorstores/", "snippet"…
+    🔧 read_url({"url": "https://python.langchain.com/docs/concepts/vectorstores/"})
+    🔧 read_url({"url": "https://www.geeksforgeeks.org/artificial-intelligence/indexing-in-langchain/"})
+    📎 [read_url] Error: could not fetch content from https://python.langchain.com/docs/concepts/vectorstores/
+    📎 [read_url] Indexing in LangChain is the process of organizing documents in a vector database such that a language model can quickly…
+    🔧 web_search({"query": "recent developments in vector stores LangChain 2023"})
+    🔧 knowledge_search({"query": "vector stores in LangChain"})
+    📎 [web_search] [{"title": "Vector Store and RAG Tutorial", "url": "https://documentation.equo.ai/guides/vector-store-tutorial", "snippe…
+    📎 [knowledge_search] [1] Source: langchain.pdf, page 3
+(https://python.langchain.com/docs/integrations/vectorstores/weaviate.html). python.la…
+    🔧 read_url({"url": "https://documentation.equo.ai/guides/vector-store-tutorial"})
+    🔧 read_url({"url": "https://infiniflow.org/blog/future-vector-database"})
+    📎 [read_url] Error: could not extract readable text from https://documentation.equo.ai/guides/vector-store-tutorial
+    📎 [read_url] Error: could not extract readable text from https://infiniflow.org/blog/future-vector-database
+    🔧 read_url({"url": "https://python.langchain.com/docs/concepts/vectorstores/"})
+    🔧 read_url({"url": "https://www.geeksforgeeks.org/artificial-intelligence/indexing-in-langchain/"})
+    📎 [read_url] Error: could not fetch content from https://python.langchain.com/docs/concepts/vectorstores/
+    📎 [read_url] Indexing in LangChain is the process of organizing documents in a vector database such that a language model can quickly…
+    🔧 web_search({"query": "latest trends in vector databases 2024"})
+    🔧 knowledge_search({"query": "current applications of vector stores in 2023"})
+    📎 [web_search] [{"title": "Databases in 2023: A Year in Review // Blog // Andy Pavlo -", "url": "https://www.cs.cmu.edu/~pavlo/blog/202…
+    📎 [knowledge_search] [1] Source: langchain.pdf, page 0
+for PDF file text extraction andmanipulation; Python and JavaScript code generation, a…
+    🔧 read_url({"url": "https://www.cs.cmu.edu/~pavlo/blog/2024/01/2023-databases-retrospective.html"})
+    🔧 read_url({"url": "https://bigdataclouds.org/the-evolution-and-landscape-of-vector-databases/"})
+    📎 [read_url] I am starting this new year the same way I ended the last: taking antibiotics because my biological daughter brought hom…
+    📎 [read_url] Error: could not extract readable text from https://bigdataclouds.org/the-evolution-and-landscape-of-vector-databases/
+    🔧 web_search({"query": "future trends in vector databases 2024"})
+    🔧 knowledge_search({"query": "advances in vector databases LangChain"})
+    📎 [web_search] [{"title": "Databases in 2023: A Year in Review // Blog // Andy Pavlo -", "url": "https://www.cs.cmu.edu/~pavlo/blog/202…
+    📎 [knowledge_search] [1] Source: langchain.pdf, page 3
+Retrieved 2026-03-09.16. "Azure Cognitive Search and LangChain: A SeamlessIntegration …
+    🔧 read_url({"url": "https://www.openpr.com/news/3288664/vector-database-market-to-see-huge-growth-by-2029"})
+    🔧 read_url({"url": "https://www.analyticsindiamag.com/ai-features/vector-databases-are-ridiculously-good/"})
+    📎 [read_url] Error: could not extract readable text from https://www.openpr.com/news/3288664/vector-database-market-to-see-huge-growt…
+    📎 [read_url] Error: could not extract readable text from https://www.analyticsindiamag.com/ai-features/vector-databases-are-ridiculou…
+    🔧 knowledge_search({"query": "role of vector stores in LangChain applications 2023 2024"})
+    🔧 web_search({"query": "vector stores LangChain applications 2023 2024 recent trends advancements case studies"})
+    📎 [knowledge_search] [1] Source: langchain.pdf, page 3
+langchain.dev. 2023-08-01.Retrieved 2024-07-08.7. "Introducing LangServe, the best way…
+    📎 [web_search] [{"title": "LangChain State of AI 2024 Report", "url": "https://blog.langchain.com/langchain-state-of-ai-2024/", "snippe…
+    🔧 read_url({"url": "https://blog.langchain.com/langchain-state-of-ai-2024/"})
+    🔧 read_url({"url": "https://www.mukeshyadav.com/blog/langchain-real-world-applications/"})
+    🔧 read_url({"url": "https://demystifying-vector-stores-lanchain-vector-store-from-scratch/"})
+    📎 [read_url] Another year of building with LLMs is coming to an end — and 2024 didn’t disappoint. With nearly 30k users signing up fo…
+    📎 [read_url] Error: could not extract readable text from https://www.mukeshyadav.com/blog/langchain-real-world-applications/
+    📎 [read_url] Error: could not fetch content from https://demystifying-vector-stores-lanchain-vector-store-from-scratch/
+    🔧 web_search({"query": "LangChain vector stores applications trends 2024 case studies"})
+    🔧 web_search({"query": "latest advancements in LangChain vector stores 2024"})
+    📎 [web_search] [{"title": "Vector store integrations - Docs by LangChain", "url": "https://docs.langchain.com/oss/javascript/integratio…
+    📎 [web_search] [{"title": "Vector store integrations - Docs by LangChain", "url": "https://docs.langchain.com/oss/javascript/integratio…
+    🔧 read_url({"url": "https://www.geeksforgeeks.org/artificial-intelligence/vector-stores-in-langchain/"})
+    🔧 read_url({"url": "https://chunkforge.com/blog/langchain-vector-store"})
+    🔧 read_url({"url": "https://medium.com/donato-story/unpacking-embeddings-and-vector-stores-with-langchain-c7525e4a9d0b"})
+    📎 [read_url] Vector stores are specialized databases that store embeddings (numeric vectors that capture semantic meaning) and provid…
+    📎 [read_url] Error: could not extract readable text from https://chunkforge.com/blog/langchain-vector-store
+    📎 [read_url] Welcome to Episode 36 of the Data Mastery Series, where we continue our exploration into the exciting world of LangChain…
+    📎 [critique] (structured parse failed — defaulting to REVISE)
+
+=== hp_hybrid_retrieval (happy_path) ===
+  planner → hp_hybrid_retrieval.json
+  researcher → hp_hybrid_retrieval.json
+  critic → hp_hybrid_retrieval.json
+  e2e → hp_hybrid_retrieval.json
+    🔧 knowledge_search({"query": "hybrid retrieval in RAG systems"})
+    🔧 web_search({"query": "usefulness of hybrid retrieval in RAG systems"})
+    📎 [knowledge_search] [1] Source: retrieval-augmented-generation.pdf, page 3
+mitigate this is to do a traditional text search, add those resul…
+    📎 [web_search] [{"title": "A Complete Guide to Implementing Hybrid RAG - Medium", "url": "https://medium.com/aingineer/a-complete-guide…
+    🔧 knowledge_search({"query": "hybrid retrieval in Retrieval-Augmented Generation (RAG) systems definition and mechanics"})
+    🔧 web_search({"query": "hybrid retrieval in RAG systems benefits case studies comparison"})
+    📎 [knowledge_search] [1] Source: retrieval-augmented-generation.pdf, page 0
+Retrieval-augmented generation
+Retrieval-augmented generation (RA…
+    📎 [web_search] [{"title": "GitHub - nabeelshan78/Optimizing-RAG-with-Hybrid-Search: Hybrid RAG ...", "url": "https://github.com/nabeels…
+    🔧 read_url({"url": "https://www.techaheadcorp.com/blog/hybrid-rag-architecture-definition-benefits-use-cases/"})
+    🔧 read_url({"url": "https://medium.com/@sahin.samia/mastering-hybrid-retrieval-strategies-in-rag-combining-the-best-of-multiple-app…)
+    🔧 read_url({"url": "https://github.com/nabeelshan78/Optimizing-RAG-with-Hybrid-Search/"})
+    📎 [read_url] Error: could not extract readable text from https://www.techaheadcorp.com/blog/hybrid-rag-architecture-definition-benefi…
+    📎 [read_url] Member-only story
+Mastering Hybrid Retrieval Strategies in RAG: Combining the Best of Multiple Approaches
+You ask an AI …
+    📎 [read_url] Is your RAG system really retrieving the best context? This project proves that the retrieval strategy you choose is the…
+    🔧 web_search({"query": "Hybrid Retrieval in Retrieval-Augmented Generation 2024"})
+    🔧 knowledge_search({"query": "Hybrid Retrieval in RAG systems"})
+    📎 [web_search] [{"title": "A Hybrid Retrieval Approach for Advancing Retrieval-Augmented", "url": "https://aclanthology.org/2024.icnlsp…
+    📎 [knowledge_search] [1] Source: retrieval-augmented-generation.pdf, page 3
+mitigate this is to do a traditional text search, add those resul…
+    🔧 read_url({"url": "https://aclanthology.org/2024.icnlsp-1.41/"})
+    🔧 read_url({"url": "https://arxiv.org/html/2506.22644v1"})
+    📎 [read_url] @inproceedings{doan-etal-2024-hybrid,
+title = "A Hybrid Retrieval Approach for Advancing Retrieval-Augmented Generation …
+    📎 [read_url] Evaluating Hybrid Retrieval Augmented Generation using Dynamic Test Sets: LiveRAG Challenge
+Abstract.
+We present our sub…
+    🔧 knowledge_search({"query": "hybrid retrieval Retrieval-Augmented Generation 2024 LiveRAG Challenge BEIR dataset FineWeb-10BT corpus"})
+    🔧 web_search({"query": "hybrid retrieval strategies 2024 RAG LiveRAG Challenge BEIR dataset FineWeb-10BT corpus"})
+    📎 [knowledge_search] [1] Source: retrieval-augmented-generation.pdf, page 3
+mitigate this is to do a traditional text search, add those resul…
+    📎 [web_search] [{"title": "LiveRAG Challenge - Home", "url": "https://liverag.tii.ae/", "snippet": "The goal of theLiveRAGChallengeis t…
+    🔧 read_url({"url": "https://liverag.tii.ae/"})
+    🔧 read_url({"url": "https://arxiv.org/abs/2506.22644"})
+    🔧 read_url({"url": "https://aclanthology.org/2024.icnlsp-1.41.pdf"})
+    📎 [read_url] Organized by the Technology Innovation Institute (TII)
+Retrieval Augmented Generation (RAG) has emerged as a key technol…
+    📎 [read_url] Computer Science > Computation and Language
+[Submitted on 27 Jun 2025]
+Title:Evaluating Hybrid Retrieval Augmented Gener…
+    📎 [read_url] Error: could not extract readable text from https://aclanthology.org/2024.icnlsp-1.41.pdf
+    🔧 web_search({"query": "Hybrid Retrieval in RAG systems 2025 developments"})
+    🔧 knowledge_search({"query": "recent advancements in hybrid retrieval RAG"})
+    📎 [web_search] [{"title": "What Is Retrieval-Augmented Generation (RAG)? 2025 Guide", "url": "https://inkeep.com/blog/what-is-rag", "sn…
+    📎 [knowledge_search] [1] Source: retrieval-augmented-generation.pdf, page 1
+memory and self-improvement to learn from previous retrievals.
+Fi…
+    🔧 read_url({"url": "https://inkeep.com/blog/what-is-rag"})
+    🔧 read_url({"url": "https://dasroot.net/posts/2025/12/advanced-rag-techniques-hybrid-search/"})
+    📎 [read_url] Error: could not extract readable text from https://inkeep.com/blog/what-is-rag
+    📎 [read_url] Error: could not extract readable text from https://dasroot.net/posts/2025/12/advanced-rag-techniques-hybrid-search/
+    🔧 read_url({"url": "https://www.edenai.co/post/the-2025-guide-to-retrieval-augmented-generation-rag"})
+    🔧 read_url({"url": "https://dify.ai/blog/hybrid-search-rerank-rag-improvement"})
+    📎 [read_url] Summarize this article with:
+Retrieval-Augmented Generation (RAG) has emerged as a pivotal approach in AI applications, …
+    📎 [read_url] Currently, developers working with large models need to understand Retrieval Augmented Generation (RAG). Before writing …
+    🔧 knowledge_search({"query": "hybrid retrieval in RAG systems advancements 2024"})
+    🔧 web_search({"query": "hybrid retrieval techniques 2024 benchmark comparisons accuracy retrieval challenges"})
+    📎 [knowledge_search] [1] Source: langchain.pdf, page 3
+on 2024-03-14. Retrieved 2023-11-26.12. "Retrieval-augmented generation (RAG) | 🦜🔗  La…
+    📎 [web_search] [{"title": "Comparative Analysis of Retrieval Systems in the Real World", "url": "https://arxiv.org/pdf/2405.02048", "sn…
+    🔧 read_url({"url": "https://arxiv.org/pdf/2405.02048"})
+    🔧 read_url({"url": "https://mbrenndoerfer.com/writing/hybrid-retrieval-combining-sparse-dense-methods-effective-information-retriev…)
+    🔧 read_url({"url": "https://aclanthology.org/2024.icnlsp-1.41.pdf"})
+    📎 [read_url] Error: could not extract readable text from https://arxiv.org/pdf/2405.02048
+    📎 [read_url] Error: could not extract readable text from https://mbrenndoerfer.com/writing/hybrid-retrieval-combining-sparse-dense-me…
+    📎 [read_url] Error: could not extract readable text from https://aclanthology.org/2024.icnlsp-1.41.pdf
+    🔧 web_search({"query": "2024 advancements in hybrid retrieval techniques RAG systems accuracy challenges"})
+    🔧 web_search({"query": "benchmark comparisons hybrid retrieval strategies 2024"})
+    📎 [web_search] [{"title": "A Systematic Review of Key Retrieval-Augmented Generation (RAG) Systems ...", "url": "https://arxiv.org/abs/…
+    📎 [web_search] [{"title": "Hybrid Search Overview - Azure AI Search | Microsoft Learn", "url": "https://learn.microsoft.com/en-us/azure…
+    🔧 read_url({"url": "https://learn.microsoft.com/en-us/azure/search/hybrid-search-overview"})
+    🔧 read_url({"url": "https://arxiv.org/html/2507.03608v1"})
+    📎 [read_url] Note
+Access to this page requires authorization. You can try signing in or changing directories.
+Access to this page req…
+    📎 [read_url] Benchmarking Vector, Graph and Hybrid Retrieval Augmented Generation (RAG) Pipelines for Open Radio Access Networks (ORA…
+    🔧 web_search({"query": "Hybrid Retrieval in RAG Systems 2024 advancements"})
+    🔧 knowledge_search({"query": "Hybrid Retrieval RAG Systems advancements 2024"})
+    📎 [web_search] [{"title": "HybridRAG: Integrating Knowledge Graphs and Vector Retrieval Augmented ...", "url": "https://arxiv.org/html/…
+    📎 [knowledge_search] [1] Source: retrieval-augmented-generation.pdf, page 0
+Retrieval-augmented generation
+Retrieval-augmented generation (RA…
+    🔧 read_url({"url": "https://arxiv.org/html/2408.04948v1"})
+    📎 [read_url] HybridRAG: Integrating Knowledge Graphs and Vector Retrieval Augmented Generation for Efficient Information Extraction
+A…
+    🔧 read_url({"url": "https://medium.com/aingineer/a-complete-guide-to-implementing-hybrid-rag-86c0febba474"})
+    📎 [read_url] A Complete Guide to Implementing Hybrid RAG
+RAG architectures are diverse, ranging from pure vector-based semantic searc…
+
+=== hp_llm_context_window (happy_path) ===
+  planner → hp_llm_context_window.json
+  researcher → hp_llm_context_window.json
+  critic → hp_llm_context_window.json
+  e2e → hp_llm_context_window.json
+    🔧 knowledge_search({"query": "large language model context window significance performance usability"})
+    🔧 web_search({"query": "large language model context window implications for performance 2023"})
+    📎 [knowledge_search] [1] Source: large-language-model.pdf, page 17
+model assigns a higher a priori probability to specific answer tokens (suc…
+    📎 [web_search] [{"title": "Understanding Large Language Models Context Windows | Appen", "url": "https://www.appen.com/blog/understandi…
+    🔧 knowledge_search({"query": "large language model context window significance implications performance usability"})
+    🔧 web_search({"query": "impact of context window size large language model NLP recent advancements trends"})
+    📎 [knowledge_search] [1] Source: large-language-model.pdf, page 17
+model assigns a higher a priori probability to specific answer tokens (suc…
+    📎 [web_search] [{"title": "NLP & Large Language Models 2026: From Theory to Practical", "url": "https://flowygo.com/en/blog/nlp-large-l…
+    🔧 read_url({"url": "https://flowygo.com/en/blog/nlp-large-language-models-2026-from-theory-to-practical-applications-complete-devel…)
+    🔧 read_url({"url": "https://arxiv.org/html/2411.03538v1"})
+    🔧 read_url({"url": "https://arxiv.org/html/2404.08865v1"})
+    📎 [read_url] Error: could not extract readable text from https://flowygo.com/en/blog/nlp-large-language-models-2026-from-theory-to-pr…
+    📎 [read_url] Long Context RAG Performance of Large Language Models
+Abstract
+Retrieval Augmented Generation (RAG) has emerged as a cru…
+    📎 [read_url] LLM In-Context Recall is Prompt Dependent
+Abstract.
+The proliferation of Large Language Models (LLMs) highlights the cri…
+    🔧 web_search({"query": "latest advancements in context window for large language models 2024"})
+    🔧 web_search({"query": "impact of larger context windows on large language models performance 2024"})
+    📎 [web_search] [{"title": "LLM Context Window Comparison 2024: Beyond Token Limits", "url": "https://aiagentmemory.org/articles/llm-con…
+    📎 [web_search] [{"title": "Understanding Large Language Models Context Windows | Appen", "url": "https://www.appen.com/blog/understandi…
+    🔧 read_url({"url": "https://aiagentmemory.org/articles/llm-context-window-comparison-2024/"})
+    🔧 read_url({"url": "https://research.ibm.com/blog/larger-context-window"})
+    📎 [read_url] The LLM context window comparison 2024 reveals leading models now offer context windows up to 1 million tokens, a signif…
+    📎 [read_url] What’s an LLM context window and why is it getting larger?
+Larger context windows give language models more background t…
+    🔧 knowledge_search({"query": "context window in LLMs"})
+    📎 [knowledge_search] [1] Source: large-language-model.pdf, page 7
+usually done by encoding the query and the documents into vectors, then fin…
+    🔧 knowledge_search({"query": "2024 context window benchmarks for large language models"})
+    🔧 web_search({"query": "2024 benchmarks context window size large language models"})
+    🔧 knowledge_search({"query": "impact of context window size on NLP tasks case studies"})
+    📎 [knowledge_search] [1] Source: large-language-model.pdf, page 41
+"AI Index Report 2024 – Artificial Intelligence Index" (https://aiindex.st…
+    📎 [web_search] [{"title": "Finetuning Large Language Models for Longer Context Lengths -", "url": "https://www.esperanto.ai/blog/finetu…
+    📎 [knowledge_search] [1] Source: large-language-model.pdf, page 5
+In order to find out which tokens are relevant to
+each other within the sco…
+    🔧 read_url({"url": "https://www.esperanto.ai/blog/finetuning-large-language-models-for-longer-context-lengths/"})
+    🔧 read_url({"url": "https://www.appen.com/blog/understanding-large-language-models-context-windows"})
+    🔧 read_url({"url": "https://www.artfish.ai/p/long-context-llms"})
+    📎 [read_url] Error: could not extract readable text from https://www.esperanto.ai/blog/finetuning-large-language-models-for-longer-co…
+    📎 [read_url] Understanding LLM Context Windows: Implications and Considerations for AI Applications
+Learn what context windows are, h…
+    📎 [read_url] Evaluating long context large language models
+There is a race towards language models with longer context windows. But h…
+    🔧 web_search({"query": "2024 benchmarks for context window sizes of large language models"})
+    🔧 web_search({"query": "advancements in context windows for LLMs 2024"})
+    📎 [web_search] [{"title": "Finetuning Large Language Models for Longer Context Lengths -", "url": "https://www.esperanto.ai/blog/finetu…
+    📎 [web_search] [{"title": "LLM Context Window Comparison 2024: Beyond Token Limits", "url": "https://aiagentmemory.org/articles/llm-con…
+    🔧 read_url({"url": "https://aiagentmemory.org/articles/llm-context-window-comparison-2024/"})
+    🔧 read_url({"url": "https://www.artfish.ai/p/long-context-llms"})
+    📎 [read_url] The LLM context window comparison 2024 reveals leading models now offer context windows up to 1 million tokens, a signif…
+    📎 [read_url] Evaluating long context large language models
+There is a race towards language models with longer context windows. But h…
+
+=== hp_reranking (happy_path) ===
+  planner → hp_reranking.json
+  researcher → hp_reranking.json
+  critic → hp_reranking.json
+  e2e → hp_reranking.json
+    🔧 knowledge_search({"query": "reranking in RAG retrieval pipeline"})
+    🔧 web_search({"query": "reranking in retrieval augmented generation advantages examples"})
+    📎 [knowledge_search] [1] Source: retrieval-augmented-generation.pdf, page 2
+selections and the model’s likelihoods to refine retrieval.[12]
+R…
+    📎 [web_search] [{"title": "Optimize Retrieval-Augmented Generation with Rerankers", "url": "https://www.getmaxim.ai/blog/reranker-rag/"…
+    🔧 knowledge_search({"query": "reranking in RAG retrieval pipeline"})
+    🔧 web_search({"query": "reranking in RAG retrieval pipeline advantages examples implementation strategies"})
+    📎 [knowledge_search] [1] Source: retrieval-augmented-generation.pdf, page 2
+selections and the model’s likelihoods to refine retrieval.[12]
+R…
+    📎 [web_search] [{"title": "RAG Explained: Reranking for Better Answers | Towards Data ...", "url": "https://towardsdatascience.com/rag-…
+    🔧 read_url({"url": "https://towardsdatascience.com/rag-explained-reranking-for-better-answers/"})
+    🔧 read_url({"url": "https://atalupadhyay.wordpress.com/2025/06/19/reranking-in-rag-pipelines-a-complete-guide-with-hands-on-impleme…)
+    🔧 read_url({"url": "https://medium.com/@abheshith7/mastering-reranking-in-rag-from-basic-retrieval-to-advanced-methods-db297530361a…)
+    📎 [read_url] Error: could not extract readable text from https://towardsdatascience.com/rag-explained-reranking-for-better-answers/
+    📎 [read_url] Error: could not extract readable text from https://atalupadhyay.wordpress.com/2025/06/19/reranking-in-rag-pipelines-a-c…
+    📎 [read_url] Mastering Reranking in RAG: From Basic Retrieval to Advanced Methods
+You built a Retrieval Augmented Generation (RAG) sy…
+    🔧 web_search({"query": "recent developments in reranking for RAG systems 2024"})
+    🔧 knowledge_search({"query": "reranking in RAG systems"})
+    📎 [web_search] [{"title": "Optimizing RAG with Rerankers: The Role and Trade-offs - Zilliz", "url": "https://zilliz.com/learn/optimize-…
+    📎 [knowledge_search] [1] Source: retrieval-augmented-generation.pdf, page 2
+selections and the model’s likelihoods to refine retrieval.[12]
+R…
+    🔧 read_url({"url": "https://zilliz.com/learn/optimize-rag-with-rerankers-the-role-and-tradeoffs"})
+    🔧 read_url({"url": "https://ragflow.io/blog/the-rise-and-evolution-of-rag-in-2024-a-year-in-review"})
+    📎 [read_url] Optimizing RAG with Rerankers: The Role and Trade-offs
+Rerankers can enhance the accuracy and relevance of answers in RA…
+    📎 [read_url] Error: could not extract readable text from https://ragflow.io/blog/the-rise-and-evolution-of-rag-in-2024-a-year-in-revi…
+    🔧 read_url({"url": "https://www.analyticsvidhya.com/blog/2024/08/improving-real-world-rag-systems/"})
+    📎 [read_url] Error: could not extract readable text from https://www.analyticsvidhya.com/blog/2024/08/improving-real-world-rag-system…
+    🔧 read_url({"url": "https://arxiv.org/html/2405.18414v1"})
+    📎 [read_url] Don’t Forget to Connect!
+Improving RAG with Graph-based Reranking
+Abstract
+Retrieval Augmented Generation (RAG) has grea…
+
+=== ec_everything_about_rag (edge_case) ===
+  planner → ec_everything_about_rag.json
+  researcher → ec_everything_about_rag.json
+  critic → ec_everything_about_rag.json
+  e2e → ec_everything_about_rag.json
+    🔧 knowledge_search({"query": "Retrieval-Augmented Generation (RAG) overview"})
+    🔧 web_search({"query": "Retrieval-Augmented Generation (RAG) applications and advancements in 2024"})
+    📎 [knowledge_search] [1] Source: retrieval-augmented-generation.pdf, page 0
+Retrieval-augmented generation
+Retrieval-augmented generation (RA…
+    📎 [web_search] [{"title": "Retrieval-Augmented Generation (RAG) Advancements: The", "url": "https://promptbestie.com/en/rag-advancement…
+    🔧 knowledge_search({"query": "Retrieval-Augmented Generation (RAG)"})
+    🔧 web_search({"query": "Recent advancements in Retrieval-Augmented Generation (RAG) 2024"})
+    📎 [knowledge_search] [1] Source: retrieval-augmented-generation.pdf, page 0
+Retrieval-augmented generation
+Retrieval-augmented generation (RA…
+    📎 [web_search] [{"title": "Retrieval-Augmented Generation (RAG) Advancements: The", "url": "https://promptbestie.com/en/rag-advancement…
+    🔧 read_url({"url": "https://promptbestie.com/en/rag-advancements-2024-2025-enterprise-ai-guide/"})
+    🔧 read_url({"url": "https://www.microsoft.com/en-us/microsoft-cloud/blog/2025/02/13/5-key-features-and-benefits-of-retrieval-augmen…)
+    🔧 read_url({"url": "https://www.chitika.com/retrieval-augmented-generation-rag-the-definitive-guide-2025/"})
+    📎 [read_url] Table of Contents
+- Introduction: The RAG Revolution
+- Technical Breakthrough Analysis
+- Advanced RAG Architectures
+- Em…
+    📎 [read_url] The rapid advancement of AI has ushered in an era of unprecedented capabilities, with large language models (LLMs) at th…
+    📎 [read_url] Retrieval-Augmented Generation (RAG): The Definitive Guide [2025]
+Explore Retrieval-Augmented Generation (RAG) like neve…
+    🔧 web_search({"query": "Retrieval-Augmented Generation latest developments 2024"})
+    🔧 knowledge_search({"query": "Retrieval-Augmented Generation 2024"})
+    📎 [web_search] [{"title": "Every thing will be about Retrieval Augmented Generation", "url": "https://nuclia.com/future/why-every-searc…
+    📎 [knowledge_search] [1] Source: langchain.pdf, page 3
+on 2024-03-14. Retrieved 2023-11-26.12. "Retrieval-augmented generation (RAG) | 🦜🔗  La…
+    🔧 read_url({"url": "https://nuclia.com/future/why-every-search-experience-is-going-to-be-powered-by-rag-in-the-coming-years/"})
+    🔧 read_url({"url": "https://www.lamiroy.com/blog/retrieval-augmented-generation/"})
+    📎 [read_url] With agent features like specialized RAG evaluation model, Named Entity Recognition, AI Search Assistant and customizabl…
+    📎 [read_url] Error: could not extract readable text from https://www.lamiroy.com/blog/retrieval-augmented-generation/
+    🔧 read_url({"url": "https://datasciencedojo.com/blog/guide-to-retrieval-augmented-generation/"})
+    📎 [read_url] Error: could not extract readable text from https://datasciencedojo.com/blog/guide-to-retrieval-augmented-generation/
+    🔧 read_url({"url": "https://opendatascience.com/4-major-applications-of-retrieval-augmented-generation-to-use-today/"})
+    📎 [read_url] Error: could not extract readable text from https://opendatascience.com/4-major-applications-of-retrieval-augmented-gene…
+    🔧 knowledge_search({"query": "2024 advancements in Retrieval-Augmented Generation (RAG) with statistical data and case studies"})
+    🔧 web_search({"query": "2024 advancements in Retrieval-Augmented Generation RAG case studies statistics"})
+    🔧 web_search({"query": "future developments in Retrieval-Augmented Generation RAG technologies"})
+    📎 [knowledge_search] [1] Source: langchain.pdf, page 3
+on 2024-03-14. Retrieved 2023-11-26.12. "Retrieval-augmented generation (RAG) | 🦜🔗  La…
+    📎 [web_search] [{"title": "A Comprehensive Survey of Retrieval-Augmented Generation (RAG ...", "url": "https://arxiv.org/abs/2410.12837…
+    📎 [web_search] [{"title": "A Comprehensive Survey of Retrieval-Augmented Generation (RAG ...", "url": "https://arxiv.org/abs/2410.12837…
+    🔧 read_url({"url": "https://arxiv.org/abs/2410.12837"})
+    🔧 read_url({"url": "https://www.researchgate.net/publication/388722115_Advancing_Retrieval-Augmented_Generation_RAG_Innovations_Cha…)
+    🔧 read_url({"url": "https://promptbestie.com/en/rag-advancements-2024-2025-enterprise-ai-guide/"})
+    📎 [read_url] Computer Science > Computation and Language
+[Submitted on 3 Oct 2024]
+Title:A Comprehensive Survey of Retrieval-Augmente…
+    📎 [read_url] Error: could not extract readable text from https://www.researchgate.net/publication/388722115_Advancing_Retrieval-Augme…
+    📎 [read_url] Table of Contents
+- Introduction: The RAG Revolution
+- Technical Breakthrough Analysis
+- Advanced RAG Architectures
+- Em…
+    🔧 web_search({"query": "2024 advancements in retrieval-augmented generation RAG"})
+    🔧 knowledge_search({"query": "2024 advancements in retrieval-augmented generation RAG"})
+    📎 [web_search] [{"title": "Retrieval-Augmented Generation (RAG) Advancements: The", "url": "https://promptbestie.com/en/rag-advancement…
+    📎 [knowledge_search] [1] Source: langchain.pdf, page 3
+on 2024-03-14. Retrieved 2023-11-26.12. "Retrieval-augmented generation (RAG) | 🦜🔗  La…
+    🔧 read_url({"url": "https://promptbestie.com/en/rag-advancements-2024-2025-enterprise-ai-guide/"})
+    🔧 read_url({"url": "https://www.marktechpost.com/2024/08/18/the-challenges-of-implementing-retrieval-augmented-generation-rag-in-pr…)
+    📎 [read_url] Table of Contents
+- Introduction: The RAG Revolution
+- Technical Breakthrough Analysis
+- Advanced RAG Architectures
+- Em…
+    📎 [read_url] Error: could not extract readable text from https://www.marktechpost.com/2024/08/18/the-challenges-of-implementing-retri…
+    🔧 read_url({"url": "https://www.chitika.com/retrieval-augmented-generation-rag-the-definitive-guide-2025/"})
+    📎 [read_url] Retrieval-Augmented Generation (RAG): The Definitive Guide [2025]
+Explore Retrieval-Augmented Generation (RAG) like neve…
+    🔧 web_search({"query": "2024 frameworks tools Retrieval-Augmented Generation RAG"})
+    🔧 web_search({"query": "2024 productivity improvements AI adoption rates statistics"})
+    📎 [web_search] [{"title": "Ragnarök: A Reusable RAG Framework and Baselines for TREC 2024 ...", "url": "https://arxiv.org/abs/2406.1682…
+    📎 [web_search] [{"title": "The Fed - Monitoring AI Adoption in the US Economy", "url": "https://www.federalreserve.gov/econres/notes/fe…
+    🔧 read_url({"url": "https://arxiv.org/abs/2406.16828"})
+    🔧 read_url({"url": "https://promptbestie.com/en/rag-advancements-2024-2025-enterprise-ai-guide/"})
+    🔧 read_url({"url": "https://www.federalreserve.gov/econres/notes/feds-notes/monitoring-ai-adoption-in-the-u-s-economy-20260403.html…)
+    🔧 read_url({"url": "https://www.gallup.com/workplace/704225/rising-adoption-spurs-workforce-changes.aspx"})
+    📎 [read_url] Computer Science > Information Retrieval
+[Submitted on 24 Jun 2024]
+Title:Ragnarök: A Reusable RAG Framework and Baselin…
+    📎 [read_url] Table of Contents
+- Introduction: The RAG Revolution
+- Technical Breakthrough Analysis
+- Advanced RAG Architectures
+- Em…
+    📎 [read_url] FEDS Notes
+April 03, 2026
+Monitoring AI Adoption in the US Economy
+This note uses three publicly available surveys with …
+    📎 [read_url] For the first time in Gallup’s measurement, half of employed American adults say they use AI in their role at least a fe…
+    🔧 knowledge_search({"query": "recent case studies Retrieval-Augmented Generation RAG industries implementations impacts"})
+    🔧 web_search({"query": "recent case studies Retrieval-Augmented Generation RAG industries impacts"})
+    📎 [knowledge_search] [1] Source: large-language-model.pdf, page 17
+with access to their private data.[171]
+Researchers target concrete failur…
+    📎 [web_search] [{"title": "Retrieval-Augmented Generation in Industry: An Interview Study on Use ...", "url": "https://arxiv.org/pdf/25…
+    🔧 read_url({"url": "https://www.graphapp.ai/blog/exploring-innovative-rag-use-cases-across-various-industries"})
+    🔧 read_url({"url": "https://arxiv.org/pdf/2508.14066"})
+    🔧 read_url({"url": "https://www.ijnrd.org/papers/IJNRD2506195.pdf"})
+    📎 [read_url] Error: could not fetch content from https://www.graphapp.ai/blog/exploring-innovative-rag-use-cases-across-various-indus…
+    📎 [read_url] Error: could not extract readable text from https://arxiv.org/pdf/2508.14066
+    📎 [read_url] Error: could not extract readable text from https://www.ijnrd.org/papers/IJNRD2506195.pdf
+    🔧 web_search({"query": "applications case studies Retrieval-Augmented Generation RAG 2023"})
+    📎 [web_search] [{"title": "Retrieval-Augmented Generation (RAG) Chatbots for Education ...", "url": "https://www.mdpi.com/2076-3417/15/…
+    🔧 read_url({"url": "https://www.signitysolutions.com/blog/real-world-examples-of-retrieval-augmented-generation"})
+    🔧 read_url({"url": "https://www.mdpi.com/2076-3417/15/8/4234"})
+    🔧 read_url({"url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12157099/"})
+    📎 [read_url] Error: could not extract readable text from https://www.signitysolutions.com/blog/real-world-examples-of-retrieval-augme…
+    📎 [read_url] Error: could not fetch content from https://www.mdpi.com/2076-3417/15/8/4234
+    📎 [read_url] Abstract
+Large Language Models (LLMs) have demonstrated promising capabilities to solve complex tasks in critical sector…
+
+=== ec_bm25_k1_tuning (edge_case) ===
+  planner → ec_bm25_k1_tuning.json
+  researcher → ec_bm25_k1_tuning.json
+  critic → ec_bm25_k1_tuning.json
+  e2e → ec_bm25_k1_tuning.json
+    🔧 knowledge_search({"query": "BM25 k1 parameter tuning best practices methodologies"})
+    🔧 web_search({"query": "BM25 k1 parameter tuning techniques and examples"})
+    📎 [knowledge_search] [1] Source: large-language-model.pdf, page 11
+LLM on the test dataset.
+and the statistical hyper-parameters are
+, meanin…
+    📎 [web_search] [{"title": "Practical BM25 - Part 3: Considerations for Picking b and k1 ...BM25 for Developers: What Actually Matters i…
+    🔧 knowledge_search({"query": "tuning BM25 k1 parameter best practices"})
+    🔧 web_search({"query": "best practices for tuning BM25 k1 parameter"})
+    📎 [knowledge_search] [1] Source: large-language-model.pdf, page 4
+the training of GPT-2 (i.e. a 1.5-billion-
+parameter model) in 2019 cost $5…
+    📎 [web_search] [{"title": "Practical BM25 - Part 3: Considerations for Picking b and k1 in", "url": "https://www.elastic.co/blog/practi…
+    🔧 read_url({"url": "https://www.elastic.co/blog/practical-bm25-part-3-considerations-for-picking-b-and-k1-in-elasticsearch"})
+    🔧 read_url({"url": "https://arpitbhayani.me/blogs/bm25"})
+    🔧 read_url({"url": "https://ranjankumar.in/bm25-based-searching-a-developers-comprehensive-guide/"})
+    📎 [read_url] Practical BM25 - Part 3: Considerations for Picking b and k1 in Elasticsearch
+This is the final post in the three-part P…
+    📎 [read_url] Error: could not extract readable text from https://arpitbhayani.me/blogs/bm25
+    📎 [read_url] BM25 is everywhere in search. Elasticsearch uses it by default. It's the sparse retrieval component in every hybrid sear…
+    🔧 web_search({"query": "recent best practices tuning k1 parameter BM25 2023"})
+    🔧 knowledge_search({"query": "tuning BM25 k1 parameter"})
+    📎 [web_search] [{"title": "Re-Rankers as Relevance Judges", "url": "https://arxiv.org/html/2601.04455v1", "snippet": "Recently, the IR …
+    📎 [knowledge_search] [1] Source: large-language-model.pdf, page 4
+the training of GPT-2 (i.e. a 1.5-billion-
+parameter model) in 2019 cost $5…
+    🔧 web_search({"query": "BM25 k1 parameter tuning 2023 benchmarks"})
+    🔧 read_url({"url": "https://www.elastic.co/blog/practical-bm25-part-3-considerations-for-picking-b-and-k1-in-elasticsearch"})
+    📎 [web_search] [{"title": "Hybrid Search: Combining BM25 and Semantic Search for Better", "url": "https://lancedb.com/blog/hybrid-searc…
+    📎 [read_url] Practical BM25 - Part 3: Considerations for Picking b and k1 in Elasticsearch
+This is the final post in the three-part P…
+    🔧 web_search({"query": "BM25 k1 parameter tuning study benchmarks 2023"})
+    🔧 web_search({"query": "BM25 parameter adjustments best practices 2023"})
+    📎 [web_search] [{"title": "Hybrid Search: Combining BM25 and Semantic Search for Better", "url": "https://lancedb.com/blog/hybrid-searc…
+    📎 [web_search] [{"title": "Searching for Best Practices in Retrieval-Augmented Generation", "url": "https://arxiv.org/html/2407.01219v1…
+    🔧 read_url({"url": "https://lancedb.com/blog/hybrid-search-combining-bm25-and-semantic-search-for-better-results-with-lan-1358038fe…)
+    🔧 read_url({"url": "https://arxiv.org/html/2509.02558v1"})
+    🔧 read_url({"url": "https://arxiv.org/html/2603.24925v1"})
+    📎 [read_url] Have you ever thought about how search engines find exactly what you’re looking for? They usually use a mix of matching …
+    📎 [read_url] Lighting the Way for BRIGHT: Reproducible Baselines with Anserini, Pyserini, and RankLLM
+Abstract
+The BRIGHT benchmark i…
+    📎 [read_url] GraphER: An Efficient Graph-Based Enrichment and Reranking Method for Retrieval-Augmented Generation
+Abstract
+Semantic s…
+    🔧 web_search({"query": "BM25 k1 parameter tuning 2023 studies"})
+    🔧 knowledge_search({"query": "BM25 k1 parameter tuning relevance recent studies"})
+    📎 [web_search] [{"title": "Practical BM25 - Part 3: Considerations for Picking b and k1 in ...", "url": "https://www.elastic.co/blog/pr…
+    📎 [knowledge_search] [1] Source: large-language-model.pdf, page 11
+LLM on the test dataset.
+and the statistical hyper-parameters are
+, meanin…
+    🔧 read_url({"url": "https://www.elastic.co/blog/practical-bm25-part-3-considerations-for-picking-b-and-k1-in-elasticsearch"})
+    📎 [read_url] Practical BM25 - Part 3: Considerations for Picking b and k1 in Elasticsearch
+This is the final post in the three-part P…
+    🔧 read_url({"url": "https://ranjankumar.in/bm25-based-searching-a-developers-comprehensive-guide"})
+    📎 [read_url] BM25 is everywhere in search. Elasticsearch uses it by default. It's the sparse retrieval component in every hybrid sear…
+    🔧 web_search({"query": "2023 benchmarks case studies k1 values BM25 tuning document length type"})
+    🔧 knowledge_search({"query": "2023 BM25 k1 tuning benchmarks case studies document length type"})
+    📎 [web_search] [{"title": "A Survey of Long-Document Retrieval in the PLM and LLM Era", "url": "https://arxiv.org/html/2509.07759v1", "…
+    📎 [knowledge_search] [1] Source: large-language-model.pdf, page 35
+303.15056). Bibcode:2023PNAS..12005016G (https://ui.adsabs.harvard.edu/abs…
+    🔧 read_url({"url": "https://arxiv.org/html/2509.07759v1"})
+    🔧 read_url({"url": "https://arxiv.org/html/2502.07067v1"})
+    📎 [read_url] A Survey of Long-Document Retrieval in the PLM and LLM Era
+Abstract.
+The proliferation of long-form documents presents a…
+    📎 [read_url] \ul
+Repository-level Code Search with Neural Retrieval Methods
+Abstract
+This paper presents a multi-stage reranking syst…
+    🔧 web_search({"query": "BM25 k1 parameter tuning recent benchmarks 2023"})
+    🔧 knowledge_search({"query": "BM25 k1 parameter tuning 2023"})
+    📎 [web_search] [{"title": "Re-Rankers as Relevance Judges", "url": "https://arxiv.org/html/2601.04455v1", "snippet": "Recently, the IR …
+    📎 [knowledge_search] [1] Source: large-language-model.pdf, page 29
+doi:10.1038/d41586-025-00229-6 (https://doi.org/10.1038%2Fd41586-025-00229…
+    🔧 read_url({"url": "https://arxiv.org/html/2601.04455v1"})
+    📎 [read_url] by
+Re-Rankers as Relevance Judges
+Abstract.
+Using large language models (LLMs) to predict relevance judgments has shown …
+    🔧 read_url({"url": "https://arxiv.org/html/2502.07067v1"})
+    📎 [read_url] \ul
+Repository-level Code Search with Neural Retrieval Methods
+Abstract
+This paper presents a multi-stage reranking syst…
+
+=== ec_rag_vs_finetuning (edge_case) ===
+  planner → ec_rag_vs_finetuning.json
+  researcher → ec_rag_vs_finetuning.json
+  critic → ec_rag_vs_finetuning.json
+  e2e → ec_rag_vs_finetuning.json
+    🔧 knowledge_search({"query": "RAG vs fine-tuning LLM for proprietary knowledge base"})
+    🔧 web_search({"query": "RAG vs fine-tuning LLM 2024 advantages disadvantages"})
+    📎 [knowledge_search] [1] Source: retrieval-augmented-generation.pdf, page 0
+uploaded documents, or web sources.[1] According to Ars Technica,…
+    📎 [web_search] [{"title": "RAG Vs Fine-Tuning for Enhancing LLM Performance", "url": "https://www.geeksforgeeks.org/nlp/rag-vs-fine-tun…
+    🔧 knowledge_search({"query": "RAG advantages and disadvantages for adapting LLMs to proprietary knowledge bases"})
+    🔧 knowledge_search({"query": "fine-tuning advantages and disadvantages for adapting LLMs to proprietary knowledge bases"})
+    🔧 web_search({"query": "RAG vs fine-tuning LLMs 2024 advantages disadvantages"})
+    📎 [knowledge_search] [1] Source: retrieval-augmented-generation.pdf, page 0
+the LLM's pre-existing training data.[2] This allows LLMs to use …
+    📎 [knowledge_search] [1] Source: retrieval-augmented-generation.pdf, page 1
+memory and self-improvement to learn from previous retrievals.
+Fi…
+    📎 [web_search] [{"title": "RAG Vs Fine-Tuning for Enhancing LLM Performance", "url": "https://www.geeksforgeeks.org/nlp/rag-vs-fine-tun…
+    🔧 read_url({"url": "https://aisera.com/blog/llm-fine-tuning-vs-rag/"})
+    🔧 read_url({"url": "https://www.ibm.com/think/topics/rag-vs-fine-tuning"})
+    🔧 read_url({"url": "https://huggingface.co/blog/airabbitX/rag-vs-fine-tuning-for-llms-a-com"})
+    📎 [read_url] Error: could not extract readable text from https://aisera.com/blog/llm-fine-tuning-vs-rag/
+    📎 [read_url] Retrieval augmented generation (RAG) and fine-tuning are two methods enterprises can use to get more value out of large …
+    📎 [read_url] RAG vs Fine-Tuning for LLMs: A Comprehensive Guide with Examples
+Introduction
+The world of artificial intelligence is ra…
+    🔧 web_search({"query": "RAG vs fine-tuning for LLMs 2024"})
+    🔧 web_search({"query": "latest benchmarks RAG fine-tuning LLMs 2024"})
+    📎 [web_search] [{"title": "RAG vs Fine-Tuning for LLMs: A Comprehensive Guide with Examples", "url": "https://devops7.com/rag-vs-fine-t…
+    📎 [web_search] [{"title": "A Guide to Fine-Tuning LLMs for Enhanced RAG Performance", "url": "https://www.hyperstack.cloud/technical-re…
+    🔧 read_url({"url": "https://devops7.com/rag-vs-fine-tuning-for-llms-a-comprehensive-guide-with-examples/"})
+    🔧 read_url({"url": "https://www.hyperstack.cloud/technical-resources/tutorials/a-guide-to-fine-tuning-llms-for-improved-rag-perform…)
+    📎 [read_url] I’ve seen a big change in how Large Language Models (LLMs) are made for certain tasks. Over 70% of AI projects now invol…
+    📎 [read_url] Error: could not extract readable text from https://www.hyperstack.cloud/technical-resources/tutorials/a-guide-to-fine-t…
+    🔧 read_url({"url": "https://www.ibm.com/think/topics/llm-benchmarks"})
+    📎 [read_url] The latest AI trends, brought to you by experts
+Get curated insights on the most important—and intriguing—AI news. Subsc…
+    🔧 web_search({"query": "latest benchmarks developments 2024 Retrieval-Augmented Generation RAG fine-tuning large language models"})
+    🔧 web_search({"query": "AI applications trends 2024"})
+    📎 [web_search] [{"title": "Next-Gen Large Language Models: The Retrieval-Augmented", "url": "https://www.freecodecamp.org/news/retrieva…
+    📎 [web_search] [{"title": "AI Trends for 2024", "url": "https://www.marble.onl/posts/ai_trends_2024.html", "snippet": "It’s easy to fin…
+    🔧 read_url({"url": "https://www.freecodecamp.org/news/retrieval-augmented-generation-rag-handbook/"})
+    🔧 read_url({"url": "https://www.marktechpost.com/2024/07/06/enhancing-language-models-with-rag-best-practices-and-benchmarks/"})
+    🔧 read_url({"url": "https://www.marble.onl/posts/ai_trends_2024.html"})
+    🔧 read_url({"url": "https://aifordevelopers.io/the-most-important-ai-trends-in-2024/"})
+    📎 [read_url] Error: could not extract readable text from https://www.freecodecamp.org/news/retrieval-augmented-generation-rag-handboo…
+    📎 [read_url] Error: could not extract readable text from https://www.marktechpost.com/2024/07/06/enhancing-language-models-with-rag-b…
+    📎 [read_url] Andrew Marble
+marble.onl
+andrew@willows.ai
+Dec 30, 2023
+As a preamble, current investment and expectations of AI have we…
+    📎 [read_url] Error: could not fetch content from https://aifordevelopers.io/the-most-important-ai-trends-in-2024/
+    🔧 web_search({"query": "2024 RAG fine-tuning benchmarks latest developments"})
+    🔧 web_search({"query": "AI trends applications 2024"})
+    📎 [web_search] [{"title": "RAG vs Fine-tuning: Pipelines, Tradeoffs, and a Case Study on Agriculture", "url": "https://arxiv.org/abs/24…
+    📎 [web_search] [{"title": "IDC's 2024 AI opportunity study: Top five AI trends to watch", "url": "https://blogs.microsoft.com/blog/2024…
+    🔧 read_url({"url": "https://ragflow.io/blog/the-rise-and-evolution-of-rag-in-2024-a-year-in-review"})
+    🔧 read_url({"url": "https://blogs.microsoft.com/blog/2024/11/12/idcs-2024-ai-opportunity-study-top-five-ai-trends-to-watch/"})
+    🔧 read_url({"url": "https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai-2024"})
+    📎 [read_url] Error: could not extract readable text from https://ragflow.io/blog/the-rise-and-evolution-of-rag-in-2024-a-year-in-revi…
+    📎 [read_url] Error: could not extract readable text from https://blogs.microsoft.com/blog/2024/11/12/idcs-2024-ai-opportunity-study-t…
+    📎 [read_url] Error: could not fetch content from https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai-2024
+    🔧 read_url({"url": "https://dl.acm.org/doi/10.1145/3673791.3698415"})
+    🔧 read_url({"url": "https://thriveagency.com/news/top-applications-and-use-cases-for-ai-in-2024/"})
+    📎 [read_url] Error: could not fetch content from https://dl.acm.org/doi/10.1145/3673791.3698415
+    📎 [read_url] Error: could not extract readable text from https://thriveagency.com/news/top-applications-and-use-cases-for-ai-in-2024/
+    🔧 web_search({"query": "latest benchmarks in RAG 2024"})
+    🔧 web_search({"query": "RAG fine-tuning comparison 2024"})
+    📎 [web_search] [{"title": "[2406.04744] CRAG -- Comprehensive RAG Benchmark - arXiv.orgawesome-generative-ai-guide/research_updates/rag…
+    📎 [web_search] [{"title": "RAG vs Fine-tuning: Pipelines, Tradeoffs, and a Case Study on Agriculture", "url": "https://arxiv.org/abs/24…
+    🔧 read_url({"url": "https://arxiv.org/abs/2406.04744"})
+    🔧 read_url({"url": "https://www.montecarlodata.com/blog-rag-vs-fine-tuning/"})
+    📎 [read_url] Computer Science > Computation and Language
+[Submitted on 7 Jun 2024 (v1), last revised 1 Nov 2024 (this version, v2)]
+T…
+    📎 [read_url] RAG vs Fine Tuning: How to Choose the Right Method
+Table of Contents
+Generative AI has the potential to transform your b…
+    🔧 knowledge_search({"query": "Comprehensive RAG Benchmark (CRAG) 2024 performance metrics comparisons RAG fine-tuning"})
+    🔧 web_search({"query": "Comprehensive RAG Benchmark CRAG 2024 performance metrics RAG fine-tuning comparison industry applications ca…)
+    📎 [knowledge_search] [1] Source: retrieval-augmented-generation.pdf, page 0
+Retrieval-augmented generation
+Retrieval-augmented generation (RA…
+    📎 [web_search] [{"title": "CRAG – Comprehensive RAG Benchmark", "url": "https://arxiv.org/html/2406.04744v2", "snippet": "To bridge thi…
+    🔧 read_url({"url": "https://arxiv.org/html/2406.04744v2"})
+    🔧 read_url({"url": "https://www.marktechpost.com/2024/06/11/advancing-reliable-question-answering-with-the-crag-benchmark/"})
+    📎 [read_url] CRAG – Comprehensive RAG Benchmark
+Abstract
+Retrieval-Augmented Generation (RAG) has recently emerged as a promising sol…
+    📎 [read_url] Error: could not extract readable text from https://www.marktechpost.com/2024/06/11/advancing-reliable-question-answerin…
+    🔧 web_search({"query": "RAG vs fine-tuning techniques comparison 2024 case studies applications"})
+    📎 [web_search] [{"title": "RAG vs Fine-tuning: Pipelines, Tradeoffs, and a Case Study on ...", "url": "https://arxiv.org/abs/2401.08406…
+    🔧 read_url({"url": "https://arxiv.org/abs/2401.08406"})
+    🔧 read_url({"url": "https://huggingface.co/blog/airabbitX/rag-vs-fine-tuning-for-llms-a-com"})
+    📎 [read_url] Computer Science > Computation and Language
+[Submitted on 16 Jan 2024 (v1), last revised 30 Jan 2024 (this version, v3)]…
+    📎 [read_url] RAG vs Fine-Tuning for LLMs: A Comprehensive Guide with Examples
+Introduction
+The world of artificial intelligence is ra…
+    🔧 web_search({"query": "Comprehensive RAG Benchmark CRAG 2024 updates"})
+    🔧 web_search({"query": "RAG performance metrics 2024"})
+    📎 [web_search] [{"title": "[2406.04744] CRAG -- Comprehensive RAG Benchmark - arXiv.org", "url": "https://arxiv.org/abs/2406.04744", "s…
+    📎 [web_search] [{"title": "Continuous Improvement of RAG Results: Enhancing Performance", "url": "https://devrev.ai/blog/continuous-imp…
+    🔧 read_url({"url": "https://arxiv.org/abs/2406.04744"})
+    🔧 read_url({"url": "https://kddcup24.github.io/"})
+    📎 [read_url] Computer Science > Computation and Language
+[Submitted on 7 Jun 2024 (v1), last revised 1 Nov 2024 (this version, v2)]
+T…
+    📎 [read_url] News
+[2024/09/11] The accepted papers are now available on OpenReview.
+[2024/09/07] Slides of the workshop are available…
+    🔧 knowledge_search({"query": "Retrieval-Augmented Generation RAG 2024 performance metrics"})
+    📎 [knowledge_search] [1] Source: langchain.pdf, page 3
+on 2024-03-14. Retrieved 2023-11-26.12. "Retrieval-augmented generation (RAG) | 🦜🔗  La…
+    🔧 web_search({"query": "CRAG benchmark implications 2024 RAG QA advancements"})
+    📎 [web_search] [{"title": "CRAG - Comprehensive RAG Benchmark", "url": "https://proceedings.neurips.cc/paper_files/paper/2024/hash/1435…
+    🔧 read_url({"url": "https://www.vectara.com/blog/towards-a-gold-standard-for-rag-evaluation"})
+    📎 [read_url] Error: could not extract readable text from https://www.vectara.com/blog/towards-a-gold-standard-for-rag-evaluation
+    🔧 read_url({"url": "https://devrev.ai/blog/continuous-improvement-of-rag-results"})
+    📎 [read_url] Error: could not extract readable text from https://devrev.ai/blog/continuous-improvement-of-rag-results
+    🔧 read_url({"url": "https://www.ragas.io/"})
+    📎 [read_url] Error: could not extract readable text from https://www.ragas.io/
+    🔧 read_url({"url": "https://www.vectara.com/blog/evaluating-rag"})
+    📎 [read_url] Error: could not fetch content from https://www.vectara.com/blog/evaluating-rag
+    🔧 read_url({"url": "https://docs.ragas.io/en/latest/concepts/metrics/overview/"})
+    📎 [read_url] Overview of Metrics
+Why Metrics Matter
+You can't improve what you don't measure. Metrics are the feedback loop that make…
+    🔧 knowledge_search({"query": "RAG 2024 quality metrics advancements"})
+    📎 [knowledge_search] [1] Source: retrieval-augmented-generation.pdf, page 0
+uploaded documents, or web sources.[1] According to Ars Technica,…
+
+=== ec_three_subquestions (edge_case) ===
+  planner → ec_three_subquestions.json
+  researcher → ec_three_subquestions.json
+  critic → ec_three_subquestions.json
+  e2e → ec_three_subquestions.json
+  [FAIL e2e ec_three_subquestions] GraphRecursionError: Recursion limit of 21 reached without hitting a stop condition. You can increase the limit by setting the `recursion_limit` config key.
+For troubleshooting, visit: https://docs.langchain.com/oss/python/langgraph/errors/GRAPH_RECURSION_LIMIT
+
+=== ec_llm_agent_ambiguous (edge_case) ===
+  planner → ec_llm_agent_ambiguous.json
+  researcher → ec_llm_agent_ambiguous.json
+  critic → ec_llm_agent_ambiguous.json
+  e2e → ec_llm_agent_ambiguous.json
+    🔧 knowledge_search({"query": "agent in context of LLMs"})
+    📎 [knowledge_search] [1] Source: large-language-model.pdf, page 7
+carry out these actions.[71]
+The ReAct pattern, a portmanteau of reason and…
+    🔧 web_search({"query": "definition of agent in large language models"})
+    📎 [web_search] [{"title": "AI agent - Wikipedia", "url": "https://en.wikipedia.org/wiki/AI_agent", "snippet": "Overview AIagentspossess…
+    🔧 knowledge_search({"query": "agent roles in LLMs"})
+    🔧 web_search({"query": "how LLMs function as agents"})
+    📎 [knowledge_search] [1] Source: large-language-model.pdf, page 7
+environments, recall past behaviors, and plan future actions. But it can be…
+    📎 [web_search] [{"title": "LLM Agents - GeeksforGeeks", "url": "https://www.geeksforgeeks.org/artificial-intelligence/llm-agents/", "sn…
+    🔧 knowledge_search({"query": "agent in the context of Large Language Models"})
+    🔧 web_search({"query": "agent in Large Language Models LLMs definition roles types applications"})
+    📎 [knowledge_search] [1] Source: large-language-model.pdf, page 28
+71. Wang, Lei; Ma, Chen; Feng, Xueyang; Zhang, Zeyu; Yang, Hao; Zhang, Jin…
+    📎 [web_search] [{"title": "Agent Skills for Large Language Models: Architecture,", "url": "https://arxiv.org/html/2602.12430v2", "snipp…
+    🔧 read_url({"url": "https://www.ngpcap.com/insights/introduction-to-large-language-model-llm-agents"})
+    🔧 read_url({"url": "https://www.analyticsvidhya.com/blog/2024/05/building-llm-agent-using-advanced-rag-techniques/"})
+    🔧 read_url({"url": "https://www.analyticsvidhya.com/blog/2024/07/langchains-agent-framework/"})
+    📎 [read_url] Listen now
+In my previous blog posts (Operationalizing Generative AI part 1 | part 2 ) I discussed the use of Large Lang…
+    📎 [read_url] Error: could not extract readable text from https://www.analyticsvidhya.com/blog/2024/05/building-llm-agent-using-advanc…
+    📎 [read_url] Error: could not extract readable text from https://www.analyticsvidhya.com/blog/2024/07/langchains-agent-framework/
+    🔧 web_search({"query": "definition roles types applications of LLM agents"})
+    🔧 read_url({"url": "https://arxiv.org/html/2602.12430v2"})
+    🔧 read_url({"url": "https://arxiv.org/html/2602.12430v3"})
+    📎 [web_search] [{"title": "Agentic Prompt Engineering: Mastering LLM Roles and Role-Based ...", "url": "https://digitalthoughtdisruptio…
+    📎 [read_url] Agent Skills for Large Language Models:
+Architecture, Acquisition, Security, and the Path Forward
+Abstract
+The transitio…
+    📎 [read_url] Agent Skills for Large Language Models:
+Architecture, Acquisition, Security, and the Path Forward
+Abstract
+The transitio…
+    📎 [critique] (structured parse failed — defaulting to REVISE)
+    🔧 knowledge_search({"query": "agent concept in Large Language Models LLMs"})
+    📎 [knowledge_search] [1] Source: large-language-model.pdf, page 0
+Large language model
+A large language model (LLM) is a computational model …
+    🔧 knowledge_search({"query": "agent roles types applications examples in large language models"})
+    📎 [knowledge_search] [1] Source: large-language-model.pdf, page 0
+capabilities like conversational agents, code generation, knowledge retriev…
+    🔧 web_search({"query": "concept of agent in Large Language Models applications types examples"})
+    📎 [web_search] [{"title": "Large Language Model Agent: A Survey on Methodology, Applications and ...", "url": "https://arxiv.org/html/2…
+    🔧 read_url({"url": "https://arxiv.org/html/2503.21460v1"})
+    🔧 read_url({"url": "https://www.databricks.com/blog/types-ai-agents-definitions-roles-and-examples"})
+    🔧 read_url({"url": "https://www.ibm.com/think/topics/ai-agents"})
+    📎 [read_url] Large Language Model Agent: A Survey on Methodology, Applications and Challenges
+Abstract
+The era of intelligent agents …
+    📎 [read_url] Error: could not extract readable text from https://www.databricks.com/blog/types-ai-agents-definitions-roles-and-exampl…
+    📎 [read_url] An artificial intelligence (AI) agent is a system that autonomously performs tasks by designing workflows with available…
+    🔧 web_search({"query": "2025 benchmarks for AI agents based on LLMs"})
+    🔧 web_search({"query": "recent advancements in LLM agents 2024"})
+    📎 [web_search] [{"title": "The 2025 AI Index Report - Stanford HAI", "url": "https://hai.stanford.edu/ai-index/2025-ai-index-report", "…
+    📎 [web_search] [{"title": "Navigating the New Types of LLM Agents and Architectures |", "url": "https://towardsdatascience.com/navigati…
+    🔧 read_url({"url": "https://www.evidentlyai.com/blog/ai-agent-benchmarks"})
+    🔧 read_url({"url": "https://fabrity.com/blog/llm-agents-the-next-big-thing-for-genai/"})
+    📎 [read_url] contents
+Agentic AI is quickly becoming one of the most discussed topics in tech, with some even calling 2025 the "year …
+    📎 [read_url] Over the past few years, we have witnessed remarkable advances in language models. From GPT-3’s groundbreaking capabilit…
+    🔧 knowledge_search({"query": "2025 AI Index Report Large Language Model agents advancements capabilities benchmarks methodologies feedback …)
+    🔧 web_search({"query": "recent advancements in LLM agents capabilities benchmarks methodologies feedback 2025 AI Index Report"})
+    📎 [knowledge_search] [1] Source: large-language-model.pdf, page 0
+This innovation enabled models like GPT, BERT, and their successors, which …
+    📎 [web_search] [{"title": "The 2025 AI Index Report - Stanford HAI", "url": "https://hai.stanford.edu/ai-index/2025-ai-index-report", "…
+    🔧 read_url({"url": "https://hai.stanford.edu/ai-index/2025-ai-index-report"})
+    🔧 read_url({"url": "https://www.ibm.com/think/news/stanford-hai-2025-ai-index-report"})
+    🔧 read_url({"url": "https://arxiv.org/abs/2507.21504"})
+    📎 [read_url] Get the latest news, advances in research, policy work, and education program updates from HAI in your inbox weekly.
+Sig…
+    📎 [read_url] Benchmarks, inference costs, innovation: how’s AI reshaping our society? This year, Stanford’s 2025 AI Index Report adde…
+    📎 [read_url] Computer Science > Machine Learning
+[Submitted on 29 Jul 2025]
+Title:Evaluation and Benchmarking of LLM Agents: A Survey…
+    🔧 web_search({"query": "2025 advancements in large language model agents"})
+    🔧 web_search({"query": "2023 benchmarks for LLMs MMMU GPQA SWE-bench"})
+    📎 [web_search] [{"title": "[2503.21460] Large Language Model Agent: A Survey on ...", "url": "https://arxiv.org/abs/2503.21460", "snipp…
+    📎 [web_search] [{"title": "Technical Performance | The 2025 AI Index Report | Stanford HAI", "url": "https://hai.stanford.edu/ai-index/…
+    🔧 read_url({"url": "https://hai.stanford.edu/ai-index/2025-ai-index-report/technical-performance"})
+    🔧 read_url({"url": "https://isolutions.medium.com/language-model-agents-in-2025-897ec15c9c42"})
+    📎 [read_url] Get the latest news, advances in research, policy work, and education program updates from HAI in your inbox weekly.
+Sig…
+    📎 [read_url] Language Model Agents in 2025:
+Society of Mind Revisited
+Large Language Model (LLM) agents have evolved rapidly in 2025,…
+
+=== fc_weather_kyiv (failure_case) ===
+  planner → fc_weather_kyiv.json
+  researcher → fc_weather_kyiv.json
+  critic → fc_weather_kyiv.json
+  e2e → fc_weather_kyiv.json
+  [FAIL e2e fc_weather_kyiv] GraphRecursionError: Recursion limit of 21 reached without hitting a stop condition. You can increase the limit by setting the `recursion_limit` config key.
+For troubleshooting, visit: https://docs.langchain.com/oss/python/langgraph/errors/GRAPH_RECURSION_LIMIT
+
+=== fc_gibberish (failure_case) ===
+  planner → fc_gibberish.json
+  researcher → fc_gibberish.json
+  critic → fc_gibberish.json
+  e2e → fc_gibberish.json
+    🔧 web_search({"query": "asdf qwer zxcv hjkl meaning or context"})
+    🔧 knowledge_search({"query": "asdf qwer zxcv hjkl relevance in research or data"})
+    📎 [web_search] [{"title": "Keysmash - Wikipedia", "url": "https://en.wikipedia.org/wiki/Keysmash", "snippet": "QWERTYkeysmashes tend to…
+    📎 [knowledge_search] [1] Source: large-language-model.pdf, page 6
+including the use of external tools and data sources, improved reasoning on…
+    🔧 web_search({"query": "meaning significance of keysmash asdf qwer zxcv hjkl internet culture"})
+    🔧 web_search({"query": "keysmash asdf qwer zxcv hjkl usage examples social media"})
+    📎 [web_search] [{"title": "Keysmash - Wikipedia", "url": "https://en.wikipedia.org/wiki/Keysmash", "snippet": "Akeysmash(alternativelyk…
+    📎 [web_search] [{"title": "Keysmash - Wikipedia", "url": "https://en.wikipedia.org/wiki/Keysmash", "snippet": "Akeysmash(alternativelyk…
+    🔧 read_url({"url": "https://en.wikipedia.org/wiki/Keysmash"})
+    🔧 read_url({"url": "https://www.cjr.org/language_corner/keysmash-qwerty-asdf.php"})
+    🔧 read_url({"url": "https://thesocialcat.com/glossary/keysmash"})
+    📎 [read_url] Keysmash
+The examples and perspective in this article may not represent a worldwide view of the subject. (February 2021)…
+    📎 [read_url] Error: could not extract readable text from https://www.cjr.org/language_corner/keysmash-qwerty-asdf.php
+    📎 [read_url] Error: could not extract readable text from https://thesocialcat.com/glossary/keysmash
+    🔧 web_search({"query": "keysmash asdf examples social media usage 2023"})
+    🔧 read_url({"url": "https://grokipedia.com/page/Keysmash"})
+    📎 [web_search] [{"title": "Keysmash - Wikipedia", "url": "https://en.wikipedia.org/wiki/Keysmash", "snippet": "Akeysmash(alternativelyk…
+    📎 [read_url] A keysmash is a string of random or semi-random characters, typically letters, produced by rapidly striking keys on a ke…
+    🔧 web_search({"query": "keysmash internet culture 2023"})
+    🔧 knowledge_search({"query": "keysmash history origin usage"})
+    📎 [web_search] [{"title": "Sryzvduebbcylzk: How a Random Keyboard Smash Became Internet's Hottest ...", "url": "https://50track.com/lat…
+    📎 [knowledge_search] [1] Source: langchain.pdf, page 0
+History
+Capabilities
+
+[2] Source: large-language-model.pdf, page 19
+jailbreaking throu…
+    🔧 read_url({"url": "https://50track.com/latest-trends/sryzvduebbcylzk-how-a-random-keyboard-smash-became-internets-hottest-communic…)
+    🔧 read_url({"url": "https://www.hercampus.com/school/muj/cat-on-keyboard-the-art-of-expressing-emotion-through-keysmash/"})
+    📎 [read_url] In the ever-evolving world of digital communication, “sryzvduebbcylzk” has emerged as a fascinating phenomenon that’s le…
+    📎 [read_url] Error: could not extract readable text from https://www.hercampus.com/school/muj/cat-on-keyboard-the-art-of-expressing-e…
+    🔧 web_search({"query": "keysmash cultural significance 2023"})
+    📎 [web_search] [{"title": "Keysmash - Wikipedia", "url": "https://en.wikipedia.org/wiki/Keysmash", "snippet": "1 month ago -Gretchen Mc…
+    🔧 read_url({"url": "https://en.wikipedia.org/wiki/Keysmash"})
+    🔧 read_url({"url": "https://thesocialcat.com/glossary/keysmash"})
+    📎 [read_url] Keysmash
+The examples and perspective in this article may not represent a worldwide view of the subject. (February 2021)…
+    📎 [read_url] Error: could not extract readable text from https://thesocialcat.com/glossary/keysmash
+    🔧 web_search({"query": "keysmash asdf qwer zxcv recent trends 2023 Gen Z Millennials cultural phenomenon"})
+    📎 [web_search] [{"title": "Keysmash - Wikipedia", "url": "https://en.wikipedia.org/wiki/Keysmash", "snippet": "Akeysmash(alternativelyk…
+    🔧 read_url({"url": "https://en.wikipedia.org/wiki/Keysmash"})
+    🔧 read_url({"url": "https://www.dazeddigital.com/life-culture/article/60565/1/dazed-media-full-2023-trend-report-future-of-youth-cu…)
+    🔧 read_url({"url": "https://www.deloitte.com/global/en/about/press-room/2023-gen-z-and-millenial-survey.html"})
+    📎 [read_url] Keysmash
+The examples and perspective in this article may not represent a worldwide view of the subject. (February 2021)…
+    📎 [read_url] Life & Culture / NewsLife & Culture / NewsDazed Media’s full 2023 trend report on the future of youth culture is hereAll…
+    📎 [read_url] NEW YORK, NY, US, 17 May 2023 — Released today, Deloitte’s 2023 Gen Z and Millennial Survey explores how the disruptive …
+    🔧 web_search({"query": "keysmash cultural phenomenon Gen Z Millennials 2023"})
+    🔧 web_search({"query": "Deloitte Gen Z and Millennial Survey 2023 keysmashing"})
+    📎 [web_search] [{"title": "Generation Z, values, and media: from influencers to BeReal, between ...", "url": "https://pmc.ncbi.nlm.nih.…
+    📎 [web_search] [{"title": "2023 Gen Z and Millennial Survey | Deloitte Global", "url": "https://www.deloitte.com/global/en/about/press-…
+    🔧 read_url({"url": "https://www.dazeddigital.com/life-culture/article/60565/1/dazed-media-full-2023-trend-report-future-of-youth-cu…)
+    🔧 read_url({"url": "https://www.deloitte.com/global/en/about/press-room/2023-gen-z-and-millenial-survey.html"})
+    📎 [read_url] Life & Culture / NewsLife & Culture / NewsDazed Media’s full 2023 trend report on the future of youth culture is hereAll…
+    📎 [read_url] NEW YORK, NY, US, 17 May 2023 — Released today, Deloitte’s 2023 Gen Z and Millennial Survey explores how the disruptive …
+    🔧 web_search({"query": "2023 Dazed Media report keysmashing trends examples"})
+    🔧 web_search({"query": "Deloitte survey keysmashing Gen Z Millennials comparison"})
+    🔧 web_search({"query": "future implications of keysmashing in digital communication"})
+    📎 [web_search] [{"title": "Read Dazed Media's 2023 trend report on the future of", "url": "https://www.dazeddigital.com/life-culture/ar…
+    📎 [web_search] [{"title": "Deloitte Global Gen Z and Millennial Survey 2025", "url": "https://www.deloitte.com/global/en/issues/work/ge…
+    📎 [web_search] [{"title": "Glossary of 2020s slang - Wikipedia", "url": "https://en.wikipedia.org/wiki/Glossary_of_2020s_slang", "snipp…
+    🔧 read_url({"url": "https://www.dazeddigital.com/life-culture/article/60565/1/dazed-media-full-2023-trend-report-future-of-youth-cu…)
+    🔧 read_url({"url": "https://www.deloitte.com/us/en/insights/topics/talent/2025-gen-z-millennial-survey.html"})
+    🔧 read_url({"url": "https://www.dazeddigital.com/life-culture/article/60436/1/read-dazed-media-2023-ctrl-shift-trend-report-future-…)
+    📎 [read_url] Life & Culture / NewsLife & Culture / NewsDazed Media’s full 2023 trend report on the future of youth culture is hereAll…
+    📎 [read_url] Error: could not extract readable text from https://www.deloitte.com/us/en/insights/topics/talent/2025-gen-z-millennial-…
+    📎 [read_url] Dazed MediaLife & Culture / NewsLife & Culture / NewsRead Dazed Media’s 2023 trend report on the future of youth culture…
+  [FAIL e2e fc_gibberish] GraphRecursionError: Recursion limit of 31 reached without hitting a stop condition. You can increase the limit by setting the `recursion_limit` config key.
+For troubleshooting, visit: https://docs.langchain.com/oss/python/langgraph/errors/GRAPH_RECURSION_LIMIT
+
+=== fc_malware (failure_case) ===
+  planner → fc_malware.json
+  researcher → fc_malware.json
+  critic → fc_malware.json
+  e2e → fc_malware.json
+
+=== fc_nba_results (failure_case) ===
+  planner → fc_nba_results.json
+  [FAIL planner fc_nba_results] GraphRecursionError: Recursion limit of 21 reached without hitting a stop condition. You can increase the limit by setting the `recursion_limit` config key.
+For troubleshooting, visit: https://docs.langchain.com/oss/python/langgraph/errors/GRAPH_RECURSION_LIMIT
+  researcher → fc_nba_results.json
+  critic → fc_nba_results.json
+  e2e → fc_nba_results.json
+  [FAIL e2e fc_nba_results] GraphRecursionError: Recursion limit of 21 reached without hitting a stop condition. You can increase the limit by setting the `recursion_limit` config key.
+For troubleshooting, visit: https://docs.langchain.com/oss/python/langgraph/errors/GRAPH_RECURSION_LIMIT
+
+=== fc_empty_input (failure_case) ===
+  planner → fc_empty_input.json
+  researcher → fc_empty_input.json
+  critic → fc_empty_input.json
+  e2e → fc_empty_input.json
+
+5 failures:
+  - e2e ec_three_subquestions: GraphRecursionError: Recursion limit of 21 reached without hitting a stop condition. You can increase the limit by setting the `recursion_limit` config key.
+For troubleshooting, visit: https://docs.langchain.com/oss/python/langgraph/errors/GRAPH_RECURSION_LIMIT
+  - e2e fc_weather_kyiv: GraphRecursionError: Recursion limit of 21 reached without hitting a stop condition. You can increase the limit by setting the `recursion_limit` config key.
+For troubleshooting, visit: https://docs.langchain.com/oss/python/langgraph/errors/GRAPH_RECURSION_LIMIT
+  - e2e fc_gibberish: GraphRecursionError: Recursion limit of 31 reached without hitting a stop condition. You can increase the limit by setting the `recursion_limit` config key.
+For troubleshooting, visit: https://docs.langchain.com/oss/python/langgraph/errors/GRAPH_RECURSION_LIMIT
+  - planner fc_nba_results: GraphRecursionError: Recursion limit of 21 reached without hitting a stop condition. You can increase the limit by setting the `recursion_limit` config key.
+For troubleshooting, visit: https://docs.langchain.com/oss/python/langgraph/errors/GRAPH_RECURSION_LIMIT
+  - e2e fc_nba_results: GraphRecursionError: Recursion limit of 21 reached without hitting a stop condition. You can increase the limit by setting the `recursion_limit` config key.
+For troubleshooting, visit: https://docs.langchain.com/oss/python/langgraph/errors/GRAPH_RECURSION_LIMIT
+
+Done.

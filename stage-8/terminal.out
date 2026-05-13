@@ -1,0 +1,198 @@
+============================================================
+  Multi-Agent Research System  (homework-lesson-8)
+  Type 'quit' or 'exit' to stop.
+============================================================
+  Loading retriever model… ready.
+
+You: Compare naive RAG, sentence-window RAG, and parent-child RAG approaches. Write a detailed report.
+
+  🔧 plan({"request": "Compare naive RAG, sentence-window RAG, and parent-child RAG approaches. Write a detailed report."})
+    🔧 knowledge_search({"query": "naive RAG vs sentence-window RAG vs parent-child RAG comparison"})
+    🔧 web_search({"query": "RAG techniques naive sentence-window parent-child comparison"})
+    📎 [knowledge_search] [1] Source: retrieval-augmented-generation.pdf, page 0
+Retrieval-augmented generation
+Retrieval-augmented generation (RA…
+    📎 [web_search] [{"title": "Recent RAG advancements and how to use it", "url": "https://blog.pythonic.ai/recent-rag-advancements", "snip…
+  📎 [plan] {
+  "goal": "Produce a detailed comparison report on naive RAG, sentence-window RAG, and parent-child RAG approaches.",
+  "search_queries": [
+    "naive RAG overview and limitations",
+    "sentence-wi…
+  🔧 research({"request": "Research and compile a detailed comparison report on naive RAG, sentence-window RAG, and parent-child RAG approaches. Cover definitions, advantages, limitations, and use cases for each RA…)
+    🔧 knowledge_search({"query": "naive RAG, sentence-window RAG, parent-child RAG definitions, advantages, limitations, use cases"})
+    🔧 web_search({"query": "naive RAG vs sentence-window RAG vs parent-child RAG comparison"})
+    📎 [knowledge_search] [1] Source: retrieval-augmented-generation.pdf, page 0
+Retrieval-augmented generation
+Retrieval-augmented generation (RA…
+    📎 [web_search] [{"title": "Beyond Naive RAG: Comparing Basic, Sentence-Window, and Auto ... - Medium", "url": "https://medium.com/@hars…
+    🔧 read_url({"url": "https://medium.com/@harsh_77214/beyond-naive-rag-comparing-basic-sentence-window-and-auto-merging-retrieval-wit…)
+    🔧 read_url({"url": "https://blog.ninethsense.com/technology/ai-ml/rag-patterns/"})
+    🔧 read_url({"url": "https://www.linkedin.com/pulse/comparison-between-three-rag-paradigms-sanjay-kumar-mba-ms-phd-tzrdc"})
+    📎 [read_url] Member-only story
+Beyond Naive RAG: Comparing Basic, Sentence-Window, and Auto-Merging Retrieval (with LlamaIndex)
+5 min…
+    📎 [read_url] Error: could not extract readable text from https://blog.ninethsense.com/technology/ai-ml/rag-patterns/
+    📎 [read_url] Comparison between three RAG paradigms
+Mastering Retrieval-Augmented Generation (RAG): A Deep Dive into Naive, Advanced,…
+  📎 [research] # Comparative Report on RAG Approaches: Naive RAG, Sentence-Window RAG, and Parent-Child RAG
+
+Retrieval-Augmented Generation (RAG) is an AI framework enhancing generative language models (LLMs) by all…
+  🔧 critique({"findings": "# Comparative Report on RAG Approaches: Naive RAG, Sentence-Window RAG, and Parent-Child RAG\n\nRetrieval-Augmented Generation (RAG) is an AI framework enhancing generative language mode…)
+    🔧 web_search({"query": "latest developments in RAG approaches Naive RAG Sentence-Window RAG Parent-Child RAG 2023"})
+    🔧 knowledge_search({"query": "latest benchmarks on RAG approaches Naive RAG Sentence-Window RAG Parent-Child RAG"})
+    📎 [web_search] [{"title": "RAG, Memory Systems & Dynamic Context for Production AI [2026]", "url": "https://www.meta-intelligence.tech/…
+    📎 [knowledge_search] [1] Source: retrieval-augmented-generation.pdf, page 3
+mitigate this is to do a traditional text search, add those resul…
+    🔧 read_url({"url": "https://www.meta-intelligence.tech/en/insight-context-engineering"})
+    🔧 read_url({"url": "https://blog.pythonic.ai/recent-rag-advancements"})
+    📎 [read_url] Error: could not extract readable text from https://www.meta-intelligence.tech/en/insight-context-engineering
+    📎 [read_url] Error: could not extract readable text from https://blog.pythonic.ai/recent-rag-advancements
+    🔧 read_url({"url": "https://medium.com/data-science/beyond-naïve-rag-advanced-techniques-for-building-smarter-and-reliable-ai-syste…)
+    🔧 read_url({"url": "https://www.linkedin.com/pulse/advanced-rag-techniques-overview-yugank-aman-t4kkf"})
+    📎 [read_url] Member-only story
+Beyond Naïve RAG: Advanced Techniques for Building Smarter and Reliable AI Systems
+A deep dive into ad…
+    📎 [read_url] Advanced RAG Techniques: An Overview
+A comprehensive study of the advanced retrieval augmented generation techniques and…
+  📎 [critique] {
+  "verdict": "REVISE",
+  "is_fresh": false,
+  "is_complete": true,
+  "is_well_structured": true,
+  "strengths": [
+    "The report clearly defines and compares different RAG approaches, providing an …
+  🔧 research({"request": "Research the latest advancements in Retrieval-Augmented Generation (RAG) as of 2024, including performance metrics and benchmarks comparing Naive RAG, Sentence-Window RAG, and Parent-Chil…)
+    🔧 web_search({"query": "latest advancements in Retrieval-Augmented Generation RAG 2024 performance metrics Naive RAG Sentence-Window …)
+    🔧 knowledge_search({"query": "Retrieval-Augmented Generation RAG performance metrics benchmarks Naive RAG Sentence-Window RAG Parent-Child …)
+    📎 [web_search] [{"title": "A Comprehensive Survey of Retrieval-Augmented Generation (RAG ...", "url": "https://arxiv.org/abs/2410.12837…
+    📎 [knowledge_search] [1] Source: retrieval-augmented-generation.pdf, page 0
+Retrieval-augmented generation
+Retrieval-augmented generation (RA…
+    🔧 read_url({"url": "https://arxiv.org/abs/2410.12837"})
+    🔧 read_url({"url": "https://ragflow.io/blog/the-rise-and-evolution-of-rag-in-2024-a-year-in-review"})
+    🔧 read_url({"url": "https://www.researchgate.net/publication/388722115_Advancing_Retrieval-Augmented_Generation_RAG_Innovations_Cha…)
+    📎 [read_url] Computer Science > Computation and Language
+[Submitted on 3 Oct 2024]
+Title:A Comprehensive Survey of Retrieval-Augmente…
+    📎 [read_url] Error: could not fetch content from https://ragflow.io/blog/the-rise-and-evolution-of-rag-in-2024-a-year-in-review
+    📎 [read_url] Error: could not extract readable text from https://www.researchgate.net/publication/388722115_Advancing_Retrieval-Augme…
+    🔧 web_search({"query": "Retrieval-Augmented Generation RAG benchmarks Naive RAG Sentence-Window RAG Parent-Child RAG comparisons"})
+    📎 [web_search] [{"title": "7 RAG benchmarks - evidentlyai.com", "url": "https://www.evidentlyai.com/blog/rag-benchmarks", "snippet": "W…
+    🔧 read_url({"url": "https://www.evidentlyai.com/blog/rag-benchmarks"})
+    🔧 read_url({"url": "https://bigdataboutique.com/blog/rag-architecture-explained-how-retrieval-augmented-generation-works"})
+    📎 [read_url] contents
+Retrieval-Augmented Generation (RAG) is a popular technique for grounding the outputs of large language models …
+    📎 [read_url] Error: could not extract readable text from https://bigdataboutique.com/blog/rag-architecture-explained-how-retrieval-au…
+  📎 [research] # Latest Advancements in Retrieval-Augmented Generation (RAG) as of 2024
+
+## Overview of RAG
+Retrieval-Augmented Generation (RAG) integrates retrieval systems with generative language models to improv…
+  🔧 critique({"findings": "# Latest Advancements in Retrieval-Augmented Generation (RAG) as of 2024\n\n## Overview of RAG\nRetrieval-Augmented Generation (RAG) integrates retrieval systems with generative language…)
+    ⚠️  Critic structured output validation failed — using REVISE fallback.
+  📎 [critique] {
+  "verdict": "REVISE",
+  "is_fresh": false,
+  "is_complete": false,
+  "is_well_structured": true,
+  "strengths": [],
+  "gaps": [
+    "Critic could not produce a structured verdict — assuming revisio…
+  🔧 research({"request": "Re-evaluate the latest advancements in RAG as of 2024 to ensure completeness and structure in the comparison of Naive RAG, Sentence-Window RAG, and Parent-Child RAG approaches. Make sure …)
+    🔧 knowledge_search({"query": "latest advancements in RAG 2024"})
+    🔧 web_search({"query": "recent developments and advancements in RAG approaches 2024"})
+    📎 [knowledge_search] [1] Source: langchain.pdf, page 3
+on 2024-03-14. Retrieved 2023-11-26.12. "Retrieval-augmented generation (RAG) | 🦜🔗  La…
+    📎 [web_search] [{"title": "The Rise and Evolution of RAG in 2024 A Year in Review | RAGFlow", "url": "https://ragflow.io/blog/the-rise-…
+    🔧 read_url({"url": "https://ragflow.io/blog/the-rise-and-evolution-of-rag-in-2024-a-year-in-review"})
+    🔧 read_url({"url": "https://promptbestie.com/en/rag-advancements-2024-2025-enterprise-ai-guide/"})
+    🔧 read_url({"url": "https://www.agenticfoundry.ai/post/the-evolution-of-rag-introducing-a-technical-deep-dive"})
+    📎 [read_url] Error: could not fetch content from https://ragflow.io/blog/the-rise-and-evolution-of-rag-in-2024-a-year-in-review
+    📎 [read_url] Table of Contents
+- Introduction: The RAG Revolution
+- Technical Breakthrough Analysis
+- Advanced RAG Architectures
+- Em…
+    📎 [read_url] Error: could not extract readable text from https://www.agenticfoundry.ai/post/the-evolution-of-rag-introducing-a-techni…
+    🔧 read_url({"url": "https://promptbestie.com/en/rag-advancements-2024-2025-enterprise-ai-guide/"})
+    🔧 web_search({"query": "RAG performance metrics benchmarks 2024"})
+    📎 [read_url] Table of Contents
+- Introduction: The RAG Revolution
+- Technical Breakthrough Analysis
+- Advanced RAG Architectures
+- Em…
+    📎 [web_search] [{"title": "BenchmarkQED: Automated benchmarking of RAG systems - Microsoft", "url": "https://www.microsoft.com/en-us/re…
+    🔧 read_url({"url": "https://www.microsoft.com/en-us/research/blog/benchmarkqed-automated-benchmarking-of-rag-systems/"})
+    🔧 read_url({"url": "https://www.marktechpost.com/2024/11/18/balancing-accuracy-and-speed-in-rag-systems-insights-into-optimized-ret…)
+    📎 [read_url] One of the key use cases for generative AI involves answering questions over private datasets, with retrieval-augmented …
+    📎 [read_url] Error: could not extract readable text from https://www.marktechpost.com/2024/11/18/balancing-accuracy-and-speed-in-rag-…
+  📎 [research] # Latest Advancements in Retrieval-Augmented Generation (RAG) Approaches as of 2024
+
+## Introduction
+Retrieval-Augmented Generation (RAG) has undergone significant advancements as of 2024, evolving fr…
+  🔧 critique({"findings": "# Latest Advancements in Retrieval-Augmented Generation (RAG) Approaches as of 2024\n\n## Introduction\nRetrieval-Augmented Generation (RAG) has undergone significant advancements as of …)
+    🔧 web_search({"query": "Retrieval-Augmented Generation RAG advancements 2024"})
+    🔧 knowledge_search({"query": "Retrieval-Augmented Generation RAG advancements 2024"})
+    📎 [web_search] [{"title": "Retrieval-Augmented Generation (RAG) Advancements: The", "url": "https://promptbestie.com/en/rag-advancement…
+    📎 [knowledge_search] [1] Source: langchain.pdf, page 3
+on 2024-03-14. Retrieved 2023-11-26.12. "Retrieval-augmented generation (RAG) | 🦜🔗  La…
+    🔧 read_url({"url": "https://www.marktechpost.com/2024/11/18/balancing-accuracy-and-speed-in-rag-systems-insights-into-optimized-ret…)
+    📎 [read_url] Error: could not extract readable text from https://www.marktechpost.com/2024/11/18/balancing-accuracy-and-speed-in-rag-…
+    🔧 read_url({"url": "https://promptbestie.com/en/rag-advancements-2024-2025-enterprise-ai-guide/"})
+    📎 [read_url] Table of Contents
+- Introduction: The RAG Revolution
+- Technical Breakthrough Analysis
+- Advanced RAG Architectures
+- Em…
+    🔧 web_search({"query": "Recent benchmarks for Retrieval-Augmented Generation RAG 2024"})
+    📎 [web_search] [{"title": "BERGEN: A Benchmarking Library for Retrieval-Augmented Generation", "url": "https://aclanthology.org/2024.fi…
+    🔧 read_url({"url": "https://aclanthology.org/2024.findings-emnlp.449/"})
+    🔧 read_url({"url": "https://proceedings.neurips.cc/paper_files/paper/2024/hash/1435d2d0fca85a84d83ddcb754f58c29-Abstract-Datasets_a…)
+    📎 [read_url] @inproceedings{rau-etal-2024-bergen,
+title = "{BERGEN}: A Benchmarking Library for Retrieval-Augmented Generation",
+auth…
+    📎 [read_url] Retrieval-Augmented Generation (RAG) has recently emerged as a promising solution to alleviate Large Language Model (LLM…
+  📎 [critique] {
+  "verdict": "REVISE",
+  "is_fresh": true,
+  "is_complete": false,
+  "is_well_structured": true,
+  "strengths": [
+    "The report covers significant advancements in Retrieval-Augmented Generation (R…
+  🔧 research({"request": "Research the latest benchmarks for Retrieval-Augmented Generation (RAG) approaches from 2024, particularly focusing on CRAG and BERGEN studies. Highlight findings and implications of thes…)
+  🔧 research({"request": "Investigate the latest technological advancements and innovative techniques in RAG, including multimodal uses and complex datasets as of 2024."})
+  📎 [research] [REVISION LIMIT REACHED — 3 research rounds completed] You have used all 2 allowed revision rounds. You MUST now call save_report() with the best findings gathered. Do NOT call research() again.
+  📎 [research] [REVISION LIMIT REACHED — 3 research rounds completed] You have used all 2 allowed revision rounds. You MUST now call save_report() with the best findings gathered. Do NOT call research() again.
+
+============================================================
+⏸️  ACTION REQUIRES APPROVAL
+============================================================
+  Tool: save_report
+  File: rag_comparison.md
+
+  --- Report preview ---
+# Comparative Report on RAG Approaches: Naive RAG, Sentence-Window RAG, and Parent-Child RAG
+
+Retrieval-Augmented Generation (RAG) is an AI framework enhancing generative language models (LLMs) by allowing them to draw information from external data sources, improving the accuracy and relevance of generated content. This report compares three RAG approaches—Naive RAG, Sentence-Window RAG, and Pare
+  …
+  ---
+
+👉 approve / edit / reject: ✏️  Your feedback:   📎 [save_report] Please revise the report: Add a comparison table summarizing all three approaches
+
+============================================================
+⏸️  ACTION REQUIRES APPROVAL
+============================================================
+  Tool: save_report
+  File: rag_comparison.md
+
+  --- Report preview ---
+# Comparative Report on RAG Approaches: Naive RAG, Sentence-Window RAG, and Parent-Child RAG
+
+Retrieval-Augmented Generation (RAG) is an AI framework enhancing generative language models (LLMs) by allowing them to draw information from external data sources, improving the accuracy and relevance of generated content. This report compares three RAG approaches—Naive RAG, Sentence-Window RAG, and Pare
+  …
+  ---
+
+👉 approve / edit / reject:   📎 [save_report] Report saved to output/rag_comparison.md
+
+Agent: The report comparing Naive RAG, Sentence-Window RAG, and Parent-Child RAG approaches is complete and has been saved. You can access the file [here](output/rag_comparison.md). If you need any further modifications or additional information, feel free to ask!
+
+You: Bye!
